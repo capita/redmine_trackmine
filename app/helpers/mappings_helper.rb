@@ -1,0 +1,2 @@
+module MappingsHelper
+end

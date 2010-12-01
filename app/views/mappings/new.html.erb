@@ -1,0 +1,32 @@
+<h2>Map Redmine project to Pivotal Tracker project and labels.</h2>
+<% form_for :mapping , :url => { :controller => :mappings, :action => :create } do |f| %>
+
+  <div class="box">
+
+    <label>
+      Redmine project <span class="required"> *</span> 
+    </label>
+
+    <p> 
+      <%= f.select :project_id, @projects.collect{|p| [p.name, p.id]}  %> <br /> 
+    </p>
+
+    <label> Pivotal Tracker project <span class="required"> *</span> </label>
+    <p>
+      <%= select_tag 'tracker_project_id', options_for_select(@tracker_projects.collect{|p| [p.name, p.id] }), {:onchange => remote_function(:update => "mapping_label", :url => { :action => :xhr_labels }, :with => "'id=' + $('tracker_project_id').value" )}  %> <br />
+    </p>
+    
+    <label> Project labels</label>
+    <p>
+      <%= f.select :label, @labels %><br />
+    </p>
+
+  </div>
+
+  <p>
+    <%= submit_tag 'Add mapping',:name=>'save' %>
+    <%= link_to 'Cancel', :action => :index %>
+  </p>
+
+<% end %>
+

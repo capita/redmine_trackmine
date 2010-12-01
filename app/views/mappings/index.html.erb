@@ -1,0 +1,46 @@
+<div class="contextual">
+  <%= link_to 'New mapping', {:action => 'new'}, :class => 'icon icon-add' %>
+</div>
+
+<h2>All mappings between Redmine projects and Pivotal Tracker projects (or labels)</h2>
+
+<table class="list issues">
+
+  <thead>
+    <tr>
+    	<th>
+    	  Redmine project
+     	</th>
+     	<th>
+    	  Pivotal Tracker project
+	    </th>
+      <th>
+        Label
+      </th>
+      <th>
+      </th>
+  	</tr>
+  </thead>
+	
+  <tbody>
+  <% @mappings.each do |mapping|%>
+    <tr>
+    	<td>
+        <%= mapping.project.name %>
+      </td>
+      <td>
+        <%= mapping.tracker_project_name%>
+      </td>
+      <td>
+        <%= mapping.label %>
+      </td>
+    	<td align='center'>	
+      	<p>
+    	    <%= link_to image_tag('/images/delete.png')+'Delete', {:action => :destroy, :id => mapping}, :confirm =>"Do you really want to remove that mapping?"%>
+        </p>
+    	</td>
+  	</tr>
+    <% end %>
+	</tbody>
+
+</table>

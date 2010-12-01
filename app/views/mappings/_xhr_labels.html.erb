@@ -1,0 +1,17 @@
+<option value="">
+  <% if @labels.size >1 %>
+    any
+  <% else%>
+  no labels
+  <% end %>
+</option>
+
+<% for label in @labels %>
+
+	<option value="<%= label %>">
+    <%= label %>
+  </option>
+
+<% end %>
+
+
