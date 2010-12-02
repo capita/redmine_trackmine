@@ -8,11 +8,11 @@ class PivotalHandler < Sinatra::Base
 
   post '/pivotal_message.xml' do
     message = request.body.read.strip
-    message_hash = Hash.from_xml(message)
-    activity = message_hash["activity"]
-    if activity["event_type"] == "story_create"
-      #Issue
-    end 
+#    message_hash = Hash.from_xml(message)
+#    activity = message_hash["activity"]
+#    if activity["event_type"] == "story_create"
+#      #Issue
+#    end 
     
     return [200, "Got the stuff"]
   end
