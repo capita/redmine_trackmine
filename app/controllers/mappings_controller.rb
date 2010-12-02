@@ -1,7 +1,6 @@
 class MappingsController < ApplicationController
   unloadable
-  #TODO : that should be mostly for admin
-
+  before_filter :require_admin
   before_filter :set_token
 
   def index
@@ -21,10 +20,10 @@ class MappingsController < ApplicationController
     @mapping.tracker_project_name = PivotalTracker::Project.find(params[:tracker_project_id].to_i).name 
     if @mapping.save
       flash[:notice] = 'Mapping was successfully added.'
-      redirect_to :action => "index"
+      redirect_to :action => "index", :project_id => @project    
     else
       flash[:error] = "Can't map these projects."
-      redirect_to :action => "new"
+      redirect_to :action => "new", :project_id => @project    
     end
   end
 
@@ -35,7 +34,7 @@ class MappingsController < ApplicationController
     else
       flash[:error] = "Mapping could not be removed."
     end
-    redirect_to :action => "index"    
+    redirect_to :action => "index", :project_id => @project    
   end
 
   def xhr_labels
@@ -48,5 +47,4 @@ class MappingsController < ApplicationController
   def set_token
     Trackmine.set_token(User.current.mail)
   end
-
-end
+ end
