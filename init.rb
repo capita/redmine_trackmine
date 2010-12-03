@@ -1,6 +1,10 @@
 require 'redmine'
 require 'pivotal_tracker'
 
+# Adds relationship between Project and Mapping 
+Project.class_eval do
+  has_many :mappings
+end
 
 Redmine::Plugin.register :redmine_trackmine do
   name 'Redmine Trackmine plugin'

@@ -1,6 +1,6 @@
 # Load test_helper from Redmine main project
 require File.expand_path(File.dirname(__FILE__) + '/../../../../test/test_helper')
-
+require 'fakeweb'
 require 'shoulda'
 require 'factory_girl'
 require 'test/unit'
@@ -16,4 +16,5 @@ end
 # Ensure that we are using the temporary fixture path
 Engines::Testing.set_fixture_path
 set :environment, :test
+
 
