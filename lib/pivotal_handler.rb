@@ -7,9 +7,11 @@ class PivotalHandler < Sinatra::Base
     message_hash = Hash.from_xml(message)
     return [202, "It is not a correct Pivotal Tracker message"] if message_hash['activity'].nil?
 
-    #TODO: it want pass until I finish fakeweb    
-    authors_email = Trackmine.get_author(message_hash["activity"])
-    return [202, "Can't get authors email"] if authors_email.nil?
+    begin
+      authors_email = Trackmine.get_authors_email(message_hash["activity"])
+    rescue
+      return [202, "Can't get authors email"] 
+    end
 
     [200, "Got the stuff"]
   end

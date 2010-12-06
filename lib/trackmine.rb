@@ -32,11 +32,14 @@ module Trackmine
     end
 
     # Finds author of the tracker activity and returns its email
-    def get_author(activity)
-      set_token('super_user') if @token.nil?
-      project = PivotalTracker::Project.find activity['project_id'].to_i
-      project.memberships.all.select{|m| m.name == activity['author']}[0].email
-      rescue WrongActivityData.new("Can't get email of the Tracker activity author")
+    def get_authors_email(activity)
+      begin
+        set_token('super_user') if @token.nil?
+        project = PivotalTracker::Project.find activity['project_id'].to_i
+        project.memberships.all.select{|m| m.name == activity['author']}[0].email
+      rescue => e
+        raise WrongActivityData.new("Can't get email of the Tracker activity author."+e)
+      end 
     end
   end
   

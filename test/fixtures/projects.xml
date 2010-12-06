@@ -11,7 +11,7 @@
     <current_velocity>2</current_velocity>
     <initial_velocity>2</initial_velocity>
     <number_of_done_iterations_to_show>12</number_of_done_iterations_to_show>
-    <labels></labels>
+    <labels>shields,transporter</labels>
     <last_activity_at type="datetime">2010/07/29 19:13:13 UTC</last_activity_at>
     <allow_attachments>true</allow_attachments>
     <public>true</public>

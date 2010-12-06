@@ -7,16 +7,17 @@ class PivotalHandlerTest < Test::Unit::TestCase
     PivotalHandler
   end
   
-  context 'A Pivotal Tracker handler' do
+  context 'A Pivotal Handler' do
     setup do
+      #FakeTracker.setup
       activity_hash = {"author"=>"Piotr Brudny", "id"=>38057455, "version"=>17, "description"=>"Piotr Brudny edited \"Szafa gra\"",  "stories"=>{"story"=>{"current_state"=>"unstarted", "url"=>"http://www.pivotaltracker.com/services/v3/projects/152369/stories/6799765", "id"=>6799765}}}
-      activity_hash['project_id'] = 123
+      activity_hash['project_id'] = 152369
       activity_hash['event_type'] = "story_update"
       activity_hash['occurred_at'] = Time.now
-      @tracker_activity = activity_hash.to_xml(:root=>'activity')
+      @tracker_activity = activity_hash.to_xml(:root => 'activity')
     end
   
-    should "not respond for redmine root page" do
+    should "not respond for a redmine root page" do
       get '/'
       assert !last_response.ok?
     end

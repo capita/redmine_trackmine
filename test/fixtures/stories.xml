@@ -13,6 +13,7 @@
     <created_at type="datetime">2010/07/27 21:58:28 UTC</created_at>
     <updated_at type="datetime">2010/07/27 22:21:17 UTC</updated_at>
     <accepted_at type="datetime">2010/07/18 17:00:00 UTC</accepted_at>
+    <labels>shields</labels>
   </story>
   <story>
     <id type="integer">4459994</id>
@@ -26,6 +27,7 @@
     <requested_by>Jon Mischo</requested_by>
     <created_at type="datetime">2010/07/27 21:51:01 UTC</created_at>
     <updated_at type="datetime">2010/07/27 22:20:46 UTC</updated_at>
+    <labels>transporter</labels>
     <tasks type="array">
       <task>
         <id type="integer">468113</id>
