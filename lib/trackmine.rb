@@ -28,7 +28,14 @@ module Trackmine
     end
     
     def read_activity(activity)
-        
+      case activity['event_type']
+        when "story_create"
+          ""
+        when "story_update"
+          ""
+        else
+          raise WrongActivityData.new("Not supported event type.")
+      end
     end
 
     # Finds author of the tracker activity and returns its email
@@ -41,6 +48,10 @@ module Trackmine
         raise WrongActivityData.new("Can't get email of the Tracker activity author."+e)
       end 
     end
+    
+    def get_mapping
+      
+    end    
   end
   
   # Error to be raised when any problem occured while parsing activity data
@@ -49,11 +60,16 @@ module Trackmine
   # Error to be raised when trackmine.yml can't be found in /config
   class MissingTrackmineConfig < StandardError; end;
   
-    # Error to be raised when missing credentials for given email
+  # Error to be raised when missing credentials for given email
   class MissingCredentials < StandardError; end;
     
   # Error to be raised when wrong credentials given
   class WrongCredentials < StandardError; end;
+
+  # Error to be raised when missing Trackmine mapping. 
+  #Tracker project/label with Redmine (sub)project
+  class MissingTrackmineMapping < StandardError; end;
+  
 
 end
 
