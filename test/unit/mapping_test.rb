@@ -12,10 +12,24 @@ class MappingTest < ActiveSupport::TestCase
     should_validate_presence_of :project_id
     should_validate_presence_of :tracker_project_id
     should_validate_uniqueness_of :tracker_project_id, :scoped_to => :label
+    should_have_db_columns :estimations, :story_types
+    should_validate_presence_of :estimations, :story_types
 
     should 'be created when attributes are valid' do
       mapping = Factory.build(:mapping)
       assert mapping.save
+    end 
+
+    should 'be able to store hash in estimations attribute' do
+      mapping = Factory.build(:mapping)
+      assert mapping.estimations.kind_of? Hash
+      assert_equal 1, mapping.estimations[1]
+    end 
+
+    should 'be able to store hash in story_types attribute' do
+      mapping = Factory.build(:mapping)
+      assert mapping.story_types.kind_of? Hash
+      assert_equal "Feature", mapping.story_types['feature'] 
     end 
 
   end

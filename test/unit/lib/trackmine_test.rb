@@ -10,8 +10,8 @@ class TrackmineTest < Test::Unit::TestCase
                        "version"=>17, 
                        "description"=>"Edited sth",  
                        "stories"=>{"story"=>{"current_state"=>"unstarted", 
-                                                       "url"=>"http://www.pivotaltracker.com/services/v3/projects/152369/stories/6799765", 
-                                                       "id"=>6799765}}}
+                                             "url"=>"http://www.pivotaltracker.com/services/v3/projects/152369/stories/6799765", 
+                                             "id"=>6799765}}}
     @tracker_activity = @activity_hash.to_xml(:root => 'activity')
     FakeTracker.setup
   end        
@@ -64,10 +64,22 @@ class TrackmineTest < Test::Unit::TestCase
       end
       context 'create_story' do
         setup do 
-          @mapping = Factory.create(:mapping, :tracker_project_id => @activity_hash['project_id'], :label => '') 
-         end
-        should 'create an issue' do
-          assert Trackmine.create_issue(@activity_hash).instance_of? Issue
+          @activity_hash['stories']['story']['name'] = "Testing API"
+          @activity_hash['stories']['story']['story_type'] = "feature" #bug,chore
+          @activity_hash['stories']['story']['estimate_type'] = 1 #2,3
+          @activity_hash['description'] = "Testing description"
+          @mapping = Factory.create(:mapping, :tracker_project_id => @activity_hash['project_id'], :label =>'') 
+        end
+        should 'create a proper issue' do
+          issue = Trackmine.create_issue(@activity_hash)
+          assert issue.instance_of? Issue
+          assert_equal @activity_hash['stories']['story']['name'], issue.subject
+          assert_equal @activity_hash['stories']['story']['url'] +"\r\n"+@activity_hash['description'], issue.description
+          assert_equal "Feature", issue.tracker.name
+          assert_equal "Accepted", issue.status.name  
+          assert_equal 1, issue.estimated_hours
+          assert_equal @activity_hash['stories']['story']['id'], issue.custom_field_values.select{|cv| cv.custom_field.name=="Pivotal Tracker ID"}.first.try(:value)
+
         end
       end
     end 

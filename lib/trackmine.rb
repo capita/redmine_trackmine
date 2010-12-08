@@ -51,8 +51,7 @@ module Trackmine
     
     # Return object which maps Redmine project with Tracker project
     def get_mapping(tracker_project_id, label)
-      #mapping = Mapping.find :first, :conditions=>['tracker_project_id=? AND label=? ', tracker_project_id, label]
-      mapping = Mapping.find :first, :conditions=>['tracker_project_id=?', tracker_project_id]
+      mapping = Mapping.find :first, :conditions=>['tracker_project_id=? AND label=? ', tracker_project_id, label.to_s]
       raise MissingTrackmineMapping.new("Can't find mapping for project:#{tracker_project_id} and label:#{label}")  if mapping.nil?
       return mapping
     end    
@@ -61,12 +60,28 @@ module Trackmine
     def create_issue(activity)
       author = User.find_by_mail(get_authors_email(activity))
       raise WrongActivityData.new("Can't find the author") if author.nil?
-      project = get_mapping(activity['project_id'], activity['labels']).project
-      raise WrongActivityData.new("Can't find project") if project.nil?
-
+      mapping = get_mapping(activity['project_id'], activity['labels'])
+      raise WrongActivityData.new("Can't find project") if mapping.project.nil?
       issue_subject = activity['stories']['story']['name']
-      tracker = 1#TODO: activity['stories']['story']['story_type']
-      project.issues.create(:subject=> issue_subject,:author_id=>author,:tracker_id=>tracker )
+      description = activity['stories']['story']['url'] + "\r\n" + activity['description']
+      status = IssueStatus.find_by_name "Accepted"
+      raise WrongTrackmineConfiguration.new("Can't find Redmine IssueStatus: 'Accepted' ") if status.nil?  
+      tracker = Tracker.find_by_name mapping.story_types[activity['stories']['story']['story_type']] #bug->bug, feature->feature, chore->support
+      raise WrongTrackmineConfiguration.new("Can't find Redmine suitable Tracker") if tracker.nil?  
+      estimated_hours = mapping.estimations[activity['stories']['story']['estimate_type']] # 1->1h, 2->4h, 3->10h, nil for bug and chore
+
+      # Creates new Redmine issue
+      issue = mapping.project.issues.create(:subject=> issue_subject,
+                            :description => description,
+                            :author_id => author.id,
+                            :tracker_id=> tracker.id, 
+                            :status_id => status.id,
+                            :estimated_hours=> estimated_hours)
+
+      # Sets value of 'Pivotal Tracker ID' issue custom field
+      custom_field = issue.custom_field_values.select{|cv| cv.custom_field.name=="Pivotal Tracker ID"}.first
+      raise WrongTrackmineConfiguration.new("Can't find 'Pivotal Tracker ID' custom field for issues") if custom_field.nil?
+      custom_field.update_attributes :value => activity['stories']['story']['id']
     end
 
   end
@@ -86,6 +101,8 @@ module Trackmine
   # Error to be raised when missing Trackmine mapping. 
   class MissingTrackmineMapping < StandardError; end;
   
+  # Error to be raised when fails due to Trackmine configuration
+  class WrongTrackmineConfiguration < StandardError; end;
 
 end
 
