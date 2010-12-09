@@ -13,6 +13,8 @@
         <url>http://www.pivotaltracker.com/services/v3/projects/102622/stories/4492080</url>
         <name>Create stuff</name>
         <story_type>feature</story_type>
+        <estimate type="integer">3</estimate>
+        <labels>barlab,foolab</labels>
         <current_state>unscheduled</current_state>
       </story>
     </stories>

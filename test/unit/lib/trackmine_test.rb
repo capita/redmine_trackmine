@@ -62,26 +62,115 @@ class TrackmineTest < Test::Unit::TestCase
           should('return a mapping object') { assert_equal (Trackmine.get_mapping( @mapping.tracker_project_id ,'' )), @mapping }                            
         end
       end
-      context 'create_story' do
+
+      fast_context 'create_story without labels' do
         setup do 
-          @activity_hash['stories']['story']['name'] = "Testing API"
-          @activity_hash['stories']['story']['story_type'] = "feature" #bug,chore
-          @activity_hash['stories']['story']['estimate_type'] = 1 #2,3
           @activity_hash['description'] = "Testing description"
-          @mapping = Factory.create(:mapping, :tracker_project_id => @activity_hash['project_id'], :label =>'') 
+          @mapping = Factory.create :mapping, 
+                                    :tracker_project_id => @activity_hash['project_id'], 
+                                    :label =>''
         end
-        should 'create a proper issue' do
+
+        should 'create a proper Feature issue' do
+          @activity_hash['stories']['story']['name'] = "Testing API feature"
+          @activity_hash['stories']['story']['story_type'] = "feature" #bug,chore
+          @activity_hash['stories']['story']['estimate'] = 2
           issue = Trackmine.create_issue(@activity_hash)
+
           assert issue.instance_of? Issue
           assert_equal @activity_hash['stories']['story']['name'], issue.subject
           assert_equal @activity_hash['stories']['story']['url'] +"\r\n"+@activity_hash['description'], issue.description
           assert_equal "Feature", issue.tracker.name
           assert_equal "Accepted", issue.status.name  
-          assert_equal 1, issue.estimated_hours
-          assert_equal @activity_hash['stories']['story']['id'], issue.custom_field_values.select{|cv| cv.custom_field.name=="Pivotal Tracker ID"}.first.try(:value)
+          assert_equal 4, issue.estimated_hours
+          assert_equal @activity_hash['stories']['story']['id'], issue.custom_field_values.select{|cv| cv.custom_field.name=="Pivotal Story ID"}.first.try(:value)
+        end
 
+        should 'create a proper Bug issue' do
+          @activity_hash['stories']['story']['story_type'] = "bug" 
+          @activity_hash['stories']['story']['name'] = "Testing API Bug"
+          @activity_hash['stories']['story']['estimate'] = ''
+          issue = Trackmine.create_issue(@activity_hash)
+
+          assert issue.instance_of? Issue
+          assert_equal @activity_hash['stories']['story']['name'], issue.subject
+          assert_equal @activity_hash['stories']['story']['url'] +"\r\n"+@activity_hash['description'], issue.description
+          assert_equal "Bug", issue.tracker.name
+          assert_equal "Accepted", issue.status.name  
+          assert issue.estimated_hours.nil?
+          assert_equal @activity_hash['stories']['story']['id'], issue.custom_field_values.select{|cv| cv.custom_field.name=="Pivotal Story ID"}.first.try(:value)
+        end
+
+        should 'create a proper Support issue' do
+          @activity_hash['stories']['story']['story_type'] = "chore" #bug,chore
+          @activity_hash['stories']['story']['name'] = "Testing API Support"
+          @activity_hash['stories']['story']['estimate'] = ''
+
+          issue = Trackmine.create_issue( @activity_hash, @label )
+          assert issue.instance_of? Issue
+          assert_equal @activity_hash['stories']['story']['name'], issue.subject
+          assert_equal @activity_hash['stories']['story']['url'] +"\r\n"+@activity_hash['description'], issue.description
+          assert_equal "Support", issue.tracker.name
+          assert_equal "Accepted", issue.status.name  
+          assert issue.estimated_hours.nil?
+          assert_equal @activity_hash['stories']['story']['id'], issue.custom_field_values.select{|cv| cv.custom_field.name=="Pivotal Story ID"}.first.try(:value)
         end
       end
+
+      fast_context 'create_story with a label' do
+        setup do 
+          @label = "Label1"
+          @mapping = Factory.create :mapping, 
+                                    :tracker_project_id => @activity_hash['project_id'], 
+                                    :label => @label 
+        end
+
+        should 'create a proper Feature issue' do
+          @activity_hash['stories']['story']['name'] = "Testing API feature"
+          @activity_hash['stories']['story']['story_type'] = "feature" #bug,chore
+          @activity_hash['stories']['story']['estimate'] = 2
+          issue = Trackmine.create_issue(@activity_hash, @label)
+
+          assert issue.instance_of? Issue
+          assert_equal @activity_hash['stories']['story']['name'], issue.subject
+          assert_equal @activity_hash['stories']['story']['url'] +"\r\n"+@activity_hash['description'], issue.description
+          assert_equal "Feature", issue.tracker.name
+          assert_equal "Accepted", issue.status.name  
+          assert_equal 4, issue.estimated_hours
+          assert_equal @activity_hash['stories']['story']['id'], issue.custom_field_values.select{|cv| cv.custom_field.name=="Pivotal Story ID"}.first.try(:value)
+        end
+
+        should 'create a proper Bug issue' do
+          @activity_hash['stories']['story']['story_type'] = "bug" 
+          @activity_hash['stories']['story']['name'] = "Testing API Bug"
+          @activity_hash['stories']['story']['estimate'] = ''
+
+          issue = Trackmine.create_issue( @activity_hash, @label )
+          assert issue.instance_of? Issue
+          assert_equal @activity_hash['stories']['story']['name'], issue.subject
+          assert_equal @activity_hash['stories']['story']['url'] +"\r\n"+@activity_hash['description'], issue.description
+          assert_equal "Bug", issue.tracker.name
+          assert_equal "Accepted", issue.status.name  
+          assert issue.estimated_hours.nil?
+          assert_equal @activity_hash['stories']['story']['id'], issue.custom_field_values.select{|cv| cv.custom_field.name=="Pivotal Story ID"}.first.try(:value)
+        end
+
+        should 'create a proper Support issue' do
+          @activity_hash['stories']['story']['story_type'] = "chore" 
+          @activity_hash['stories']['story']['name'] = "Testing API Support"
+          @activity_hash['stories']['story']['estimate'] = ''
+
+          issue = Trackmine.create_issue(@activity_hash, @label)
+          assert issue.instance_of? Issue
+          assert_equal @activity_hash['stories']['story']['name'], issue.subject
+          assert_equal @activity_hash['stories']['story']['url'] +"\r\n"+@activity_hash['description'], issue.description
+          assert_equal "Support", issue.tracker.name
+          assert_equal "Accepted", issue.status.name  
+          assert issue.estimated_hours.nil?
+          assert_equal @activity_hash['stories']['story']['id'], issue.custom_field_values.select{|cv| cv.custom_field.name=="Pivotal Story ID"}.first.try(:value)
+        end
+      end
+
     end 
   end
 end

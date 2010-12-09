@@ -2,6 +2,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/../../../../test/test_helper')
 require 'fakeweb'
 require 'shoulda'
+require 'fast_context'
 require 'factory_girl'
 require 'test/unit'
 require 'rack/test'

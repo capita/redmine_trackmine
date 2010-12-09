@@ -16,8 +16,12 @@ class PivotalHandlerTest < Test::Unit::TestCase
     end
   
     context 'POST /pivotal_message.xml' do 
-      context 'having a correct activity message' do
-        setup { @tracker_activity = File.read( File.dirname(__FILE__) + "/../../fixtures/activity.xml") }
+      context 'having a correct activity message with Redmine mapping' do
+        setup do 
+          @tracker_activity = File.read( File.dirname(__FILE__) + "/../../fixtures/activity.xml") 
+          Factory.create :mapping, :tracker_project_id => 102622, :label => 'foolab'
+          Factory.create :mapping, :tracker_project_id => 102622, :label => 'barlab'
+        end
     
         should "return OK status" do
           post 'pivotal_message.xml', @tracker_activity
