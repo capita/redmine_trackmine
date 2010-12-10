@@ -84,7 +84,7 @@ module Trackmine
                             :status_id => status.id,
                             :estimated_hours=> estimated_hours)
 
-      # Sets value of 'Pivotal Tracker ID' issue custom field
+      # Sets value of 'Pivotal Story ID' issue custom field
       custom_field = issue.custom_field_values.select{|cv| cv.custom_field.name=="Pivotal Story ID"}.first
       raise WrongTrackmineConfiguration.new("Can't find 'Pivotal Story ID' custom field for issues") if custom_field.nil?
       custom_field.update_attributes :value => activity['stories']['story']['id']

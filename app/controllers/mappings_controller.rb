@@ -8,14 +8,18 @@ class MappingsController < ApplicationController
   end
 
   def new
-    @mapping = Mapping.new
+    @mapping = Mapping.new :estimations => { 1 => 1, 2 => 4, 3 => 10 },
+                           :story_types => { 'feature' => 'Feature', 'bug' => 'Bug', 'chore' => 'Support' }
+                                  
     @projects = Project.all
     @tracker_projects = Trackmine.projects
-    @labels = []
+    @labels = ['..choose..']
   end
 
   def create
-    @mapping = Mapping.new params[:mapping]
+    @mapping = Mapping.new params[:mapping].merge :estimations => { 1 => 1, 2 => 4, 3 => 10 },
+                                                  :story_types => { 'feature' => 'Feature', 'bug' => 'Bug', 'chore' => 'Support' }
+    
     @mapping.tracker_project_id = params[:tracker_project_id]
     @mapping.tracker_project_name = PivotalTracker::Project.find(params[:tracker_project_id].to_i).name 
     if @mapping.save

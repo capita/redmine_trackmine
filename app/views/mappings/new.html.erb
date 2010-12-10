@@ -4,22 +4,26 @@
   <div class="box">
 
     <label>
-      Redmine project <span class="required"> *</span> 
+      <h4>Redmine project <span class="required"> *</span> </h4>
     </label>
 
     <p> 
       <%= f.select :project_id, @projects.collect{|p| [p.name, p.id]}  %> <br /> 
     </p>
 
-    <label> Pivotal Tracker project <span class="required"> *</span> </label>
+    <label> <h4> Pivotal Tracker project <span class="required"> *</span></h4> </label>
+
     <p>
       <%= select_tag 'tracker_project_id', options_for_select(@tracker_projects.collect{|p| [p.name, p.id] }), {:onchange => remote_function(:update => "mapping_label", :url => { :action => :xhr_labels }, :with => "'id=' + $('tracker_project_id').value" )}  %> <br />
     </p>
     
-    <label> Project labels</label>
+    <label><h4> Project labels </h4></label>
+
     <p>
       <%= f.select :label, @labels %><br />
     </p>
+
+    <%= render :partial => 'config', :locals => { :f => f }  %>
 
   </div>
 
