@@ -28,16 +28,18 @@ module Trackmine
     end
         
     def read_activity(activity)
-      case activity['event_type']
-        when "story_create"
-          labels = activity['stories']['story']['labels'].to_s.split(',')
-          create_issue(activity) if labels.blank?         
-          labels.each{|label| create_issue(activity,label)}
-        when "story_update"
-          ""
-        else
-          raise WrongActivityData.new("Not supported event type.")
-      end
+      story = get_story(activity)
+      email = get_authors_email(activity)
+      
+#      case activity['event_type']
+#        when "story_update"
+#          ""# no matter if its start or restart- the same behaviour
+#          labels = activity['stories']['story']['labels'].to_s.split(',')
+#          create_issue(activity) if labels.blank?         
+#          labels.each{|label| create_issue(activity,label)}
+#        else
+#          raise WrongActivityData.new("Not supported event type.")
+#      end
     end
 
     # Finds author of the tracker activity and returns its email
@@ -51,6 +53,15 @@ module Trackmine
       end 
     end
     
+    # Return PivotalTracker story for given activity    
+    def get_story(activity)
+      project_id = activity['project_id']
+      story_id = activity['stories']['story']['id']
+      story = PivotalTracker::Project.find(project_id).stories.find(story_id)
+      raise WrongActivityData.new("Can't get story: #{story_id} from Pivotal Tracker") if story.nil?
+      return story 
+    end
+
     # Return object which maps Redmine project with Tracker project
     def get_mapping(tracker_project_id, label)
       mapping = Mapping.find :first, :conditions=>['tracker_project_id=? AND label=? ', tracker_project_id, label.to_s]
