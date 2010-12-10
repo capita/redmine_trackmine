@@ -23,9 +23,11 @@
       <%= f.select :label, @labels %><br />
     </p>
 
-    <%= render :partial => 'config', :locals => { :f => f }  %>
-
   </div>
+   
+  <%= render :partial => 'config' %>
+
+
 
   <p>
     <%= submit_tag 'Add mapping',:name=>'save' %>
