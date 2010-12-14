@@ -19,8 +19,8 @@ class PivotalHandlerTest < Test::Unit::TestCase
       context 'having a correct activity message with Redmine mapping' do
         setup do 
           @tracker_activity = File.read( File.dirname(__FILE__) + "/../../fixtures/activity.xml") 
-          Factory.create :mapping, :tracker_project_id => 102622, :label => 'foolab'
-          Factory.create :mapping, :tracker_project_id => 102622, :label => 'barlab'
+          Factory.create :mapping, :tracker_project_id => 102622, :label => 'shields'
+          Factory.create :mapping, :tracker_project_id => 102622, :label => 'transporter'
         end
     
         should "return OK status" do

@@ -1,22 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <activity>
-    <id type="integer">24492385</id>
-    <version type="integer">206</version>
-    <event_type>story_create</event_type>
-    <occurred_at type="datetime">2010/07/29 19:13:04 UTC</occurred_at>
-    <author>Test Suite Access</author>
-    <project_id type="integer">102622</project_id>
-    <description>Test Suite Access added &quot;Create stuff&quot;</description>
-    <stories>
-      <story>
-        <id type="integer">4492080</id>
-        <url>http://www.pivotaltracker.com/services/v3/projects/102622/stories/4492080</url>
-        <name>Create stuff</name>
-        <story_type>feature</story_type>
-        <estimate type="integer">3</estimate>
-        <labels>barlab,foolab</labels>
-        <current_state>unscheduled</current_state>
-      </story>
-    </stories>
-  </activity>
+<activity>
+  <id type="integer">41028329</id>
+  <version type="integer">40</version>
+  <event_type>story_update</event_type>
+  <occurred_at type="datetime">2010/12/10 15:26:38 UTC</occurred_at>
+  <author>Test Suite Access</author>
+  <project_id type="integer">102622</project_id>
+  <description>Test Suite Access started &quot;ziomo&quot;</description>
+  <stories>
+    <story>
+      <id type="integer">4460116</id>
+      <url>http://www.pivotaltracker.com/services/v3/projects/102622/stories/4460116</url>
+      <current_state>started</current_state>
+    </story>
+  </stories>
+</activity>
 

@@ -23,7 +23,7 @@ class MappingTest < ActiveSupport::TestCase
     should 'be able to store hash in estimations attribute' do
       mapping = Factory.build(:mapping)
       assert mapping.estimations.kind_of? Hash
-      assert_equal 1, mapping.estimations[1]
+      assert_equal '4', mapping.estimations['2']
     end 
 
     should 'be able to store hash in story_types attribute' do

@@ -6,6 +6,12 @@ Project.class_eval do
   has_many :mappings
 end
 
+# Adds finding Issue by PivotalTracker ID
+#Issue.class_eval do
+#  def find_by_pivotal_id
+#  end
+#end
+
 Redmine::Plugin.register :redmine_trackmine do
   name 'Redmine Trackmine plugin'
   author 'Piotr Brudny'

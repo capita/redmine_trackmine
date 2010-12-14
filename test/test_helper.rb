@@ -23,6 +23,7 @@ module FakeTracker
 
   # Constant to load a correct fixture project
   PROJECT_ID = 102622 
+  STORY_ID = 4460116
 
   # Labels taken from stories.xml fixture. Make sure there are the same.
   LABELS = ['shields','transporter']
@@ -36,11 +37,34 @@ module FakeTracker
 
     def setup
       FakeWeb.allow_net_connect = false
-      FakeWeb.register_uri(:post, "https://www.pivotaltracker.com/services/v3/tokens/active", :body => File.read(fixture_path('token')), :content_type => "text/xml")
-      FakeWeb.register_uri(:get, "http://www.pivotaltracker.com/services/v3/projects", :body => File.read(fixture_path('projects')), :content_type => "text/xml")
-      FakeWeb.register_uri(:get, "http://www.pivotaltracker.com/services/v3/projects/#{PROJECT_ID}", :body => File.read(fixture_path('project')), :content_type => "text/xml")
-      FakeWeb.register_uri(:get, "http://www.pivotaltracker.com/services/v3/projects/#{PROJECT_ID}/memberships", :body => File.read(fixture_path('memberships')), :content_type => "text/xml")
-      FakeWeb.register_uri(:get, "http://www.pivotaltracker.com/services/v3/projects/#{PROJECT_ID}/stories", :body => File.read(fixture_path('stories')), :content_type => "text/xml")
+
+      FakeWeb.register_uri(:post, "https://www.pivotaltracker.com/services/v3/tokens/active", 
+                           :body => File.read(fixture_path('token')), 
+                           :content_type => "text/xml")
+
+      FakeWeb.register_uri(:get, "http://www.pivotaltracker.com/services/v3/projects", 
+                           :body => File.read(fixture_path('projects')), 
+                           :content_type => "text/xml")
+
+      FakeWeb.register_uri(:get, "http://www.pivotaltracker.com/services/v3/projects/#{PROJECT_ID}", 
+                           :body => File.read(fixture_path('project')), 
+                           :content_type => "text/xml")
+
+      FakeWeb.register_uri(:get, "http://www.pivotaltracker.com/services/v3/projects/#{PROJECT_ID}/memberships", 
+                           :body => File.read(fixture_path('memberships')), 
+                           :content_type => "text/xml")
+
+      FakeWeb.register_uri(:get, "http://www.pivotaltracker.com/services/v3/projects/#{PROJECT_ID}/stories", 
+                           :body => File.read(fixture_path('stories')), 
+                           :content_type => "text/xml")
+
+      FakeWeb.register_uri(:get, "http://www.pivotaltracker.com/services/v3/projects/#{PROJECT_ID}/stories/#{STORY_ID}", 
+                           :body => File.read(fixture_path('story')), 
+                           :content_type => "text/xml")
+
+      FakeWeb.register_uri(:get, "http://www.pivotaltracker.com/services/v3/projects/#{PROJECT_ID}/stories/#{STORY_ID}/notes", 
+                           :body => File.read(fixture_path('notes')),  
+                           :content_type => "text/xml")
     end
   end 
 end

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <story>
+    <id type="integer">4460116</id>
+    <project_id type="integer">102622</project_id>
+    <story_type>feature</story_type>
+    <url>http://www.pivotaltracker.com/story/show/4460116</url>
+    <estimate type="integer">2</estimate>
+    <current_state>accepted</current_state>
+    <description>It is a basic description</description>
+    <name>More power to shields</name>
+    <requested_by>James Kirk</requested_by>
+    <owned_by>Test Suite Access</owned_by>
+    <created_at type="datetime">2008/12/10 00:00:00 UTC</created_at>
+    <accepted_at type="datetime">2008/12/10 00:00:00 UTC</accepted_at>
+    <labels>shields,transporter</labels>
+</story>
+

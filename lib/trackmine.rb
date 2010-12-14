@@ -28,8 +28,11 @@ module Trackmine
     end
         
     def read_activity(activity)
-      story = get_story(activity)
-      email = get_authors_email(activity)
+     
+      if activity['stories']['story']['current_state'] == "started"
+      end
+      #if activity['stories']['story']['name']
+      #if activity['stories']['story']['description']
       
 #      case activity['event_type']
 #        when "story_update"
@@ -43,13 +46,13 @@ module Trackmine
     end
 
     # Finds author of the tracker activity and returns its email
-    def get_authors_email(activity)
+    def get_user_email(project_id, name)
       begin
         set_token('super_user') if @token.nil?
-        project = PivotalTracker::Project.find activity['project_id'].to_i
-        project.memberships.all.select{|m| m.name == activity['author']}[0].email
+        project = PivotalTracker::Project.find project_id.to_i
+        project.memberships.all.select{|m| m.name == name }[0].email
       rescue => e
-        raise WrongActivityData.new("Can't get email of the Tracker activity author."+e)
+        raise WrongActivityData.new("Can't get email of the Tracker user: #{name} in project id: #{project_id}. " + e)
       end 
     end
     
@@ -58,7 +61,8 @@ module Trackmine
       project_id = activity['project_id']
       story_id = activity['stories']['story']['id']
       story = PivotalTracker::Project.find(project_id).stories.find(story_id)
-      raise WrongActivityData.new("Can't get story: #{story_id} from Pivotal Tracker") if story.nil?
+      rescue => e
+      raise WrongActivityData.new("Can't get story: #{story_id} from Pivotal Tracker. " + e)
       return story 
     end
 
@@ -70,38 +74,64 @@ module Trackmine
       return mapping
     end    
 
-    # Creates a Redmine issue- works fine only with 0/1 labels !
-    def create_issue(activity, label = '')
+    # Creates a Redmine issues-
+    def create_issues(activity)
+      story = get_story(activity)
+      raise WrongActivityData.new("Can't get story from #{activity['stories']['story']['id']}") if story.nil?
 
-      # Sets issue attributes
-      author = User.find_by_mail(get_authors_email(activity))
-      raise WrongActivityData.new("Can't find the author") if author.nil?
-      issue_subject = activity['stories']['story']['name']
-      description = activity['stories']['story']['url'] + "\r\n" + activity['description']
+      # getting story owners email
+      email = get_user_email( story.project_id, story.owned_by )
+      author = User.find_by_mail email
+
+      # Setting issue attributes
+      description = story.url + "\r\n" + story.description
       status = IssueStatus.find_by_name "Accepted"
       raise WrongTrackmineConfiguration.new("Can't find Redmine IssueStatus: 'Accepted' ") if status.nil?  
-      mapping = get_mapping(activity['project_id'], label)
-      raise WrongActivityData.new("Can't find project") if mapping.project.nil?
-      tracker = Tracker.find_by_name mapping.story_types[activity['stories']['story']['story_type']] #bug->bug, feature->feature, chore->support
-      raise WrongTrackmineConfiguration.new("Can't find Redmine suitable Tracker") if tracker.nil?  
-      estimated_hours = mapping.estimations[activity['stories']['story']['estimate']] # 1->1h, 2->4h, 3->10h, nil for bug and chore
-      
-     
-      # Creates new Redmine issue
-      issue = mapping.project.issues.create(:subject=> issue_subject,
-                            :description => description,
-                            :author_id => author.id,
-                            :tracker_id=> tracker.id, 
-                            :status_id => status.id,
-                            :estimated_hours=> estimated_hours)
+      issues = []
+      labels = story.labels.to_s.split(',')
+      labels = [''] if labels.blank?
+      labels.each do |label|
+        mapping = get_mapping(activity['project_id'], label)
+        raise WrongActivityData.new("Can't find project") if mapping.project.nil?
+        tracker = Tracker.find_by_name mapping.story_types[story.story_type] 
+        raise WrongTrackmineConfiguration.new("Can't find Redmine suitable Tracker") if tracker.nil?  
+        estimated_hours = mapping.estimations[story.estimate.to_i.to_s].to_i 
+       
+        # Creating a new Redmine issue
+        issue = mapping.project.issues.create(:subject => story.name,
+                                              :description => description,
+                                              :author_id => author.id,
+                                              :tracker_id => tracker.id, 
+                                              :status_id => status.id,
+                                              :estimated_hours => estimated_hours)
 
-      # Sets value of 'Pivotal Story ID' issue custom field
-      custom_field = issue.custom_field_values.select{|cv| cv.custom_field.name=="Pivotal Story ID"}.first
-      raise WrongTrackmineConfiguration.new("Can't find 'Pivotal Story ID' custom field for issues") if custom_field.nil?
-      custom_field.update_attributes :value => activity['stories']['story']['id']
-      return issue
+        # Setting value of 'Pivotal Story ID' issue custom field
+        custom_field = issue.custom_field_values.select{|cv| cv.custom_field.name == "Pivotal Story ID"}.first
+        raise WrongTrackmineConfiguration.new("Can't find 'Pivotal Story ID' custom field for issues") if custom_field.nil?
+        custom_field.update_attributes :value => story.id
+
+        #adding comments (journals)
+        story.notes.all.each do |note|
+          user = User.find_by_mail get_user_email(story.project_id, note.author) 
+          journal = issue.journals.new :notes => note.text
+          journal.user_id = user.id unless user.nil?
+          journal.save
+        end
+
+        issues << issue
+      end 
+      return issues
+    end
+    
+    # Updates Redmine issues- title, description only
+    def update_issues(activity)
+      
     end
 
+    # Updates Redmine issues- status and owner when story restarted
+    def story_restart
+      
+    end
   end
   
   # Error to be raised when any problem occured while parsing activity data
