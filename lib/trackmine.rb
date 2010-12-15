@@ -33,12 +33,12 @@ module Trackmine
       if issues.empty?
         create_issues(activity)
       else 
-        story_restart(activity) if story['current_state'] == "started"
+        story_restart(issues, activity) if story['current_state'] == "started"
         update_issues(issues, activity['project_id'], { :description => story['url'] +"\r\n"+ story['description'] }) if story['description'] 
         update_issues(issues, activity['project_id'] ,{ :subject => story['name'] }) if story['name'] 
       end
     end
-
+  
     # Finds author of the tracker activity and returns its email
     def get_user_email(project_id, name)
       begin
@@ -68,12 +68,12 @@ module Trackmine
       return mapping
     end    
 
-    # Creates a Redmine issues-
+    # Creates Redmine issues
     def create_issues(activity)
       story = get_story(activity)
       raise WrongActivityData.new("Can't get story from #{activity['stories']['story']['id']}") if story.nil?
 
-      # getting story owners email
+      # Getting story owners email
       email = get_user_email( story.project_id, story.owned_by )
       author = User.find_by_mail email
 
@@ -102,7 +102,7 @@ module Trackmine
         # Setting value of 'Pivotal Story ID' issue custom field
         issue.pivotal_story_id= story.id
 
-        #adding comments (journals)
+        # Adding comments (journals)
         story.notes.all.each do |note|
           user = User.find_by_mail get_user_email(story.project_id, note.author) 
           journal = issue.journals.new :notes => note.text
@@ -118,19 +118,19 @@ module Trackmine
     # Updates Redmine issues
     def update_issues( issues, tracker_project_id, params ) 
       issues.each do |issue|
-        # Before update checks if mapping still exist (no matter of labels)
-        unless issue.project.mappings.all(:conditions=>["tracker_project_id=?", tracker_project_id]).empty?
+        # Before update checks if mapping still exist (no matter of labels- only projects mapping)
+        unless issue.project.mappings.all( :conditions => ["tracker_project_id=?", tracker_project_id] ).empty?
           issue.update_attributes(params)
         end
       end
     end
 
     # Updates Redmine issues- status and owner when story restarted
-    def story_restart(activity)
+    def story_restart(issues, activity)
       status = IssueStatus.find_by_name "Accepted"
-      owners_email = get_user_email( activity['project_id'], activity['author'] )
+      email = get_user_email( activity['project_id'], activity['author'] )
       author = User.find_by_mail email
-      update_issues(issues, activity['project_id'], { :status_id => status.id, :author_id => author.id })    
+      update_issues(issues, activity['project_id'], { :status_id => status.id, :assigned_to_id => author.id })    
     end
   end
   

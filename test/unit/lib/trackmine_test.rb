@@ -56,48 +56,116 @@ class TrackmineTest < Test::Unit::TestCase
       end
     end   
   
-    context 'reading activity' do
-      context '.get_mapping(tracker_project_id, label)' do
-        context 'when no Redmine project mapped' do
-          should("raise an error") do 
-            assert_raise(Trackmine::MissingTrackmineMapping) { Trackmine.get_mapping(10,'match')}
-          end
-        end
-
-        context 'when there is a mapping for the Redmine project' do
-          setup { @mapping = Factory.create(:mapping, :label => '') }
-          should('return a mapping object') { assert_equal (Trackmine.get_mapping( @mapping.tracker_project_id ,'' )), @mapping }                            
+    context '.get_mapping(tracker_project_id, label)' do
+      context 'when no Redmine project mapped' do
+        should("raise an error") do 
+          assert_raise(Trackmine::MissingTrackmineMapping) { Trackmine.get_mapping(10,'match')}
         end
       end
+
+      context 'when there is a mapping for the Redmine project' do
+        setup { @mapping = Factory.create(:mapping, :label => '') }
+        should('return a mapping object') { assert_equal (Trackmine.get_mapping( @mapping.tracker_project_id ,'' )), @mapping }                            
+      end
+    end
       
-      context 'get_story(activity)' do
-        context 'having correct activity data' do
-        setup { @activity = { 'project_id' => 102622,
+    context '.get_story(activity)' do
+      context 'having correct activity data' do
+      setup { @activity = { 'project_id' => 102622,
                               'stories' => { 'story' => { 'id' => 4460116 } } } }
-          should "a return Story object" do
-            assert Trackmine.get_story(@activity).kind_of? PivotalTracker::Story 
-          end 
+      should "a return Story object" do
+        assert Trackmine.get_story(@activity).kind_of? PivotalTracker::Story 
+      end 
+    end
+
+    context 'having wrong activity data' do
+        setup { @activity = { 'project_id' => 90909,
+                              'stories' => { 'story' => { 'id' => 90909 } } } }
+        should('raise an error') do
+          assert_raise(Trackmine::WrongActivityData) { Trackmine.get_story(@activity)}
+        end
+      end
+    end
+
+    context '.update_issues(issues,tracker_project_id, params)' do
+      context 'with no mapping' do
+        setup do
+          @issue = Factory(:issue)
+          @tpid = Mapping.all.collect{|t| t.tracker_project_id}.max + 1
         end
 
-        context 'having wrong activity data' do
-          setup { @activity = { 'project_id' => 90909,
-                                'stories' => { 'story' => { 'id' => 90909 } } } }
-          should('raise an error') do
-            assert_raise(Trackmine::WrongActivityData) { Trackmine.get_story(@activity)}
-          end
+        should('not raise an error') do
+          assert_nothing_raised (Trackmine::MissingTrackmineMapping) { Trackmine.update_issues([@issue], @tpid, {})}
         end
       end
 
+      context 'with mapping' do
+        setup do 
+          @issue = Factory(:issue)
+          Factory(:mapping, :project_id => 1, :tracker_project_id => 888 )
+        end
+
+        should 'update issues description' do
+          Trackmine.update_issues( [@issue], 888, {:description => 'new d'} )
+          assert_equal 'new d', @issue.description
+        end
+
+        should 'update issues subject' do
+          Trackmine.update_issues( [@issue], 888, {:subject => 'new s'} )
+          assert_equal 'new s', @issue.subject
+        end
+      end
+    end
+      
       fast_context 'updating a story' do
         setup do
-#          @activity_hash['stories']['story'] = { 'id' => 1234,
-#                                                 'url' => "http://www.pivotaltracker.com/services/v3/projects/102622/stories/1234",
-#                                                 'description' => 'Foo description' } 
-#          @issue = Factory.create(:issue)
+          @activity_hash['stories']['story'] = { 'id' => 1234,
+                                                 'url' => "http://www.pivotaltracker.com/services/v3/projects/102622/stories/1234",
+                                                 'description' => 'Foo description',
+                                                 'name' => 'foo name' } 
+          @story = @activity_hash['stories']['story']
+          @issues = []
+          3.times do 
+            issue = Factory.create(:issue)
+            issue.pivotal_story_id = @story['id']  
+            @issues << issue
+          end
+          Trackmine.read_activity @activity_hash
+        end
+
+        should 'change an issue description in each issue' do
+          @issues.each{|issue| assert_equal @story['url'] +"\r\n"+ @story['description'], issue.reload.description}  
+        end
+
+        should 'change an issue subject in each issue' do
+          @issues.each{|issue| assert_equal @story['name'], issue.reload.subject }
         end
       end
-      
+
       fast_context 'restarting a story' do
+        setup do
+          @activity_hash['stories']['story'] = { 'id' => 1234,
+                                                 'url' => "http://www.pivotaltracker.com/services/v3/projects/102622/stories/1234",
+                                                 'current_state' => 'started' } 
+          @story = @activity_hash['stories']['story']
+          @issues = []
+          status = IssueStatus.find_by_name 'Feedback' 
+          3.times do 
+            issue = Factory.create(:issue, :status_id => status.id)
+            issue.pivotal_story_id = @story['id']  
+            @issues << issue
+          end
+          Trackmine.read_activity @activity_hash
+        end
+
+        should 'change an issues status for "Accepted" in each issue' do
+          @issues.each{|issue| assert_equal "Accepted", issue.reload.status.name}  
+        end
+    
+        should 'assigned issue to user who restarted a story' do
+          @issues.each{|issue| assert_equal "admin@somenet.foo", issue.reload.assigned_to.try(:mail)}  
+        end
+        
       end
 
       fast_context 'starting a story with 2 labels' do
@@ -125,11 +193,7 @@ class TrackmineTest < Test::Unit::TestCase
           assert_equal @activity_hash['stories']['story']['id'], issue.pivotal_story_id
           assert_equal 5, issue.journals.size
         end
-  
       end
-
-
-    end 
   end
 end
 

@@ -10,16 +10,18 @@ end
 Issue.class_eval do
   def self.find_by_story_id(story_id)
     Issue.scoped(:joins => {:custom_values => :custom_field},
-                 :conditions => ["custom_fields.name=? AND custom_values.value=?", 'Pivotal Story ID', story_id.to_s ])
+                 :conditions => ["custom_fields.name=? AND custom_values.value=?", 'Pivotal Story ID', story_id.to_s ],
+                 :readonly => false)
   end
   
   def pivotal_custom_value
-    cv = CustomValue.first :joins => :custom_field, 
-                      :conditions => { :custom_values => { :customized_id => self.id, 
-                                                           :customized_type => 'Issue' },
-                                                           :custom_fields => { :name => 'Pivotal Story ID' } }
-    raise Exception.new("Can't find 'Pivotal Story ID' custom field for issues") if cv.nil?
-    CustomValue.find cv
+    cv = CustomValue.first :joins => :custom_field,
+                           :readonly => false,          
+                           :conditions => { :custom_values => { :customized_id => self.id, 
+                                                                :customized_type => 'Issue' },
+                                                                :custom_fields => { :name => 'Pivotal Story ID' } }
+    raise Exception.new("Can't find 'Pivotal Story ID' custom field for issue: '#{self.subject}'") if cv.nil?
+    return cv
   end
 
    # Setter
