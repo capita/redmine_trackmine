@@ -102,6 +102,7 @@ module Trackmine
                                               :estimated_hours => estimated_hours)
         # Setting value of 'Pivotal Story ID' issue custom field
         issue.pivotal_story_id= story.id
+        StoryProject.create(:story_id => story.id, :tracker_project_id => story.project_id, :issue_id => issue.id)
 
         # Adding comments (journals)
         story.notes.all.each do |note|
@@ -135,12 +136,27 @@ module Trackmine
     end
     
     # Finishes the story when Redmine issue closed    
-    def finish_story(story_id, project_id)
-      set_super_token  
+    def finish_story(story_id)
+      begin
+        set_super_token
+        project_id = StoryProject.find_by_story_id(story_id).try(:tracker_project_id)
+        story = PivotalTracker::Story.find(story_id, project_id) 
+        case story.story_type
+          when 'feature'
+            story.update( :current_state => 'finished' )
+          when 'bug'
+            story.update( :current_state => 'finished' )
+          when 'chore'  
+            story.update( :current_state => 'accepted' )
+        end
+      rescue => e 
+        raise PivotalTrackerError.new("Can't finish the story id:#{story_id}. " + e )     
+      end
     end
 
     private 
-
+    
+    # Gets and sets token for Pivotal Tracker 'Super User'
     def set_super_token
        set_token('super_user') if @token.nil?       
     end
@@ -163,6 +179,10 @@ module Trackmine
   
   # Error to be raised when fails due to Trackmine configuration
   class WrongTrackmineConfiguration < StandardError; end;
+
+  # Error to be raised when can't get access to PivotalTracker
+  class PivotalTrackerError < StandardError; end;
+
 
 end
 

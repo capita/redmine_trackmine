@@ -8,6 +8,8 @@ end
 
 # Adds finding Issue by Pivotal Story ID
 Issue.class_eval do
+  after_save :finish_pivotal_story
+
   def self.find_by_story_id(story_id)
     Issue.scoped(:joins => {:custom_values => :custom_field},
                  :conditions => ["custom_fields.name=? AND custom_values.value=?", 'Pivotal Story ID', story_id.to_s ],
@@ -33,7 +35,16 @@ Issue.class_eval do
   def pivotal_story_id
     pivotal_custom_value.value.to_i
   end
+  
+  private
+
+  def finish_pivotal_story
+    if self.status.is_closed?  && self.pivotal_story_id!=0
+      Trackmine.finish_story( self.pivotal_story_id )
+    end
+  end
 end
+
 
 Redmine::Plugin.register :redmine_trackmine do
   name 'Redmine Trackmine plugin'
