@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <story>
+    <id type="integer">1</id>
+    <project_id type="integer">102622</project_id>
+    <story_type>bug</story_type>
+    <url>http://www.pivotaltracker.com/story/show/1</url>
+    <current_state>accepted</current_state>
+    <description>Description 1</description>
+    <name>Story 1</name>
+    <requested_by>James Kirk</requested_by>
+    <owned_by>Test Suite Access</owned_by>
+    <created_at type="datetime">2008/12/10 00:00:00 UTC</created_at>
+    <accepted_at type="datetime">2008/12/10 00:00:00 UTC</accepted_at>
+    <labels></labels>
+</story>

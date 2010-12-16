@@ -1,7 +1,7 @@
 module Trackmine
 
   class << self
-
+ 
     # Returns all projects for the current user
     def projects
       PivotalTracker::Project.all
@@ -27,6 +27,7 @@ module Trackmine
       tracker_project.stories.all.collect{|s| s.labels }.join(',').squeeze.split(',').uniq
     end
         
+    # Main method parsing PivotalTracker activity
     def read_activity(activity)
       story = activity['stories']['story']
       issues = Issue.find_by_story_id story['id'].to_s
@@ -42,7 +43,7 @@ module Trackmine
     # Finds author of the tracker activity and returns its email
     def get_user_email(project_id, name)
       begin
-        set_token('super_user') if @token.nil?
+        set_super_token
         project = PivotalTracker::Project.find project_id.to_i
         project.memberships.all.select{|m| m.name == name }[0].email
       rescue => e
@@ -52,6 +53,7 @@ module Trackmine
     
     # Return PivotalTracker story for given activity    
     def get_story(activity)
+      set_super_token
       project_id = activity['project_id']
       story_id = activity['stories']['story']['id']
       story = PivotalTracker::Project.find(project_id).stories.find(story_id)
@@ -63,7 +65,7 @@ module Trackmine
     # Return object which maps Redmine project with Tracker project
     def get_mapping(tracker_project_id, label)
       mapping = Mapping.find :first, :conditions=>['tracker_project_id=? AND label=? ', tracker_project_id, label.to_s]
-      raise MissingTrackmineMapping.new("Can't find mapping for project:#{tracker_project_id} and label:#{label}")  if mapping.nil?
+      #raise MissingTrackmineMapping.new("Can't find mapping for project:#{tracker_project_id} and label:#{label}")  if mapping.nil?
       # TODO: email with error!
       return mapping
     end    
@@ -86,9 +88,9 @@ module Trackmine
       labels = [''] if labels.blank?
       labels.each do |label|
         mapping = get_mapping(activity['project_id'], label)
-        raise WrongActivityData.new("Can't find project") if mapping.project.nil?
+        next if mapping.try(:project).nil?
         tracker = Tracker.find_by_name mapping.story_types[story.story_type] 
-        raise WrongTrackmineConfiguration.new("Can't find Redmine suitable Tracker") if tracker.nil?  
+        next if tracker.nil?  
         estimated_hours = mapping.estimations[story.estimate.to_i.to_s].to_i 
        
         # Creating a new Redmine issue
@@ -98,7 +100,6 @@ module Trackmine
                                               :tracker_id => tracker.id, 
                                               :status_id => status.id,
                                               :estimated_hours => estimated_hours)
-
         # Setting value of 'Pivotal Story ID' issue custom field
         issue.pivotal_story_id= story.id
 
@@ -131,6 +132,17 @@ module Trackmine
       email = get_user_email( activity['project_id'], activity['author'] )
       author = User.find_by_mail email
       update_issues(issues, activity['project_id'], { :status_id => status.id, :assigned_to_id => author.id })    
+    end
+    
+    # Finishes the story when Redmine issue closed    
+    def finish_story(story_id, project_id)
+      set_super_token  
+    end
+
+    private 
+
+    def set_super_token
+       set_token('super_user') if @token.nil?       
     end
   end
   

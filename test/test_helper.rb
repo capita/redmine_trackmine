@@ -62,9 +62,34 @@ module FakeTracker
                            :body => File.read(fixture_path('story')), 
                            :content_type => "text/xml")
 
-      FakeWeb.register_uri(:get, "http://www.pivotaltracker.com/services/v3/projects/#{PROJECT_ID}/stories/#{STORY_ID}/notes", 
-                           :body => File.read(fixture_path('notes')),  
+      FakeWeb.register_uri(:get, "http://www.pivotaltracker.com/services/v3/projects/#{PROJECT_ID}/stories/1", 
+                           :body => File.read(fixture_path('story_bug_1')), 
                            :content_type => "text/xml")
+
+      FakeWeb.register_uri(:get, "http://www.pivotaltracker.com/services/v3/projects/#{PROJECT_ID}/stories/2", 
+                           :body => File.read(fixture_path('story_chore_2')), 
+                           :content_type => "text/xml")
+
+      FakeWeb.register_uri(:get, "http://www.pivotaltracker.com/services/v3/projects/#{PROJECT_ID}/stories/3", 
+                           :body => File.read(fixture_path('story_feature_labels_3')), 
+                           :content_type => "text/xml")
+  
+      FakeWeb.register_uri(:get, "http://www.pivotaltracker.com/services/v3/projects/#{PROJECT_ID}/stories/#{STORY_ID}/notes", 
+                           :body => File.read(fixture_path('notes_1')),  
+                           :content_type => "text/xml")
+
+      FakeWeb.register_uri(:get, "http://www.pivotaltracker.com/services/v3/projects/#{PROJECT_ID}/stories/1/notes", 
+                           :body => File.read(fixture_path('notes_1')),  
+                           :content_type => "text/xml")
+
+      FakeWeb.register_uri(:get, "http://www.pivotaltracker.com/services/v3/projects/#{PROJECT_ID}/stories/2/notes", 
+                           :body => File.read(fixture_path('notes_2')),  
+                           :content_type => "text/xml")
+
+      FakeWeb.register_uri(:get, "http://www.pivotaltracker.com/services/v3/projects/#{PROJECT_ID}/stories/3/notes", 
+                           :body => File.read(fixture_path('notes_2')),  
+                           :content_type => "text/xml")
+
     end
   end 
 end
