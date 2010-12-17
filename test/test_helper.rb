@@ -37,6 +37,10 @@ module FakeTracker
 
     def setup
       FakeWeb.allow_net_connect = false
+      
+      FakeWeb.register_uri(:put, %r|http://www.pivotaltracker.com/services/v3/projects/|, 
+                           :body => File.read(fixture_path('put_response')), 
+                           :content_type => "text/xml")
 
       FakeWeb.register_uri(:post, "https://www.pivotaltracker.com/services/v3/tokens/active", 
                            :body => File.read(fixture_path('token')), 

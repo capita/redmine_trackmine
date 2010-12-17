@@ -8,7 +8,15 @@ end
 
 # Adds finding Issue by Pivotal Story ID
 Issue.class_eval do
-  after_save :finish_pivotal_story
+
+  # When Issue status changed to 'closed' or 'rejected' finishes story 
+  before_update do |issue|
+    if issue.status_id_changed?
+      if issue.status.is_closed?  && issue.pivotal_story_id != 0
+        Trackmine.finish_story( issue.pivotal_story_id )
+      end  
+    end
+  end
 
   def self.find_by_story_id(story_id)
     Issue.scoped(:joins => {:custom_values => :custom_field},
@@ -34,14 +42,6 @@ Issue.class_eval do
   # Getter  
   def pivotal_story_id
     pivotal_custom_value.value.to_i
-  end
-  
-  private
-
-  def finish_pivotal_story
-    if self.status.is_closed?  && self.pivotal_story_id!=0
-      Trackmine.finish_story( self.pivotal_story_id )
-    end
   end
 end
 

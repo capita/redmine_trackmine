@@ -100,9 +100,10 @@ module Trackmine
                                               :tracker_id => tracker.id, 
                                               :status_id => status.id,
                                               :estimated_hours => estimated_hours)
+
         # Setting value of 'Pivotal Story ID' issue custom field
         issue.pivotal_story_id= story.id
-        StoryProject.create(:story_id => story.id, :tracker_project_id => story.project_id, :issue_id => issue.id)
+        StoryProject.find_or_create_by_story_id_and_tracker_project_id(story.id, story.project_id)
 
         # Adding comments (journals)
         story.notes.all.each do |note|
@@ -135,7 +136,7 @@ module Trackmine
       update_issues(issues, activity['project_id'], { :status_id => status.id, :assigned_to_id => author.id })    
     end
     
-    # Finishes the story when Redmine issue closed    
+    # Finishes the story when the Redmine issue is closed    
     def finish_story(story_id)
       begin
         set_super_token

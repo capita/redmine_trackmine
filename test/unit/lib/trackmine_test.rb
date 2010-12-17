@@ -78,9 +78,11 @@ class TrackmineTest < Test::Unit::TestCase
       setup do 
         @activity_hash['stories']['story']['id'] = 1  
         Factory.create :mapping, :tracker_project_id => @activity_hash['project_id'], :label => ''
+        @old_count= StoryProject.count
         @issue = Trackmine.create_issues(@activity_hash)[0]
       end
-
+      
+      should('create one StoryProject') { assert StoryProject.count - @old_count == 1 }
       should 'create a proper Feature issue' do
         assert @issue.instance_of? Issue
         assert_equal "Story 1", @issue.subject
@@ -93,7 +95,7 @@ class TrackmineTest < Test::Unit::TestCase
         assert_equal 5, @issue.journals.size
       end
     end
-
+    
     context '.update_issues(issues,tracker_project_id, params)' do
       context 'with no mapping' do
         setup do
@@ -123,6 +125,21 @@ class TrackmineTest < Test::Unit::TestCase
         end
       end
     end
+    
+    fast_context 'finish_story' do
+      setup do 
+        @story_id = StoryProject.first.story_id
+        @wrong_id = -1 
+      end
+
+      should("get response with a current_state 'finished'") do
+        assert_equal "finished", Trackmine.finish_story(@story_id).current_state
+      end
+
+      should("raise an errors when wrong story_id given") do
+        assert_raise(Trackmine::PivotalTrackerError) { Trackmine.finish_story(@wrong_id) }
+      end
+    end
 
     fast_context 'starting a story with one label' do
       setup do
@@ -147,87 +164,85 @@ class TrackmineTest < Test::Unit::TestCase
       should('set issues comments') { assert_equal 0, @issue.journals.size }
     end
 
-      fast_context 'starting a story with 3 labels and 2 mappings' do
-        setup do
-          @activity_hash['stories']['story'] = { 'id' => 3,
-                                                 'url' => "http://www.pivotaltracker.com/services/v3/projects/102622/stories/4460116",
-                                                 'current_state' => 'started' } 
-          @story = @activity_hash['stories']['story']
-          Factory(:mapping, :project_id => 1, :tracker_project_id => @activity_hash['project_id'], :label => 'orange')
-          Factory(:mapping, :project_id => 1, :tracker_project_id => @activity_hash['project_id'], :label => 'apple')
-      
-          @issue_count = Issue.count    
-          Trackmine.read_activity @activity_hash
-          @issues = Issue.all[-2..-1] # 2 last created issues
-        end
-
-        should('create 2 issues') { assert Issue.count-@issue_count == 2 }
-        should 'create 2 issues with correct attributes values' do
-          @issues.each do |issue|
-            assert_equal "Story 3", issue.subject
-            assert_equal "http://www.pivotaltracker.com/story/show/3"+"\r\n"+"Description 3", issue.description
-            assert_equal "Feature", issue.tracker.name
-            assert_equal "Accepted", issue.status.name    
-            assert_equal 10, issue.estimated_hours    
-            assert_equal 'admin@somenet.foo', issue.author.mail 
-            assert_equal @activity_hash['stories']['story']['id'], issue.pivotal_story_id 
-            assert_equal 0, issue.journals.size 
-          end
-        end
-       end
-      
-      fast_context 'updating a story' do
-        setup do
-          @activity_hash['stories']['story'] = { 'id' => 1234,
-                                                 'url' => "http://www.pivotaltracker.com/services/v3/projects/102622/stories/1234",
-                                                 'description' => 'Foo description',
-                                                 'name' => 'foo name' } 
-          @story = @activity_hash['stories']['story']
-          @issues = []
-          3.times do 
-            issue = Factory.create(:issue)
-            issue.pivotal_story_id = @story['id']  
-            @issues << issue
-          end
-          Trackmine.read_activity @activity_hash
-        end
-
-        should 'change an issue description in each issue' do
-          @issues.each{|issue| assert_equal @story['url'] +"\r\n"+ @story['description'], issue.reload.description}  
-        end
-
-        should 'change an issue subject in each issue' do
-          @issues.each{|issue| assert_equal @story['name'], issue.reload.subject }
-        end
-      end
-
-      fast_context 'restarting a story' do
-        setup do
-          @activity_hash['stories']['story'] = { 'id' => 1234,
-                                                 'url' => "http://www.pivotaltracker.com/services/v3/projects/102622/stories/1234",
-                                                 'current_state' => 'started' } 
-          @story = @activity_hash['stories']['story']
-          @issues = []
-          status = IssueStatus.find_by_name 'Feedback' 
-          3.times do 
-            issue = Factory.create(:issue, :status_id => status.id)
-            issue.pivotal_story_id = @story['id']  
-            @issues << issue
-          end
-          Trackmine.read_activity @activity_hash
-        end
-
-        should 'change an issues status for "Accepted" in each issue' do
-          @issues.each{|issue| assert_equal "Accepted", issue.reload.status.name}  
-        end
+    fast_context 'starting a story with 3 labels and 2 mappings' do
+      setup do
+        @activity_hash['stories']['story'] = { 'id' => 3,
+                                               'url' => "http://www.pivotaltracker.com/services/v3/projects/102622/stories/4460116",
+                                               'current_state' => 'started' } 
+        @story = @activity_hash['stories']['story']
+        Factory(:mapping, :project_id => 1, :tracker_project_id => @activity_hash['project_id'], :label => 'orange')
+        Factory(:mapping, :project_id => 1, :tracker_project_id => @activity_hash['project_id'], :label => 'apple')
     
-        should 'assigned issue to user who restarted a story' do
-          @issues.each{|issue| assert_equal "admin@somenet.foo", issue.reload.assigned_to.try(:mail)}  
-        end
-        
+        @issue_count = Issue.count    
+        Trackmine.read_activity @activity_hash
+        @issues = Issue.all[-2..-1] # 2 last created issues
       end
+
+      should('create 2 issues') { assert Issue.count - @issue_count == 2 }
+      should 'create 2 issues with correct attributes values' do
+        @issues.each do |issue|
+          assert_equal "Story 3", issue.subject
+          assert_equal "http://www.pivotaltracker.com/story/show/3"+"\r\n"+"Description 3", issue.description
+          assert_equal "Feature", issue.tracker.name
+          assert_equal "Accepted", issue.status.name    
+          assert_equal 10, issue.estimated_hours    
+          assert_equal 'admin@somenet.foo', issue.author.mail 
+          assert_equal @activity_hash['stories']['story']['id'], issue.pivotal_story_id 
+          assert_equal 0, issue.journals.size 
+        end
+      end
+    end
       
-     
+    fast_context 'updating a story' do
+      setup do
+        @activity_hash['stories']['story'] = { 'id' => 1234,
+                                               'url' => "http://www.pivotaltracker.com/services/v3/projects/102622/stories/1234",
+                                               'description' => 'Foo description',
+                                               'name' => 'foo name' } 
+        @story = @activity_hash['stories']['story']
+        @issues = []
+        3.times do 
+          issue = Factory.create(:issue)
+          issue.pivotal_story_id = @story['id']  
+          @issues << issue
+        end
+        Trackmine.read_activity @activity_hash
+      end
+
+      should 'change an issue description in each issue' do
+        @issues.each{|issue| assert_equal @story['url'] +"\r\n"+ @story['description'], issue.reload.description}  
+      end
+
+      should 'change an issue subject in each issue' do
+        @issues.each{|issue| assert_equal @story['name'], issue.reload.subject }
+      end
+    end
+
+    fast_context 'restarting a story' do
+      setup do
+        @activity_hash['stories']['story'] = { 'id' => 1234,
+                                               'url' => "http://www.pivotaltracker.com/services/v3/projects/102622/stories/1234",
+                                               'current_state' => 'started' } 
+        @story = @activity_hash['stories']['story']
+        @issues = []
+        status = IssueStatus.find_by_name 'Feedback' 
+        3.times do 
+          issue = Factory.create(:issue, :status_id => status.id)
+          issue.pivotal_story_id = @story['id']  
+          @issues << issue
+        end
+        Trackmine.read_activity @activity_hash
+      end
+
+      should 'change an issues status for "Accepted" in each issue' do
+        @issues.each{|issue| assert_equal "Accepted", issue.reload.status.name}  
+      end
+    
+      should 'assigned issue to user who restarted a story' do
+        @issues.each{|issue| assert_equal "admin@somenet.foo", issue.reload.assigned_to.try(:mail)}  
+      end
+        
+    end
   end
 end
 
