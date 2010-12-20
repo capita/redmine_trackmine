@@ -1,5 +1,8 @@
 require 'redmine'
 require 'dispatcher'
+require 'bundler'
+require 'bundler'
+Bundler.setup(:default)
 require 'pivotal_tracker'
 
 RAILS_DEFAULT_LOGGER.info 'Starting Trackmine Plugin for Redmine'
