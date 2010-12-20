@@ -30,11 +30,19 @@ class PivotalHandlerTest < Test::Unit::TestCase
         end
       end  
 
-      context "with invalid activity message" do
+      context "with invalid activity message format" do
         setup { post '/pivotal_activity.xml', {}.to_xml}
         should("return accepted status") { assert_equal 202, last_response.status}
       end
-      
+
+      context "with wrong activity message data" do
+        setup do
+          post '/pivotal_activity.xml', '<?xml version="1.0" encoding="UTF-8"?><activity><event_type>story_update</event_type></activity>'
+        end
+        
+        should("return accepted status") { assert_equal 202, last_response.status}
+        should("send email with an error notification") {  assert !ActionMailer::Base.deliveries.empty? }
+      end
     end
   end  
 end

@@ -65,8 +65,6 @@ module Trackmine
     # Return object which maps Redmine project with Tracker project
     def get_mapping(tracker_project_id, label)
       mapping = Mapping.find :first, :conditions=>['tracker_project_id=? AND label=? ', tracker_project_id, label.to_s]
-      #raise MissingTrackmineMapping.new("Can't find mapping for project:#{tracker_project_id} and label:#{label}")  if mapping.nil?
-      # TODO: email with error!
       return mapping
     end    
 

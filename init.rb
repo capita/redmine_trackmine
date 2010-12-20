@@ -13,7 +13,11 @@ Issue.class_eval do
   before_update do |issue|
     if issue.status_id_changed?
       if issue.status.is_closed?  && issue.pivotal_story_id != 0
-        Trackmine.finish_story( issue.pivotal_story_id )
+        begin
+          Trackmine.finish_story( issue.pivotal_story_id )
+        rescue => e
+          TrackmineMailer.deliver_error_mail("Error while closing story: " + e)
+        end
       end  
     end
   end
@@ -30,6 +34,7 @@ Issue.class_eval do
                            :conditions => { :custom_values => { :customized_id => self.id, 
                                                                 :customized_type => 'Issue' },
                                                                 :custom_fields => { :name => 'Pivotal Story ID' } }
+  
     raise Exception.new("Can't find 'Pivotal Story ID' custom field for issue: '#{self.subject}'") if cv.nil?
     return cv
   end
