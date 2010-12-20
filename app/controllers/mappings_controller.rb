@@ -1,5 +1,6 @@
 class MappingsController < ApplicationController
   unloadable
+
   before_filter :require_admin
   before_filter :set_token
 
