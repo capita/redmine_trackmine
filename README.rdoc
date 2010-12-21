@@ -74,15 +74,14 @@ Example:
 You can configure:
 
 * Mapping between Pivotal story estimation points and Redmine estimated_hours
-
-On default it is: 
+Default: 
   1 point  => 1 hour
   2 points => 4 hours
   3 points => 10 hours
 
+
 * Mapping between Pivotal story_types and Redmine trackers
-   
-On default it is: 
+Default: 
   'feature'  => 'Feature'
   'bug'      => 'Bug'
   'chore'    => 'Support'
