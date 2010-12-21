@@ -31,7 +31,7 @@ Run migrations
 * Make sure you have 'Pivotal Story ID' (field_format: int) custom field for Redmine Issue.
 * Add valid Pivotal Tracker credentials into [redmine_app]/config/trackmine.yml
 
-/config/trackmine.yml  
+trackmine.yml  
 
   foouser@example.net: 
     email: foouser@example.net
@@ -45,7 +45,7 @@ Run migrations
     email: admin@net.org
     password: 1234
 
-Super user has access to all Pivotal Tracker projects.
+The user named 'super_user' should have access to all Pivotal Tracker projects you want to map with.
 Its credentials are used to handle tracker web hooks.
 
 
