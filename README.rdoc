@@ -12,4 +12,49 @@ with Pivotal Tracker projects (or labels).
 
 == Setup
 
+=== Installation
 
+In Redmine app run:
+
+  $ script/plugin install https://github.com/capita/trackmine.git
+
+or clone it into /vendor/plugins/
+
+  $ git clone https://github.com/capita/trackmine.git
+
+Run migrations
+
+  $ rake db:migrate_plugins
+
+=== Configuration
+
+* Make sure you have 'Pivotal Story ID' (field_format: int) custom field for Redmine Issue.
+* Add valid Pivotal Tracker credentials into [redmine_app]/config/trackmine.yml
+
+  #/config/trackmine.yml  
+  #
+  #[redmine_email]:
+  #  email: [pivotal_tracker_email]
+  #  password: [pivotal_tracker_password]   
+  #
+  foouser@example.net: 
+    email: foouser@example.net
+    password: 1111
+
+  baruser@example.net:
+    email: baruser2@fake.net
+    password: 2222
+
+
+  # Super user has access to all Pivotal Tracker projects.
+  # Its credentials are used to handle tracker web hooks.
+  #
+  # Syntax:
+  #
+  #super_user:
+  #  email: [pivotal_tracker_email]
+  #  password: [pivotal_tracker_password]   
+  #
+  super_user:
+    email: admin@net.org
+    password: 1234
