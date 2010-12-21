@@ -26,7 +26,7 @@ Run migrations
 
   $ rake db:migrate_plugins
 
-=== Configuration
+=== Configuration- Redmine side
 
 * Make sure you have 'Pivotal Story ID' (field_format: int) custom field for Redmine Issue.
 * Add valid Pivotal Tracker credentials into [redmine_app]/config/trackmine.yml
@@ -46,6 +46,45 @@ trackmine.yml
     password: 1234
 
 The user named 'super_user' should have access to all Pivotal Tracker projects you want to map with.
-Its credentials are used to handle tracker web hooks.
+Its credentials are used to handle Pivotal Tracker hooks.
+
+=== Configuration- Pivotal Tracker side
+
+Add Web Hook Url pointing to your Redmine app. To do that:
+
+* On your project page choose 'Project -> Configure Integrations'
+* Find Activity Web Hook section 
+* In 'Web Hook Url' put [redmine_app_url]/pivotal_activity.xml
+
+Example:
+
+  http://my-company-redmine-site.org/pivotal_activity.xml
+  
+  
+== Usage 
+
+=== Mapping 
+
+* As a Redmine administrator go to 'Administration -> Trackmine' section.
+* Use link 'Add mapping'
+* Select Redmine project and Pivotal project (or label)
+
+=== Mapping Configuration
+
+You can configure:
+
+* Mapping between Pivotal story estimation points and Redmine estimated_hours
+
+On default it is: 
+  1 point  => 1 hour
+  2 points => 4 hours
+  3 points => 10 hours
+
+* Mapping between Pivotal story_types and Redmine trackers
+   
+On default it is: 
+  'feature'  => 'Feature'
+  'bug'      => 'Bug'
+  'chore'    => 'Support'
 
 
