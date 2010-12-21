@@ -1,6 +1,6 @@
 = Redmine Trackmine Plugin
 
-The plugin integrates particular Redmine projects (or subprojects)
+The plugin integrates Redmine projects (or subprojects)
 with Pivotal Tracker projects (or labels).
 
 == Features
@@ -22,7 +22,7 @@ or clone it into /vendor/plugins/
 
   $ git clone https://github.com/capita/trackmine.git
 
-Run migrations
+Run plugin migrations
 
   $ rake db:migrate_plugins
 
@@ -45,7 +45,7 @@ trackmine.yml
     email: admin@net.org
     password: 1234
 
-The user named 'super_user' should have access to all Pivotal Tracker projects you want to map with.
+The user named 'super_user' should have access to all Pivotal Tracker projects you want to map to.
 Its credentials are used to handle Pivotal Tracker hooks.
 
 === Configuration- Pivotal Tracker side
@@ -87,4 +87,7 @@ On default it is:
   'bug'      => 'Bug'
   'chore'    => 'Support'
 
+== Copyright
+
+Copyright (c) 2010 Capita Unternehmensberatung GmbH. See LICENSE for details.
 
