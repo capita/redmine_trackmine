@@ -1,7 +1,6 @@
 require 'redmine'
 require 'dispatcher'
 require 'bundler'
-require 'bundler'
 Bundler.setup(:default)
 require 'pivotal_tracker'
 
@@ -12,6 +11,7 @@ require_dependency 'project_patch'
 require_dependency 'issue_patch'
 
 Dispatcher.to_prepare do
+  config.middleware.insert_after ActionController::StringCoercion, "PivotalHandler"
   Issue.send(:include, IssuePatch)
   Project.send(:include, ProjectPatch)
 end

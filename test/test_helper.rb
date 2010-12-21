@@ -18,7 +18,6 @@ end
 
 # Ensure that we are using the temporary fixture path for Redmin
 Engines::Testing.set_fixture_path
-set :environment, :test
 
 # Establishing fakeweb for PivotalTracker
 module FakeTracker
