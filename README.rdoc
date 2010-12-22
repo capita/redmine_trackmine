@@ -16,11 +16,11 @@ with Pivotal Tracker projects (or labels).
 
 In Redmine app run:
 
-  $ script/plugin install https://github.com/capita/trackmine.git
+  $ script/plugin install https://github.com/capita/redmine_trackmine.git
 
 or clone it into /vendor/plugins/
 
-  $ git clone https://github.com/capita/trackmine.git
+  $ git clone git@github.com:capita/redmine_trackmine.git
 
 Run plugin migrations
 
