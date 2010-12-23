@@ -52,6 +52,11 @@ Syntax:
     password: [pivotal_tracker_password]   
 
 
+  super_user:
+    email: [pivotal_tracker_email]
+    password: [pivotal_tracker_password]   
+
+
 trackmine.yml  
 
   foouser@example.net: 
