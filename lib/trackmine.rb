@@ -60,7 +60,7 @@ module Trackmine
         story_id = activity['stories']['story']['id']
         story = PivotalTracker::Project.find(project_id).stories.find(story_id)
       rescue => e
-        raise WrongActivityData.new("Can't get story: #{story_id} from Pivotal Tracker. " + e)
+        raise WrongActivityData.new("Can't get story: #{story_id} from Pivotal Tracker project: #{project_id}. " + e)
       end
       return story 
     end
