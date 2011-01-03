@@ -54,14 +54,11 @@ module Trackmine
     
     # Return PivotalTracker story for given activity    
     def get_story(activity)
-      begin 
-        set_super_token
-        project_id = activity['project_id']
-        story_id = activity['stories']['story']['id']
-        story = PivotalTracker::Project.find(project_id).stories.find(story_id)
-      rescue => e
-        raise WrongActivityData.new("Can't get story: #{story_id} from Pivotal Tracker project: #{project_id}. " + e)
-      end
+      set_super_token
+      project_id = activity['project_id']
+      story_id = activity['stories']['story']['id']
+      story = PivotalTracker::Project.find(project_id).stories.find(story_id)
+      raise WrongActivityData.new("Can't get story: #{story_id} from Pivotal Tracker project: #{project_id}. ") if story.nil?
       return story 
     end
 
@@ -160,7 +157,7 @@ module Trackmine
     
     # Gets and sets token for Pivotal Tracker 'Super User'
     def set_super_token
-       set_token('super_user') if @token.nil?       
+      set_token('super_user') if @token.nil?       
     end
   end
   
