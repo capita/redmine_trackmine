@@ -3,6 +3,10 @@
 The plugin integrates Redmine projects (or subprojects)
 with Pivotal Tracker projects (or labels).
 
+== Important Notice!
+
+We are still working on the plugin. Please be aware that the Trackmine will go through a number of changes over the next few weeks.
+
 == Features
 
 * Starting a story in a Pivotal Tracker automatically creates a Redmine issue.  
