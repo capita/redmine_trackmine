@@ -54,12 +54,14 @@ module Trackmine
     
     # Return PivotalTracker story for given activity    
     def get_story(activity)
-      set_super_token
-      project_id = activity['project_id']
-      story_id = activity['stories']['story']['id']
-      story = PivotalTracker::Project.find(project_id).stories.find(story_id)
+      begin 
+        set_super_token
+        project_id = activity['project_id']
+        story_id = activity['stories']['story']['id']
+        story = PivotalTracker::Project.find(project_id).stories.find(story_id)
       rescue => e
-      raise WrongActivityData.new("Can't get story: #{story_id} from Pivotal Tracker. " + e)
+        raise WrongActivityData.new("Can't get story: #{story_id} from Pivotal Tracker. " + e)
+      end
       return story 
     end
 
@@ -72,7 +74,7 @@ module Trackmine
     # Creates Redmine issues
     def create_issues(activity)
       story = get_story(activity)
-      raise WrongActivityData.new("Can't get story from #{activity['stories']['story']['id']}") if story.nil?
+      raise WrongActivityData.new("Can't get story with id= #{activity['stories']['story']['id']}") if story.nil?
 
       # Getting story owners email
       email = get_user_email( story.project_id, story.owned_by )
