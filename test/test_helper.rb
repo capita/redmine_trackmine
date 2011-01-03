@@ -38,9 +38,9 @@ module FakeTracker
 
     def setup
       FakeWeb.allow_net_connect = false
-      projects_url = "http://www.pivotaltracker.com/services/v3/projects"
+      projects_url = "https://www.pivotaltracker.com/services/v3/projects"
 
-      [[:put, %r|http://www.pivotaltracker.com/services/v3/projects/|, 'put_response'],
+      [[:put, %r|https://www.pivotaltracker.com/services/v3/projects/|, 'put_response'],
        [:post, "https://www.pivotaltracker.com/services/v3/tokens/active",    'token'],
        [:get, projects_url,                                                'projects'],
        [:get, projects_url + "/#{PROJECT_ID}",                              'project'],
