@@ -66,8 +66,13 @@ class TrackmineTest < Test::Unit::TestCase
       end
 
       context 'having wrong activity data' do
-        setup { @activity = { 'project_id' => 90909,
-                              'stories' => { 'story' => { 'id' => 90909 } } } }
+        setup do 
+          @activity = { 'project_id' => 102622,
+                              'stories' => { 'story' => { 'id' => 90909 } } } 
+          FakeWeb.register_uri(:get, "https://www.pivotaltracker.com/services/v3/projects/102622/stories/90909" , 
+                               :body => '', 
+                               :content_type => "text/plain" )
+        end
         should('raise an error') do
           assert_raise(Trackmine::WrongActivityData) { Trackmine.get_story(@activity)}
         end

@@ -54,11 +54,15 @@ module Trackmine
     
     # Return PivotalTracker story for given activity    
     def get_story(activity)
-      set_super_token
-      project_id = activity['project_id']
-      story_id = activity['stories']['story']['id']
-      story = PivotalTracker::Project.find(project_id).stories.find(story_id)
-      raise WrongActivityData.new("Can't get story: #{story_id} from Pivotal Tracker project: #{project_id}. ") if story.nil?
+      begin
+        set_super_token
+        project_id = activity['project_id']
+        story_id = activity['stories']['story']['id']
+        story = PivotalTracker::Project.find(project_id).stories.find(story_id)
+        raise 'Got empty story' if story.nil?
+      rescue => e
+        raise WrongActivityData.new("Can't get story: #{story_id} from Pivotal Tracker project: #{project_id}. " + e) 
+      end
       return story 
     end
 
