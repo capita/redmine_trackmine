@@ -31,7 +31,7 @@ class PivotalHandlerTest < Test::Unit::TestCase
       end  
 
       context "with invalid activity message format" do
-        setup { post '/pivotal_activity.xml', {}.to_xml}
+        setup { post '/pivotal_activity.xml', {}.to_xml }
         should("return accepted status") { assert_equal 202, last_response.status}
       end
 
