@@ -9,7 +9,7 @@ We are still working on the plugin. Please be aware that the Trackmine will go t
 
 == Features
 
-* Starting a story in a Pivotal Tracker automatically creates a Redmine issue.  
+* Starting a story in a Pivotal Tracker automatically creates a Redmine issue with status "Accepted".  
 * Updating a story in a Pivotal Tracker updates the Redmine issue attributes (subject, description, status).  
 * Closing a Redmine issue finishes the Pivotal Tracker story.
 * Mapping between Pivotal Tracker and Redmine attributes can be configured
@@ -45,7 +45,7 @@ Run plugin migrations
 
 === Configuration- Redmine side
 
-* Make sure you have 'Pivotal Story ID' (field_format: int) custom field for Redmine Issue.
+* Make sure you have 'Pivotal Story ID' (field_format: int, Trackers: Bug, Support, Feature) custom field for Redmine Issue.
 * Add valid Pivotal Tracker credentials in [redmine_app]/config/trackmine.yml
 
 
