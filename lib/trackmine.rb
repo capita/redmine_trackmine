@@ -25,7 +25,7 @@ module Trackmine
     # Returns all labels from specified Pivotal Tracker project   
     def project_labels(tracker_project_id)
       tracker_project = PivotalTracker::Project.find tracker_project_id
-      tracker_project.stories.all.collect{|s| s.labels }.join(',').squeeze.split(',').uniq
+      tracker_project.stories.all.collect{|s| s.labels }.join(',').split(',').uniq#still lets empty label
     end
         
     # Main method parsing PivotalTracker activity
@@ -99,6 +99,7 @@ module Trackmine
         issue = mapping.project.issues.create(:subject => story.name,
                                               :description => description,
                                               :author_id => author.id,
+                                              :assigned_to_id => author.id,
                                               :tracker_id => tracker.id, 
                                               :status_id => status.id,
                                               :estimated_hours => estimated_hours)
