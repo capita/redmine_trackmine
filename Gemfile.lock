@@ -27,6 +27,7 @@ GEM
     shoulda (2.11.3)
     sinatra (1.0)
       rack (>= 1.0)
+    unicode (0.4.0)
     wirble (0.1.3)
 
 PLATFORMS
@@ -47,4 +48,5 @@ DEPENDENCIES
   rest-client (= 1.6.0)
   shoulda (= 2.11.3)
   sinatra (= 1.0.0)
+  unicode (= 0.4.0)
   wirble

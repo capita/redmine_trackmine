@@ -7,7 +7,8 @@ gem 'rest-client',                     '1.6.0', :require => 'rest_client'
 gem 'rack',                            '1.0.1'
 gem 'sinatra',                         '1.0.0'
 gem 'pivotal-tracker',                 '0.3.0'
-gem 'pg',			       '0.9.0'	
+gem 'pg',			                         '0.9.0'	
+gem 'unicode',                         '0.4.0'  
  
 group :development do
   gem 'wirble'

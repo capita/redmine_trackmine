@@ -27,7 +27,7 @@ module FakeTracker
   STORY_ID = 4460116
 
   # Labels taken from stories.xml fixture.
-  LABELS = ['shields','transporter']
+  LABELS = ['gvö','transporter']
 
   class << self
 

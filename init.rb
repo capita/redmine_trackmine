@@ -3,6 +3,7 @@ require 'dispatcher'
 require 'bundler'
 Bundler.setup(:default)
 require 'pivotal_tracker'
+require 'unicode'
 
 RAILS_DEFAULT_LOGGER.info 'Starting Trackmine Plugin for Redmine'
 

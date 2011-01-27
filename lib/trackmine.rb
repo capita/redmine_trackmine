@@ -25,7 +25,7 @@ module Trackmine
     # Returns all labels from specified Pivotal Tracker project   
     def project_labels(tracker_project_id)
       tracker_project = PivotalTracker::Project.find tracker_project_id
-      tracker_project.stories.all.select{|s| !s.labels.nil?}.collect{|s| s.labels }.join(',').split(',').uniq # nasty code but works fine
+      tracker_project.stories.all.select{|s| !s.labels.nil?}.collect{|s| Unicode.downcase(s.labels) }.join(',').split(',').uniq # ugly code but works fine
     end
         
     # Main method parsing PivotalTracker activity
@@ -89,7 +89,7 @@ module Trackmine
       labels = story.labels.to_s.split(',')
       labels = [''] if labels.blank?
       labels.each do |label|
-        mapping = get_mapping(activity['project_id'], label)
+        mapping = get_mapping(activity['project_id'], Unicode.downcase(label)) # to make sure UTF-8 works fine
         next if mapping.try(:project).nil?
         tracker = Tracker.find_by_name mapping.story_types[story.story_type] 
         next if tracker.nil?  
