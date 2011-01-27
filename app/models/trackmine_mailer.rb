@@ -1,8 +1,8 @@
 class TrackmineMailer < ActionMailer::Base
 
   def error_mail(exception)
-    recipients "piotrek@therock.pl"
-    from "Trackmine Notifications <no-reply@capita.de>" 
+    recipients Trackmine.error_notification['recipient']
+    from Trackmine.error_notification['from']
     subject "Trackmine error occurred" 
     sent_on Time.now 
     body :exception => exception

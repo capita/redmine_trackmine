@@ -17,6 +17,9 @@ Dispatcher.to_prepare do
   Project.send(:include, ProjectPatch)
 end
 
+# Sets error email for trackmine mailer
+Trackmine.set_error_notification
+
 Redmine::Plugin.register :redmine_trackmine do
   name 'Redmine Trackmine plugin'
   author 'Piotr Brudny'

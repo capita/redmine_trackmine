@@ -1,18 +1,33 @@
 module Trackmine
 
   class << self
+    attr_writer :error_notification
+    
+    # Gets data from config/trackmine.yml    
+    def get_credentials
+      trackmine_path = File.join(Rails.root, 'config', 'trackmine.yml')
+      raise MissingTrackmineConfig.new("Missing trackmine.yml configuration file in /config") unless File.exist?(trackmine_path)
+      YAML.load_file(trackmine_path)
+    end
+
+    # Sets email for error notification
+    def set_error_notification
+      @error_notification = get_credentials['error_notification'] 
+    end
+    
+    # Gets email for error notification
+    def error_notification
+      @error_notification
+    end
  
     # Returns all projects for the current user
     def projects
       PivotalTracker::Project.all
     end
 
-    # Gets credentials for user identified by its email and sets PivotalTracker token.
+    # Sets PivotalTracker token using user credentials from config/trackmine.yml
     def set_token(email)
-      trackmine_path = File.join(Rails.root, 'config', 'trackmine.yml')
-      raise MissingTrackmineConfig.new("Missing trackmine.yml configuration file in /config") unless File.exist?(trackmine_path)
-      credentials = YAML.load_file(trackmine_path)
-      credential = credentials[email] 
+      credential = get_credentials[email] 
       raise MissingCredentials.new("Missing credentials for #{email} in trackmine.yml") if credential.nil? 
       begin
         @token = PivotalTracker::Client.token(credential['email'], credential['password'])

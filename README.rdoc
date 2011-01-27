@@ -60,6 +60,9 @@ Syntax:
     email: [pivotal_tracker_email]
     password: [pivotal_tracker_password]   
 
+  error_notification:
+    recipient: [email_for_error_notifications]
+    from: "[information to emails FROM field]"
 
 trackmine.yml  
 
@@ -74,7 +77,10 @@ trackmine.yml
   super_user:
     email: admin@net.org
     password: 1234
-
+  
+  error_notification:
+    recipient: errors@examplet.net
+    from: "Trackmine Notifications <no-reply@example.net>" 
 
 Users mentioned in trackmine.yml should have administration rights in redmine.
 The user named 'super_user' should have access to all Pivotal Tracker projects you want to map to.
