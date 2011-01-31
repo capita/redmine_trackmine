@@ -96,7 +96,7 @@ class TrackmineTest < Test::Unit::TestCase
         assert_equal "Accepted", @issue.status.name  
         assert_equal 0, @issue.estimated_hours
         assert_equal 'admin@somenet.foo', @issue.author.mail
-        assert_equal @issue.assigned_to_id, @issues.author_id
+        assert_equal @issue.assigned_to_id, @issue.author_id
         assert_equal @activity_hash['stories']['story']['id'], @issue.pivotal_story_id
         assert_equal 5, @issue.journals.size
       end
