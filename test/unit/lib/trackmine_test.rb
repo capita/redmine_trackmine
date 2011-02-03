@@ -83,11 +83,9 @@ class TrackmineTest < Test::Unit::TestCase
       setup do 
         @activity_hash['stories']['story']['id'] = 1  
         Factory.create :mapping, :tracker_project_id => @activity_hash['project_id'], :label => ''
-        @old_count= StoryProject.count
         @issue = Trackmine.create_issues(@activity_hash)[0]
       end
       
-      should('create one StoryProject') { assert StoryProject.count - @old_count == 1 }
       should 'create a proper Feature issue' do
         assert @issue.instance_of? Issue
         assert_equal "Story 1", @issue.subject
@@ -97,6 +95,7 @@ class TrackmineTest < Test::Unit::TestCase
         assert_equal 0, @issue.estimated_hours
         assert_equal 'admin@somenet.foo', @issue.author.mail
         assert_equal @issue.assigned_to_id, @issue.author_id
+        assert_equal @activity_hash['project_id'], @issue.pivotal_project_id
         assert_equal @activity_hash['stories']['story']['id'], @issue.pivotal_story_id
         assert_equal 5, @issue.journals.size
       end
@@ -134,16 +133,17 @@ class TrackmineTest < Test::Unit::TestCase
     
     fast_context 'finish_story' do
       setup do 
-        @story_id = StoryProject.first.story_id
+        @story_id = 4460116
+        @project_id = 102622 
         @wrong_id = -1 
       end
 
       should("get response with a current_state 'finished'") do
-        assert_equal "finished", Trackmine.finish_story(@story_id).current_state
+        assert_equal "finished", Trackmine.finish_story(@project_id, @story_id).current_state
       end
 
       should("raise an errors when wrong story_id given") do
-        assert_raise(Trackmine::PivotalTrackerError) { Trackmine.finish_story(@wrong_id) }
+        assert_raise(Trackmine::PivotalTrackerError) { Trackmine.finish_story(@wrong_id, @wrong_id) }
       end
     end
 
