@@ -45,7 +45,9 @@ Run plugin migrations
 
 === Configuration- Redmine side
 
-* Make sure you have 'Pivotal Story ID' (field_format: int, Trackers: Bug, Support, Feature) custom field for Redmine Issue.
+* Make sure you have following custom fields for Redmine Issue:
+** 'Pivotal Project ID' (field_format: int, Trackers: Bug, Support, Feature) .
+** 'Pivotal Story ID' (field_format: int, Trackers: Bug, Support, Feature) .
 * Add valid Pivotal Tracker credentials in [redmine_app]/config/trackmine.yml
 
 
