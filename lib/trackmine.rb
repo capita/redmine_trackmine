@@ -61,8 +61,7 @@ module Trackmine
       begin
         set_super_token
         project = PivotalTracker::Project.find project_id.to_i
-        user = project.memberships.all.select{|m| m.name == name }[0]
-        user.nil? ? nil : user.email
+         project.memberships.all.select{|m| m.name == name }[0].email
       rescue => e
         raise WrongActivityData.new("Can't get email of the Tracker user: #{name} in project id: #{project_id}. " + e)
       end 
@@ -93,10 +92,8 @@ module Trackmine
       story = get_story(activity)
       raise WrongActivityData.new("Can't get story with id= #{activity['stories']['story']['id']}") if story.nil?
 
-      # Getting story owners email and the author
-      # Simply bail out and do nothing if no Story owner is declared, e.g. for Pivotal's 'Releases'
+      # Getting story owners email
       email = get_user_email( story.project_id, story.owned_by )
-      return true if email.nil?
       author = User.find_by_mail email
 
       # Setting issue attributes
