@@ -1,6 +1,6 @@
 source :rubygems
 
-gem 'bundler',                         '1.0.7'
+gem 'bundler',                         '>= 1.0.7'
 gem 'rake',                            '0.8.7'
 gem 'mime-types',                      '1.16'
 gem 'rest-client',                     '1.6.0', :require => 'rest_client'
