@@ -51,7 +51,8 @@ module Trackmine
         create_issues(activity)
       else 
         story_restart(issues, activity) if story['current_state'] == "started"
-        update_issues(issues, activity['project_id'], { :description => story['url'] +"\r\n"+ story['description'] }) if story['description'] 
+        story_url = get_story(activity).url
+        update_issues(issues, activity['project_id'], { :description => story_url +"\r\n"+ story['description'] }) if story['description'] 
         update_issues(issues, activity['project_id'] ,{ :subject => story['name'] }) if story['name'] 
       end
     end
