@@ -62,7 +62,7 @@ module Trackmine
       begin
         set_super_token
         project = PivotalTracker::Project.find project_id.to_i
-        project.memberships.all.select{|m| m.name == name }[0].email
+         project.memberships.all.select{|m| m.name == name }[0].email
       rescue => e
         raise WrongActivityData.new("Can't get email of the Tracker user: #{name} in project id: #{project_id}. " + e)
       end 
