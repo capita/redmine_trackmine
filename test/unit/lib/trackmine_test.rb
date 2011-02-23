@@ -201,8 +201,8 @@ class TrackmineTest < Test::Unit::TestCase
       
     fast_context 'updating a story' do
       setup do
-        @activity_hash['stories']['story'] = { 'id' => 1234,
-                                               'url' => "http://www.pivotaltracker.com/services/v3/projects/102622/stories/1234",
+        @activity_hash['stories']['story'] = { 'id' => 4460116,
+                                               'url' => "http://www.pivotaltracker.com/services/v3/projects/102622/stories/4460116",
                                                'description' => 'Foo description',
                                                'name' => 'foo name' } 
         @story = @activity_hash['stories']['story']
@@ -216,7 +216,7 @@ class TrackmineTest < Test::Unit::TestCase
       end
 
       should 'change an issue description in each issue' do
-        @issues.each{|issue| assert_equal @story['url'] +"\r\n"+ @story['description'], issue.reload.description}  
+        @issues.each{|issue| assert_equal "http://www.pivotaltracker.com/story/show/#{@story['id']}" +"\r\n"+ @story['description'], issue.reload.description}  
       end
 
       should 'change an issue subject in each issue' do
@@ -226,8 +226,8 @@ class TrackmineTest < Test::Unit::TestCase
 
     fast_context 'restarting a story' do
       setup do
-        @activity_hash['stories']['story'] = { 'id' => 1234,
-                                               'url' => "http://www.pivotaltracker.com/services/v3/projects/102622/stories/1234",
+        @activity_hash['stories']['story'] = { 'id' => 4460116,
+                                               'url' => "http://www.pivotaltracker.com/services/v3/projects/102622/stories/4460116",
                                                'current_state' => 'started' } 
         @story = @activity_hash['stories']['story']
         @issues = []
