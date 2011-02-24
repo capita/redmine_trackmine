@@ -198,7 +198,23 @@ class TrackmineTest < Test::Unit::TestCase
         end
       end
     end
-      
+
+    fast_context 'updating a release story with no owner' do
+      setup do
+        @activity_hash['stories']['story'] = { 'id' => 4,
+                                               'url' => "http://www.pivotaltracker.com/services/v3/projects/102622/stories/4460116",
+                                               'current_state' => 'unstarted' } 
+        @story = @activity_hash['stories']['story']
+        Factory(:mapping, :project_id => 1, :tracker_project_id => @activity_hash['project_id'], :label => 'education2')
+        @issue_count = Issue.count    
+        Trackmine.read_activity @activity_hash
+        @issue = Issue.last
+      end
+
+      should('create 0 issues') { assert Issue.count - @issue_count == 0}
+    
+    end
+
     fast_context 'updating a story' do
       setup do
         @activity_hash['stories']['story'] = { 'id' => 4460116,

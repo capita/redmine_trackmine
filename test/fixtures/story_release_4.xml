@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<story>
+  <id type="integer">4460116</id>
+  <project_id type="integer">102622</project_id>
+  <story_type>release</story_type>
+  <url>https://www.pivotaltracker.com/story/show/4460116</url>
+  <current_state>accepted</current_state>
+  <description>obczajka na maksiora</description>
+  <name>stufix</name>
+  <requested_by>Piotr Brudny</requested_by>
+  <created_at type="datetime">2011/02/23 13:56:07 UTC</created_at>
+  <updated_at type="datetime">2011/02/24 10:05:29 UTC</updated_at>
+  <accepted_at type="datetime">2011/02/24 10:05:29 UTC</accepted_at>
+  <deadline type="datetime">2011/02/28 11:00:00 UTC</deadline>
+</story>
+

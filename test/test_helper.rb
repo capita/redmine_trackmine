@@ -50,6 +50,7 @@ module FakeTracker
        [:get, projects_url + "/#{PROJECT_ID}/stories/1",                'story_bug_1'],
        [:get, projects_url + "/#{PROJECT_ID}/stories/2",              'story_chore_2'],
        [:get, projects_url + "/#{PROJECT_ID}/stories/3",     'story_feature_labels_3'],
+       [:get, projects_url + "/#{PROJECT_ID}/stories/4",            'story_release_4'],
        [:get, projects_url + "/#{PROJECT_ID}/stories/#{STORY_ID}/notes",    'notes_1'],
        [:get, projects_url + "/#{PROJECT_ID}/stories/1/notes",              'notes_1'],
        [:get, projects_url + "/#{PROJECT_ID}/stories/2/notes",              'notes_2'],

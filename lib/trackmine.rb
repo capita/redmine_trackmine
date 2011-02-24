@@ -47,7 +47,7 @@ module Trackmine
     def read_activity(activity)
       story = activity['stories']['story']
       issues = Issue.find_by_story_id story['id'].to_s
-      if issues.empty?
+      if issues.empty? and story['current_state'] == "started"
         create_issues(activity)
       else 
         story_restart(issues, activity) if story['current_state'] == "started"
