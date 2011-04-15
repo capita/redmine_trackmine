@@ -45,7 +45,7 @@ module Trackmine
         
     # Main method parsing PivotalTracker activity
     def read_activity(activity)
-      story = activity['stories']['story']
+      story = activity['stories'][0] # PT API has changed! activity['stories']['story'] doesn't work any more
       issues = Issue.find_by_story_id story['id'].to_s
       if issues.empty? and story['current_state'] == "started"
         create_issues(activity)
@@ -73,7 +73,7 @@ module Trackmine
       begin
         set_super_token
         project_id = activity['project_id']
-        story_id = activity['stories']['story']['id']
+        story_id = activity['stories'][0]['id']
         story = PivotalTracker::Project.find(project_id).stories.find(story_id)
         raise 'Got empty story' if story.nil?
       rescue => e
@@ -91,7 +91,7 @@ module Trackmine
     # Creates Redmine issues
     def create_issues(activity)
       story = get_story(activity)
-      raise WrongActivityData.new("Can't get story with id= #{activity['stories']['story']['id']}") if story.nil?
+      raise WrongActivityData.new("Can't get story with id= #{activity['stories'][0]['id']}") if story.nil?
 
       # Getting story owners email
       email = get_user_email( story.project_id, story.owned_by )

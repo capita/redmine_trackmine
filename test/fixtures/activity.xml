@@ -7,7 +7,7 @@
   <author>Test Suite Access</author>
   <project_id type="integer">102622</project_id>
   <description>Test Suite Access started &quot;ziomo&quot;</description>
-  <stories>
+  <stories type="array">
     <story>
       <id type="integer">4460116</id>
       <url>http://www.pivotaltracker.com/services/v3/projects/102622/stories/4460116</url>
