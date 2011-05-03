@@ -38,13 +38,9 @@ Copy Gemfile and Gemfile.lock from redmine_trackmine to redmine app
   $ cp vendor/plugins/redmine_trackmine/Gemfile Gemfile 
   $ cp vendor/plugins/redmine_trackmine/Gemfile.lock Gemfile.lock 
 
-Install gems on a server 
+Install gems 
 
   $ bundle install
-
-or you can use gems bundled with a plugin if you don't have permission to install them on a server
-
-  $ bundle install --path vendor/plugins/redmine_trackmine/vendor/bundle
 
 Run plugin migrations
 
