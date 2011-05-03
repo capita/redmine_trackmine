@@ -1,11 +1,18 @@
 = Redmine Trackmine Plugin
 
-The plugin integrates Redmine projects (or subprojects)
-with Pivotal Tracker projects (or labels).
+Redmine is an excellent multi-project issue tracking tool focussing on
+collaboration in the implementation and integration parts of software
+development. Pivotal Tracker, on the other hand, is a superb planning
+tool and extremely well suited for requirements capturing and customer
+feedback.
 
-== Important Notice!
+The Trackmine -plugin provides simple but effective bi-directional
+communication between Pivotal Tracker and Redmine by outsourcing the
+workflow between Pivotal's "Started" and "Finished" states to Redmine. The triggers for teleporting
+between the tools are starting a story in Pivotal and closing an issue
+in Redmine. The workflow in Redmine remains customizable and can be
+tailored to individual needs.
 
-We are still working on the plugin. Please be aware that the Trackmine will go through a number of changes over the next few weeks.
 
 == Features
 

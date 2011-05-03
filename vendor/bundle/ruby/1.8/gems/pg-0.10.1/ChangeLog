@@ -1,0 +1,645 @@
+214[master,tip]   8ab3dd3c757b   2011-01-19 08:00 -0800   ged
+  Added tag v0.10.1 for changeset de10b5d8e442
+
+213[v0.10.1]   de10b5d8e442   2011-01-19 08:00 -0800   ged
+  Added signature for changeset 230ea3e68db2
+
+212[github/master]   230ea3e68db2   2011-01-19 07:54 -0800   ged
+  Add an include guard for pg.h
+
+211   f877d2d399cc   2011-01-19 07:53 -0800   ged
+  Simplify the common case require of the ext
+
+210   8e1707a90330   2011-01-19 07:52 -0800   ged
+  Include the extconf header
+
+209   89348c8bb6d1   2010-12-06 12:00 -0800   ged
+  Experimenting with a greatly-simplified extconf, since the complex one isn't solving any problems
+
+208   aea173eec98a   2010-12-06 08:45 -0800   ged
+  Bumping version to 0.10.1.
+
+207   d61e3310ea3d   2010-12-06 08:41 -0800   ged
+  Fixing compatibility with versions of PostgreSQL without PQgetCancel. (fixes #36)
+
+206   89979f184b22   2010-12-06 07:44 -0800   ged
+  Fix require for natively-compiled extension under Windows. (fixes #55)
+
+205   9e11be78bfe4   2010-12-06 07:32 -0800   ged
+  Change rb_yield_splat() to rb_yield_values() for compatibility with Rubinius. (fixes #54)
+
+204   eb0d4b1df418   2010-12-01 18:54 -0800   ged
+  Removed tag 0.10.0
+
+203   78a63dce1491   2010-12-01 18:52 -0800   ged
+  Added tag v0.10.0 for changeset 1822a169c4fe
+
+202   469211f606ea   2010-12-01 18:52 -0800   ged
+  Fix deprecated expectation.
+
+201:197,200   857722663a6f   2010-12-01 18:47 -0800   ged
+  Merged in Mahlon's wait_for_notify update for PostgreSQL 9's notification payload
+
+200   8ffb67a23f45   2010-12-01 18:30 -0800   ged
+  Closing pg90_notify_payload pbranch for merge into default
+
+199   de86dca00ad2   2010-12-01 18:24 -0800   ged
+  Finished the merge of default; fixed specs under 1.9.2.
+
+198:197,190   60664b2495cf   2010-12-01 16:39 -0800   ged
+  merge of default
+
+197   148d0cc3db4a   2010-12-01 14:19 -0800   ged
+  Added tag 0.10.0 for changeset 1822a169c4fe
+
+196[v0.10.0]   1822a169c4fe   2010-12-01 14:19 -0800   ged
+  Added signature for changeset 3993015a841e
+
+195   3993015a841e   2010-12-01 12:20 -0800   ged
+  Ignore the yard cache, handle missing rake-compiler for non-compile-related tasks.
+
+194   71786704391b   2010-11-11 21:39 -0600   ged
+  Build/gem updates
+
+193   899329ce1b4e   2010-11-11 21:09 -0600   ged
+  Added a spec for collapsed notifications.
+
+192   413f9e81e3ea   2010-11-01 09:01 -0700   ged
+  More work trying to get the Windows-native gem to compile. No luck, but it's closer.
+
+191:171   3402babf2cdf   2010-10-31 16:29 -0700   ged
+  Fixed issue with PGconn#wait_for_notify that caused it to miss notifications that happened after the LISTEN but before the wait_for_notify.
+
+190   193043bf2244   2010-10-08 09:40 -0700   ged
+  Added support for the payload of NOTIFY events (w/Mahlon E. Smith)
+
+189:169   ce9b893ff824   2010-10-08 07:25 -0700   ged
+  start new patch on default
+
+188:120   d5fa3e079a55   2009-12-31 09:58 -0800   ged
+  Closing branch
+
+187   4c2ea65f2eb9   2008-10-14 05:27 +0000   davis
+  Merged revisions 175 via svnmerge from
+
+186   7e7c22be0302   2008-10-05 19:43 +0000   davis
+  Merged revisions 169-173 via svnmerge from
+
+185   3e9dda291ef3   2008-08-17 20:42 +0000   davis
+  Merged revisions 166 via svnmerge from
+
+184   3686c9944fe1   2008-08-17 20:27 +0000   davis
+  Add ext_helper.rb
+
+183   ed3294b76bf7   2008-08-17 20:23 +0000   davis
+  Merged revisions 149-160 via svnmerge from
+
+182   ff6af5fc4dc3   2008-08-17 20:05 +0000   davis
+  Initialized merge tracking via "svnmerge" with revisions "1-146" from
+
+181   1a7b63bacfee   2008-08-17 19:55 +0000   davis
+  Initialized merge tracking via "svnmerge" with revisions "1-146" from
+
+180   f9cd915ea427   2008-03-18 02:32 +0000   davis
+  merged ruby-pg/trunk rev 123:146 with ruby-pg/branches/stable
+
+179   bae01401c92b   2008-03-17 21:29 +0000   davis
+  merged ruby-pg/trunk rev 123:125 with ruby-pg/branches/stable
+
+178   83e5013eccc8   2008-02-05 19:23 +0000   davis
+  merged ruby-pg/trunk rev 109:121 with ruby-pg/branches/stable
+
+177   abfe9a457946   2008-01-28 18:50 +0000   davis
+  merged ruby-pg/trunk rev 104 with ruby-pg/branches/stable
+
+176   c7ddb58579d3   2008-01-24 23:07 +0000   davis
+  moved a few minor changes over before release
+
+175   8df9da92380e   2008-01-24 18:45 +0000   davis
+  merged revision 77:HEAD of ruby-pg/trunk to ruby-pg/branches/stable
+
+174   8eb1346cb9aa   2008-01-09 02:08 +0000   davis
+  removed extra directory that was left in the merge
+
+173   d6d19e5371d4   2008-01-09 01:59 +0000   davis
+  merged ruby-pg/trunk rev 69 to ruby-pg/branches/stable
+
+172:-1   7716d24a143b   2008-01-07 22:16 +0000   davis
+  Split 'ruby-pg' module and 'postgres' module
+
+171   9d8f82721f69   2010-10-29 08:09 -0700   ged
+  Updated to RSpec 2.0
+
+170   b2df89600d95   2010-10-11 09:24 -0700   ged
+  Fixes for windows static build.
+
+169   49ff3442c2ee   2010-10-08 07:23 -0700   ged
+  Fixes to get the static windows build to work with PostgreSQL 9.0 and OpenSSL 1.0.0a
+
+168   1fa5cd6851e3   2010-09-28 09:10 -0700   ged
+  More work trying to get the native windows gem to compile under PostgreSQL 9.0
+
+167   c9fb855a7d50   2010-09-28 09:09 -0700   ged
+  Adding a sample of how to use COPY FROM
+
+166   d85ff87e5949   2010-09-24 10:34 -0700   ged
+  Fixes for Ruby 1.9.2.
+
+165   5dbc24f596c8   2010-09-24 10:18 -0700   ged
+  Version bump, updates for PostgreSQL 9.
+
+164   1f8dd92ca16c   2010-08-03 10:31 -0700   ged
+  Merged JRuby fix into the build system, pulled down other build-system updates. Thanks to timfel for the fix.
+
+163   4f705f605e51   2010-08-03 17:56 +0200   timfelgentreff
+  Fix to allow Rakefile to work on JRuby
+
+162   92cc211ef553   2010-08-02 09:28 -0700   ged
+  Honor Ruby's default_internal encoding when connecting via the synchronous interface; fixes #33
+
+161   a2237e39d399   2010-08-02 09:23 -0700   ged
+  Don't treat the installed pg_config not having archflags as an error; fixes #39
+
+160   14b882b7b88c   2010-08-02 09:21 -0700   ged
+  Install extension under arch-specific directory (RPS fix)
+
+159   b0a5ae858569   2010-07-26 19:46 -0700   ged
+  Adding rake tasklibs as a sub-repo
+
+158   37835e3b8701   2010-07-21 18:39 -0700   ged
+  Removed spec for issue #22, as the library is behaving the same as the underlying library; closes #22
+
+157:156,155   86f238c12fa3   2010-07-21 18:36 -0700   ged
+  Merged with 168:dfaa59767b2e
+
+156:150   dfaa59767b2e   2010-07-21 18:35 -0700   ged
+  Reworded an example's description and added a specific transaction-abort spec
+
+155:154,151   e756f8fb15d8   2010-06-22 16:23 -0700   ged
+  Merged with 170:5418a1d86d91
+
+154   8922f0a8ee44   2010-06-22 16:22 -0700   ged
+  Adding example of invalid binary data issue (refs #22), fixing EXT_SO path
+
+153   cb92aa4b6599   2010-02-25 10:39 -0800   ged
+  Adding a spec to test bug #12
+
+152:141   86026f5ecf70   2010-02-25 10:39 -0800   ged
+  Adding rake-compiler to the dev dependencies
+
+151   5418a1d86d91   2010-06-22 15:54 -0700   ged
+  Cross-compile tasks cleanup, extconf diagnostic improvement.
+
+150   07502a793f3a   2010-06-22 10:44 -0700   ged
+  Adding some more stuff to the ignorefile
+
+149   873867122e80   2010-06-22 10:43 -0700   ged
+  Modified the large-object sample script to reflect the pg library's API (refs #35)
+
+148   ea6eae59e917   2010-06-21 11:08 -0700   ged
+  Updating build system, adding .orig files to ignore list.
+
+147   bb8a3baad96e   2010-06-14 13:57 -0700   ged
+  Whitespace fix
+
+146   45e6518b780d   2010-05-26 09:33 -0700   ged
+  Actually, just use the cflags from pg_config, which should resolve both the -Wall and the -lsocket issue (refs #30)
+
+145   730fb885ce08   2010-05-26 09:27 -0700   ged
+  Fixing compilation for non-GCC platforms (fixes #30)
+
+144   a47ffe890970   2010-03-16 07:36 -0700   ged
+  Fixed typo in ext/extconf.rb -- thanks to Keith Cascio for spotting this. Closes #27.
+
+143   9a296096f7e9   2010-02-28 08:56 -0800   ged
+  Added tag 0.9.0 for changeset da726282493c
+
+142[0.9.0]   da726282493c   2010-02-28 08:56 -0800   ged
+  Added signature for changeset 872063e42b12
+
+141   872063e42b12   2010-02-19 08:02 -0800   ged
+  Adding "fat gem" compatible loader, set the default RUBY_CC_VERSION.
+
+140   ab525ca90531   2010-02-19 06:27 -0800   ged
+  Updated the Rakefile so it includes itself in gems. (closes #15) Thanks to flameeyes@bitbucket for
+
+139   9c65eb905416   2010-02-18 06:52 -0800   ged
+  Applied patch for PGconn#async_exec to make it have the same semantics as PGconn#exec (closes #19). Thanks again to Lars Kanis for the patch.
+
+138   b0017ac0ecb5   2010-02-17 15:30 -0800   ged
+  Updated the Rakefile to always default the package version even if a version can't be read from the VERSION_FILE.
+
+137   c7d5458af696   2010-02-17 06:23 -0800   ged
+  Improving spec database setup function (closes #18). Thanks to Lars Kanis for another fine patch.
+
+136   39b11474d035   2010-02-17 06:14 -0800   ged
+  Ack! Removing typo
+
+135   9d54bbc98488   2010-02-17 06:10 -0800   ged
+  Adding a test to ensure the result encoding remains the same even when client_encoding in the connection changes.
+
+134   31afece7c203   2010-01-18 09:15 -0800   ged
+  Made the 'make_header' in the extconf more clear.
+
+133:132,131   d9c920068712   2010-01-13 20:56 -0800   pgsql
+  Merged
+
+132:124   294eb6d5530b   2010-01-13 20:51 -0800   pgsql
+  In rspec tests, replace the pattern:
+
+131   74fab32c2687   2010-01-11 08:15 -0800   ged
+  A better fix for the PGconn#block weirdness on Win32 (closes #16).
+
+130   f8dfc1b6c51c   2010-01-06 06:17 -0800   ged
+  Rearranged the sections of the README.
+
+129   0df792de2a19   2010-01-05 08:48 -0800   ged
+  Updating MacOS X README.
+
+128   2894973bc63f   2010-01-04 18:28 -0800   ged
+  Work around broken rb_thread_select() on win32; thanks to Lars Kanis for the patch!
+
+127   88dacdb9c97d   2010-01-04 18:16 -0800   ged
+  Reverted removal of PGresult::InvalidOid, fixed broken spec.
+
+126   739cec560448   2010-01-04 17:55 -0800   ged
+  Ignore some generated files, documentation work, removed type OID constants.
+
+125   38a0d2a90664   2010-01-04 17:39 -0800   ged
+  Applied patch for static cross-compilation of win32 gem from Lars Kanis with a few changes to
+
+124   f31202539234   2010-01-03 11:40 -0800   ged
+  Updated build system
+
+123   cc09390cb0a8   2010-01-02 09:22 -0800   ged
+  Added tag 0.8.0 for changeset 7fbe4187e9e5
+
+122   05834d47aac3   2009-12-31 09:57 -0800   ged
+  Bumped version to 0.9.0
+
+121:110,120   0997a0aa7624   2009-12-31 09:22 -0800   ged
+  Merged i17n-19-patches branch
+
+120   f5af71167dea   2009-12-28 14:50 -0800   ged
+  Make PGconn.connect_start use PQconnectStart instead of PQconnectdb so asynchronous connection
+
+119   42919e2a4ef8   2009-12-28 08:42 -0800   ged
+  Added column-selection methods to PGresult (#field_values and #column_values). Closes #12. Thanks to
+
+118   39fdb2552163   2009-12-23 08:28 -0800   ged
+  Fixed #11: encrypt_arguments doesn't receive password, thanks to Yuki Miyauchi for the patch.
+
+117   df770b6ad237   2009-12-23 07:49 -0800   ged
+  Fixed infinite loop in async_exec("COPY"), thanks to Mike Pomraning for the patch. Closes #9.
+
+116   4cbcf197cb82   2009-12-16 09:03 -0800   ged
+  New build system, build with rake-compiler, added PGconn::VERSION.
+
+115   6ba661bbdb28   2009-12-15 08:45 -0800   ged
+  Applied Rubyforge patch 26282; fixes #1. Thanks to Nikolai Lugovoi for the patch.
+
+114   3e42badc15de   2009-12-11 17:28 -0800   ged
+  Notify spec fixes, cleanup, Rakefile clean task adjustments.
+
+113   659d80221a45   2009-12-11 13:47 -0800   ged
+  Simplified the spec for PGconn#notify, still segfaulting.
+
+112:111,110   26b614a7ece8   2009-12-11 09:01 -0800   ged
+  Merged Mahlon's examples-directory patch from default.
+
+111:108,109   66234afab283   2009-12-11 09:01 -0800   ged
+  Merged Mahlon's notify patch from default.
+
+110   1e6349a799c3   2009-12-10 10:30 -0800   mahlon
+  Add a sample (usage example) for wait_for_notify().
+
+109:98   a3434e641f6a   2009-12-10 10:22 -0800   mahlon
+  * Small documentation fix for conn.notifies()
+
+108   59549227d7c3   2009-10-29 06:10 -0700   ged
+  Remove old mkrf config file to avoid confusion
+
+107   f30139fb0587   2009-10-28 18:14 -0700   ged
+  Write specs for and applied patch #26283; thanks to Nikolai Lugovoi.
+
+106   a41d4291ffbb   2009-10-28 16:26 -0700   ged
+  Fixups after conversion to Mercurial, fixing tests broken by the changes in the previous commit.
+
+105   91ee1ac36a54   2009-10-28 14:51 +0000   ged
+  * Made spec output elide output from the command line by default, and log everything for
+
+104   0b28f9bd8935   2009-10-17 21:42 +0000   ged
+  Applied patch #26277; thanks to Nikolai Lugovoi.
+
+103   cb5335861c5d   2009-10-16 20:50 +0000   ged
+  Build and warnings cleanup.
+
+102   1d001b550715   2009-08-28 10:50 +0000   ged
+  Applied patch #26116; thanks to Nikolai Lugovoi.
+
+101   d67c62945540   2009-08-28 06:22 +0000   ged
+  * Use pg_ctl -w instead of sleep for specs
+
+100   0524dd20fb0f   2009-08-25 00:35 +0000   ged
+  * Applied patch from (rubyforge:25931), fixes (rubyforge:22925).
+
+99   d0267176eb61   2009-07-30 15:52 +0000   ged
+  Making a branch for merging the patches and new specs to test them.
+
+98[0.8.0]   7fbe4187e9e5   2009-03-28 22:53 +0000   davis
+  Bump version to 0.8.0
+
+97   39a19c65b0a0   2009-03-28 19:39 +0000   cfis
+  Don't call file trace on windows.
+
+96   c4598eee6d1b   2009-03-28 19:33 +0000   cfis
+  Updated VC2008 project
+
+95   c75883fb5979   2009-03-28 19:32 +0000   cfis
+  Updated VC2008 project
+
+94   4192e6d1ccc0   2009-03-28 16:49 +0000   davis
+  Fix socket leak when connection error occurs.
+
+93   03d6ef0de9ef   2009-03-28 15:42 +0000   davis
+  PGconn#lo_close was calling lo_unlink.
+
+92   b27b4b4a54eb   2009-03-28 15:37 +0000   davis
+  Change header so it builds correctly on 1.8 and 1.9.
+
+91   f7b97416c101   2009-03-14 09:22 +0000   cfis
+  Oops - use ALLOC_N not ALLOC, fixes compile error with VC2008.
+
+90   c0fd7531850f   2009-03-14 09:14 +0000   cfis
+  Ignore rdoc directory, pkg directory, nbproject directory.
+
+89   c675c7534c4d   2009-03-14 09:13 +0000   cfis
+  This rakefile is just used for installing the windows gem.
+
+88   c3329724ef5b   2009-03-14 09:13 +0000   cfis
+  Split out building on mingw to a separate rake file.
+
+87   01e1dbb950c8   2009-03-14 09:12 +0000   cfis
+  Updated VC2008 projects for Ruby 1.8 and Ruby 1.9 (1.9 not quite setup yet).
+
+86   677d3eae5b16   2009-03-14 09:11 +0000   cfis
+  Added rdoc task so you can type rake rdoc.  Makes it easier to debug rdoc documentation.
+
+85   c33a73c14126   2009-03-14 08:54 +0000   cfis
+  Windows compatibility - use tcp/ip sockets, use full path names, read files in binary mode.
+
+84   241d3410b875   2009-03-14 08:48 +0000   cfis
+  Ripple port change through text.  Always full path to open spec file.
+
+83   1bf29d30c16c   2009-03-14 08:29 +0000   cfis
+  First stab at getting test to work on Windows.  Windows does not support unix-sockets, so have to use tcp/ip sockets.  Also windows requires that command line parameters are quoted with " and not '.
+
+82   4dae2cabb5ae   2009-03-14 07:47 +0000   cfis
+  Export Init_pg in windows shared library.
+
+81   4e9b028c55cd   2009-03-14 07:46 +0000   cfis
+  Fix up memory handling for Windows (match ALLOC with xfree).
+
+80   4a9ffd0aa913   2009-03-06 18:18 +0000   davis
+  1.9 compatibility fixes.
+
+79   7178d13749b7   2008-12-03 06:52 +0000   davis
+  Add better support for windows build.
+
+78   3bf9ef75bae5   2008-10-14 05:25 +0000   davis
+  Revert r172.
+
+77   cdf306d84adf   2008-10-05 19:18 +0000   davis
+  Update spec tests.
+
+76   0386537bd139   2008-10-05 19:04 +0000   davis
+  Include all libraries listed in "pg_config --libs" in the build.
+
+75   68473ee45e28   2008-10-05 18:47 +0000   davis
+  Fix PGconn#async_exec and PGconn#get_last_result to properly clear all
+
+74   622eec9c6b0b   2008-10-05 18:01 +0000   davis
+  Throw correct exception when result is NULL.
+
+73   8e8045947a9c   2008-08-21 02:48 +0000   davis
+  Fixed option connection argument in the case of using 7 arguments.
+
+72   c5c44a6267f7   2008-08-17 20:35 +0000   davis
+  Typo fix.
+
+71   ed8927d7f45d   2008-08-17 19:26 +0000   davis
+  Properly protect variables from garbage collection, preventing possible memory
+
+70   c7c5d25c851c   2008-08-17 18:19 +0000   davis
+  Applied build patch from Brett Neumeier. Thanks!
+
+69   48d2bdfcc630   2008-07-24 05:46 +0000   davis
+  Fixed PGconn#setnonblocking
+
+68   b2e1bc03aca5   2008-07-24 05:33 +0000   davis
+  Changed all temporary allocations to use ALLOC_N (heap
+
+67   c775c24a75f9   2008-07-08 06:21 +0000   davis
+  Fix oversight in connect arguments for options and connect_timeout
+
+66   b86f0f75181e   2008-04-21 17:41 +0000   davis
+  * backtracked a small piece of the patch, to catch
+
+65   b3a05d09fb27   2008-04-21 17:24 +0000   davis
+  * applied patch from Louis Lavena to improve
+
+64   7579885aff18   2008-04-21 17:13 +0000   davis
+  * added some tests for binary data
+
+63   de58e242dd99   2008-03-20 19:16 +0000   davis
+  * added PGconn#cancel() -> String
+
+62   778892302876   2008-03-20 18:20 +0000   davis
+  * added PGconn.connect_start(...) -> PGconn
+
+61   630cca5e74c1   2008-03-19 21:19 +0000   davis
+  * forgot to add the expected output to the repository,
+
+60   661ed2fea9e2   2008-03-19 21:17 +0000   davis
+  This commmit just cleans up indenting and coding
+
+59   d821d50b7d95   2008-03-17 21:34 +0000   davis
+  re-adding mkrf_config.rb
+
+58   a66f44648857   2008-03-17 21:33 +0000   davis
+  temporarily removing mkrf_config.rb and will re-add it in the
+
+57   c8752b1a33cd   2008-03-17 17:29 +0000   davis
+  * 7.3 compatibility fixes
+
+56   4aa1190e1873   2008-03-17 16:19 +0000   davis
+  * Added PGconn#reset_start
+
+55   1224350cdcb6   2008-03-12 17:39 +0000   davis
+  * added SQLSTATE test
+
+54   639f8bf03621   2008-03-12 16:40 +0000   davis
+  * updated the README to reflect the fact that the pg
+
+53   1fd6244025c5   2008-03-11 21:35 +0000   davis
+  * tried to make it easier to find the license information
+
+52   1c4f58ec2264   2008-03-10 23:55 +0000   davis
+  * add better checking to make sure that PGconn#trace is passed
+
+51   e94ce7f92a06   2008-03-10 18:14 +0000   davis
+  * corrected handling of bytea when passed in binary format
+
+50   221e68f16f2d   2008-03-10 17:54 +0000   davis
+  * make PGconn#trace accept any object that provides
+
+49   2e722b22b4bc   2008-03-10 17:34 +0000   davis
+  * Added PGconn#trace(filename)
+
+48   9b1308e85390   2008-03-07 18:11 +0000   davis
+  * Added check to find pg_config. If not found, throw an error.
+
+47   480eae4733ff   2008-02-22 01:26 +0000   davis
+  * fixed PGconn#trace
+
+46   a6a1c8613b31   2008-02-21 01:05 +0000   davis
+  * added PGconn#set_notice_receiver{ |result| ... }
+
+45   8a6e663a70f7   2008-02-19 19:25 +0000   davis
+  quick change
+
+44   5fc41a8f71f0   2008-02-19 19:06 +0000   davis
+  fix escaping of paths on windows (another try)
+
+43   a465fe9f95a3   2008-02-18 19:32 +0000   davis
+  * attempted some compatibility fixes for windows
+
+42   5a91f5660c17   2008-02-13 01:24 +0000   davis
+  * better quoting and error handling when invoking other programs,
+
+41   5289d5034472   2008-02-13 01:10 +0000   davis
+  quote include and library paths
+
+40   ed53517514b1   2008-02-13 00:22 +0000   davis
+  * created a mkrf_config.rb. I am attempting to transition away from
+
+39   21bf96d0f702   2008-02-11 18:35 +0000   davis
+  * windows fixes (thanks Daniel Berger!)
+
+38   9d0a23cf2113   2008-02-11 17:43 +0000   davis
+  * fix temporary postgresql test installation in
+
+37   7fcd53437c79   2008-02-08 18:27 +0000   davis
+  * properly retrieve binary data from result sets
+
+36   295c477ed74f   2008-02-05 17:56 +0000   davis
+  fixed bug caused by a typo. HAVE_LOCREATE should have been HAVE_LO_CREATE
+
+35   ef2214d7f448   2008-02-01 19:33 +0000   davis
+  * made exec, exec_prepared, send_query, and send_prepared with parameters
+
+34   7303b8165a37   2008-02-01 18:29 +0000   davis
+  * Corrected a comment.
+
+33   b3ad2112a91e   2008-01-31 22:11 +0000   davis
+  * removed duplicate definition of PGconn.open
+
+32   ce9c0e52eec6   2008-01-31 21:41 +0000   davis
+  more test improvements
+
+31   97cbdebaeb11   2008-01-31 21:19 +0000   davis
+  renamed pg_spec to pgconn_spec
+
+30   1cb0537730bf   2008-01-31 21:00 +0000   davis
+  * Added some tests
+
+29   29b827c7dbd0   2008-01-30 18:27 +0000   davis
+  * added PGconn.conndefaults
+
+28   c18f38225bc7   2008-01-29 19:44 +0000   davis
+  corrected the tainting of some strings returned by the database
+
+27   56cd8c6ee046   2008-01-29 17:50 +0000   davis
+  changed gem name from 'ruby-pg' to just 'pg'
+
+26   a9097dead780   2008-01-28 21:19 +0000   davis
+  made a pg.gemspec so that people can build 'pg' gem
+
+25   cfdcfcd445ab   2008-01-26 00:20 +0000   davis
+  changed exception type for empty data structures
+
+24   81cd03f8a2c3   2008-01-25 23:42 +0000   davis
+  * added PGconn#async_exec and alias PGconn#async_query
+
+23   29d775393e88   2008-01-25 00:59 +0000   davis
+  added PGresult#cmdtuples as alias for PGresult#cmd_tuples
+
+22   eac7df0aa291   2008-01-25 00:46 +0000   davis
+  Added:
+
+21   7908e778e7c3   2008-01-24 23:00 +0000   davis
+  Added README.windows and README.OS_X
+
+20   7cc13a1f3010   2008-01-24 17:48 +0000   davis
+  Another change to improve windows compatibility.
+
+19   ee0577472b67   2008-01-24 02:07 +0000   davis
+  fixed typo
+
+18   eaf3b1825d56   2008-01-24 02:05 +0000   davis
+  My previous fix for OS X compatibility didn't work well enough.
+
+17   12b2568a0ada   2008-01-23 23:18 +0000   davis
+  * had to include that file conditionally
+
+16   34dd04d21a78   2008-01-23 23:04 +0000   davis
+  * included an additional file so that it works with
+
+15   4cf66b7302bf   2008-01-23 21:42 +0000   davis
+  * added PGconn.quote_ident to quote identifiers
+
+14   081e4d8ee394   2008-01-22 18:48 +0000   davis
+  * made PGconn#query alias for PGconn#exec
+
+13   4774578059e1   2008-01-22 17:52 +0000   davis
+  * Detect if compiling on OS X, and if so set $ARCHFLAGS correctly.
+
+12   204f4b591614   2008-01-21 18:53 +0000   davis
+  made conn.block cleaner and it should be more portable.
+
+11   449d54289f07   2008-01-18 18:10 +0000   davis
+  Miscellaneous changes:
+
+10   aadd4008d2e3   2008-01-17 23:18 +0000   davis
+  started creating a rspec test, more tests to come later
+
+9   4f276bb9c4b1   2008-01-17 23:11 +0000   davis
+  properly free memory in conn.get_copy_data
+
+8   95d9ff13c269   2008-01-15 21:24 +0000   davis
+  Added conn.block( [ timeout ] ) -> Boolean
+
+7   4cefa3b1ecbb   2008-01-14 23:23 +0000   davis
+  Added conn.transaction{ |conn| ... }
+
+6   ae8c3b66c48d   2008-01-14 19:22 +0000   davis
+  Support for PostgreSQL 7.3.
+
+5   1fd8b2aaac4c   2008-01-08 23:19 +0000   davis
+  Added:
+
+4   5c0a63028583   2008-01-08 22:26 +0000   davis
+  Added:
+
+3   40270de77f48   2008-01-07 23:30 +0000   davis
+  fixed a few method defines for async query processing
+
+2   d05d9f2042d7   2008-01-07 22:52 +0000   davis
+  Change conn.exec to use PQexec if no parameters are passed,
+
+1   a531a7bc9241   2008-01-07 22:31 +0000   davis
+  Cleanup after the repository reorganization.
+
+0   aafc8cf17567   2008-01-07 22:16 +0000   davis
+  Split 'ruby-pg' module and 'postgres' module
+
