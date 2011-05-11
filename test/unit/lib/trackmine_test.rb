@@ -68,7 +68,7 @@ class TrackmineTest < Test::Unit::TestCase
       context 'having wrong activity data' do
         setup do 
           @activity = { 'project_id' => 102622,
-                              'stories' => [{ 'id' => 90909 }]}
+                           'stories' => [{ 'id' => 90909 }]}
           FakeWeb.register_uri :get, "https://www.pivotaltracker.com/services/v3/projects/102622/stories/90909" ,
                                :body => '', 
                                :content_type => "text/plain"

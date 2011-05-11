@@ -8,16 +8,20 @@ module IssuePatch
     klass.class_eval do
       unloadable # Send unloadable so it will not be unloaded in development  
 
-      # When Issue status changed to 'closed' or 'rejected' finishes story 
+      # Finishes story when Issue status changed to 'closed' or 'rejected' 
       before_update do |issue|
-        if issue.status_id_changed?
-          if issue.status.is_closed?  && issue.pivotal_story_id != 0
-            begin
+        if issue.status_id_changed? && issue.status.is_closed?
+          begin
+            if issue.pivotal_story_id != 0 && issue.pivotal_project_id != 0
               Trackmine.finish_story( issue.pivotal_project_id, issue.pivotal_story_id )
-            rescue => e
-              TrackmineMailer.deliver_error_mail("Error while closing story: " + e)
-            end
-          end  
+            elsif issue.pivotal_story_id == 0 && issue.pivotal_project_id == 0
+              #Do nothing when both are empty
+            else
+              raise Exception.new("You should fill both fields (Pivotal Story ID, Pivotal Project ID) in issue: '#{self.subject}' or none")
+            end  
+          rescue => e
+            TrackmineMailer.deliver_error_mail("Error while closing story: " + e)
+          end
         end
       end
 
