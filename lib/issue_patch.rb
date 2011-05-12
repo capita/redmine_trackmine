@@ -17,7 +17,7 @@ module IssuePatch
             elsif issue.pivotal_story_id == 0 && issue.pivotal_project_id == 0
               #Do nothing when both are empty
             else
-              raise Exception.new("You should fill both fields (Pivotal Story ID, Pivotal Project ID) in issue: '#{self.subject}' or none")
+              throw Exception.new("You should fill both fields (Pivotal Story ID, Pivotal Project ID) in issue: '#{issue.subject}' or none")
             end  
           rescue => e
             TrackmineMailer.deliver_error_mail("Error while closing story: " + e)
@@ -39,7 +39,7 @@ module IssuePatch
                                                                     :customized_type => 'Issue' },
                                                                     :custom_fields => { :name => name } }
       
-        raise Exception.new("Can't find #{name} custom field for issue: '#{self.subject}'") if cv.nil?
+        logger.error("Can't find #{name} custom field for issue: '#{self.subject}'") if cv.nil?
         return cv
       end
     
