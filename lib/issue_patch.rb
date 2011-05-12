@@ -11,17 +11,13 @@ module IssuePatch
       # Finishes story when Issue status changed to 'closed' or 'rejected' 
       before_update do |issue|
         if issue.status_id_changed? && issue.status.is_closed?
-          begin
-            if issue.pivotal_story_id != 0 && issue.pivotal_project_id != 0
+          if (issue.pivotal_story_id != 0) || (issue.pivotal_project_id != 0)
+            begin
               Trackmine.finish_story( issue.pivotal_project_id, issue.pivotal_story_id )
-            elsif issue.pivotal_story_id == 0 && issue.pivotal_project_id == 0
-              #Do nothing when both are empty
-            else
-              throw Exception.new("You should fill both fields (Pivotal Story ID, Pivotal Project ID) in issue: '#{issue.subject}' or none")
-            end  
-          rescue => e
-            TrackmineMailer.deliver_error_mail("Error while closing story: " + e)
-          end
+            rescue => e
+              TrackmineMailer.deliver_error_mail("Error while closing story. Pivotal Project ID:'#{issue.pivotal_project_id}', Story ID:'#{issue.pivotal_story_id}',: " + e)
+            end
+          end  
         end
       end
 
@@ -33,14 +29,11 @@ module IssuePatch
       end
       
       def pivotal_custom_value(name)
-        cv = CustomValue.first :joins => :custom_field,
-                               :readonly => false,          
-                               :conditions => { :custom_values => { :customized_id => self.id, 
-                                                                    :customized_type => 'Issue' },
-                                                                    :custom_fields => { :name => name } }
-      
-        logger.error("Can't find #{name} custom field for issue: '#{self.subject}'") if cv.nil?
-        return cv
+        CustomValue.first :joins => :custom_field,
+                          :readonly => false,          
+                          :conditions => { :custom_values => { :customized_id => self.id, 
+                                                               :customized_type => 'Issue' },
+                                                               :custom_fields => { :name => name } }
       end
     
       # Pivotal Project ID setter
@@ -50,7 +43,7 @@ module IssuePatch
 
       # Pivotal Project ID getter  
       def pivotal_project_id
-        pivotal_custom_value('Pivotal Project ID').value.to_i
+        pivotal_custom_value('Pivotal Project ID').try(:value).to_i
       end
 
       # Pivotal Story ID setter
@@ -60,7 +53,7 @@ module IssuePatch
 
       # Pivotal Story ID getter  
       def pivotal_story_id
-        pivotal_custom_value('Pivotal Story ID').value.to_i
+        pivotal_custom_value('Pivotal Story ID').try(:value).to_i
       end
 
     end
