@@ -38,7 +38,7 @@ module IssuePatch
     
       # Pivotal Project ID setter
       def pivotal_project_id=(project_id)
-        pivotal_custom_value('Pivotal Story ID').update_attributes :value => project_id.to_s
+        pivotal_custom_value('Pivotal Project ID').update_attributes :value => project_id.to_s
       end
 
       # Pivotal Project ID getter  
