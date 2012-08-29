@@ -30,7 +30,12 @@ module Trackmine
       credential = get_credentials[email] 
       raise MissingCredentials.new("Missing credentials for #{email} in trackmine.yml") if credential.nil? 
       begin
-        @token = PivotalTracker::Client.token(credential['email'], credential['password'])
+        if (credential['token'])
+          @token = credential['token']
+          PivotalTracker::Client.token = @token
+        else 
+          @token = PivotalTracker::Client.token(credential['email'], credential['password'])
+        end
         PivotalTracker::Client.use_ssl = true # to access pivotal projects which use https
       rescue => e
         raise WrongCredentials.new("Wrong Pivotal Tracker credentials in trackmine.yml. #{e}")
