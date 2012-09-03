@@ -63,8 +63,8 @@ Syntax:
 
 
   super_user:
-    email: [pivotal_tracker_email]
-    password: [pivotal_tracker_password]   
+    # You can use an api token or user/password for the PT api.
+    token: [pivotal_tracker_api_token]
 
   error_notification:
     recipient: [email_for_error_notifications]
@@ -73,8 +73,7 @@ Syntax:
 trackmine.yml  
 
   foouser@example.net: 
-    email: foouser@example.net
-    password: 1111
+    token: 1234 
 
   baruser@example.net:
     email: baruser2@fake.net
