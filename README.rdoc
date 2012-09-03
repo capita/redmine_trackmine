@@ -63,7 +63,7 @@ Syntax:
 
 
   super_user:
-    # You can use an api token or user/password for the PT api.
+    # You can use an api token or email/password for the PT api.
     token: [pivotal_tracker_api_token]
 
   error_notification:
