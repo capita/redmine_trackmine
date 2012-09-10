@@ -1,3 +1,4 @@
+# encoding: utf-8
 # Load test_helper from Redmine main project
 require File.expand_path(File.dirname(__FILE__) + '/../../../../test/test_helper')
 require 'bundler'
@@ -27,7 +28,7 @@ module FakeTracker
   STORY_ID = 4460116
 
   # Labels taken from stories.xml fixture.
-  LABELS = ['gvö','transporter']
+  LABELS = ["gvö",'transporter']
 
   class << self
 
