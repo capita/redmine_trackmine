@@ -51,7 +51,7 @@ class TrackmineTest < Test::Unit::TestCase
       end
 
       context 'when there is a mapping for the Redmine project' do
-        setup { @mapping = Factory(:mapping, :label => '') }
+        setup { @mapping = FactoryGirl.create(:mapping, :label => '') }
         should('return a mapping object') { assert_equal (Trackmine.get_mapping( @mapping.tracker_project_id ,'' )), @mapping }                            
       end
     end
@@ -82,7 +82,7 @@ class TrackmineTest < Test::Unit::TestCase
     fast_context '.create_issues method' do
       setup do 
         @activity_hash['stories'][0]['id'] = 1
-        Factory.create :mapping, :tracker_project_id => @activity_hash['project_id'], :label => ''
+        FactoryGirl.create :mapping, :tracker_project_id => @activity_hash['project_id'], :label => ''
         @issue = Trackmine.create_issues(@activity_hash)[0]
       end
       
@@ -104,7 +104,7 @@ class TrackmineTest < Test::Unit::TestCase
     context '.update_issues(issues,tracker_project_id, params)' do
       context 'with no mapping' do
         setup do
-          @issue = Factory :issue
+          @issue = FactoryGirl.create :issue
           @tpid = Mapping.all.collect{|t| t.tracker_project_id}.max + 1
         end
 
@@ -115,7 +115,7 @@ class TrackmineTest < Test::Unit::TestCase
 
       context 'with mapping' do
         setup do 
-          @issue = Factory :issue
+          @issue = FactoryGirl.create :issue
           Factory :mapping, :project_id => 1, :tracker_project_id => 888
         end
 
@@ -153,7 +153,7 @@ class TrackmineTest < Test::Unit::TestCase
                                        'url' => "http://www.pivotaltracker.com/services/v3/projects/102622/stories/4460116",
                                        'current_state' => 'started' }]
         @story = @activity_hash['stories'][0]
-        Factory :mapping, :project_id => 1, :tracker_project_id => @activity_hash['project_id'], :label => 'education'
+        FactoryGirl.create :mapping, :project_id => 1, :tracker_project_id => @activity_hash['project_id'], :label => 'education'
         @issue_count = Issue.count    
         Trackmine.read_activity @activity_hash
         @issue = Issue.last
@@ -176,8 +176,8 @@ class TrackmineTest < Test::Unit::TestCase
                                        'url' => "http://www.pivotaltracker.com/services/v3/projects/102622/stories/4460116",
                                        'current_state' => 'started' }]
         @story = @activity_hash['stories'][0]
-        Factory :mapping, :project_id => 1, :tracker_project_id => @activity_hash['project_id'], :label => 'orange'
-        Factory :mapping, :project_id => 1, :tracker_project_id => @activity_hash['project_id'], :label => 'apple'
+        FactoryGirl.create :mapping, :project_id => 1, :tracker_project_id => @activity_hash['project_id'], :label => 'orange'
+        FactoryGirl.create :mapping, :project_id => 1, :tracker_project_id => @activity_hash['project_id'], :label => 'apple'
     
         @issue_count = Issue.count    
         Trackmine.read_activity @activity_hash
@@ -205,7 +205,7 @@ class TrackmineTest < Test::Unit::TestCase
                                        'url' => "http://www.pivotaltracker.com/services/v3/projects/102622/stories/4460116",
                                        'current_state' => 'unstarted' }]
         @story = @activity_hash['stories'][0]
-        Factory :mapping, :project_id => 1, :tracker_project_id => @activity_hash['project_id'], :label => 'education2'
+        FactoryGirl.create :mapping, :project_id => 1, :tracker_project_id => @activity_hash['project_id'], :label => 'education2'
         @issue_count = Issue.count    
         Trackmine.read_activity @activity_hash
         @issue = Issue.last
@@ -249,7 +249,7 @@ class TrackmineTest < Test::Unit::TestCase
         @issues = []
         status = IssueStatus.find_by_name 'Feedback' 
         3.times do 
-          issue = Factory :issue, :status_id => status.id
+          issue = FactoryGirl.create :issue, :status_id => status.id
           issue.pivotal_story_id = @story['id']  
           @issues << issue
         end

@@ -1,24 +1,24 @@
 # encoding: utf-8
 # Load test_helper from Redmine main project
-require File.expand_path(File.dirname(__FILE__) + '/../../../../test/test_helper')
+require File.expand_path(File.dirname(__FILE__) + '../../test/test_helper')
 require 'bundler'
 Bundler.setup(:default, :test)
 require 'fakeweb'
 require 'shoulda'
-require 'fast_context'
+require 'active_support/test_case'
 require 'factory_girl'
 require 'test/unit'
 require 'rack/test'
 
 # load factories manually. Otherwise load it from redmine app.
-if (!Factory.factories || Factory.factories.empty?)
+#if (!FactoryGirl.factories || FactoryGirl.factories.empty?)
   Dir.glob(File.dirname(__FILE__) + "/factories/*.rb").each do |factory|
     require factory
   end
-end
+#end
 
 # Ensure that we are using the temporary fixture path for Redmin
-Engines::Testing.set_fixture_path
+#Engines::Testing.set_fixture_path
 
 # Establishing fakeweb for PivotalTracker
 module FakeTracker

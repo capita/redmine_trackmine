@@ -14,7 +14,7 @@
     <label> <h4> Pivotal Tracker project <span class="required"> *</span></h4> </label>
 
     <p>
-      <%= select_tag 'tracker_project_id', options_for_select(@tracker_projects.collect{|p| [p.name, p.id] }), {:onchange => remote_function(:update => "mapping_label", :url => { :action => :xhr_labels }, :with => "'id=' + $('tracker_project_id').value" )}  %> <br />
+      <%= select_tag 'tracker_project_id', options_for_select(@tracker_projects.collect{|p| [p.name, p.id] })  %> <br />
     </p>
     
     <label><h4> Project labels </h4></label>
@@ -36,3 +36,12 @@
 
 <% end %>
 
+<script type="text/javascript">
+  $(function($) {
+      $('#tracker_project_id').change(function() {
+          $('#mapping_label').innerHTML = $.ajax({url: '<%= url_for :action => 'xhr_labels' %>',
+          data: 'id=' + this.value
+          })
+      });
+  });
+</script>
