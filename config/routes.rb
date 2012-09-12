@@ -1,6 +1,6 @@
 resources :mappings do
   collection do
-    get 'xhr_labels'
+    post 'xhr_labels'
   end
 end
 
