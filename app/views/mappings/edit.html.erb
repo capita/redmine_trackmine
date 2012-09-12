@@ -1,4 +1,4 @@
-<% form_for @mapping, :url => { :controller => :mappings, :action => :update, :id => @mapping } do |f|%>
+<%= form_for @mapping, :url => { :controller => :mappings, :action => :update, :id => @mapping } do |f|%>
   <%= render :partial => 'config' %>
   <p>
     <%= f.submit 'Update' %>

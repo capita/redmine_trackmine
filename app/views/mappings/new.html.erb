@@ -1,5 +1,5 @@
 <h2>Map Redmine project to Pivotal Tracker project and labels.</h2>
-<% form_for :mapping , :url => { :controller => :mappings, :action => :create } do |f| %>
+<%= form_for :mapping , :url => { :controller => :mappings, :action => :create } do |f| %>
 
   <div class="box">
 
@@ -39,8 +39,11 @@
 <script type="text/javascript">
   $(function($) {
       $('#tracker_project_id').change(function() {
-          $('#mapping_label').innerHTML = $.ajax({url: '<%= url_for :action => 'xhr_labels' %>',
-          data: 'id=' + this.value
+          $.ajax({url: '<%= url_for :action => 'xhr_labels' %>',
+          data: 'id=' + this.value,
+            success: function(data){
+              $('#mapping_label').html(data);
+                }
           })
       });
   });
