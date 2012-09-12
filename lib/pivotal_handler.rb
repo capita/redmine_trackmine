@@ -3,7 +3,6 @@ require 'sinatra'
 class PivotalHandler < Sinatra::Base
 
   post '/pivotal_activity.xml' do
-#    message = request.body.read.strip # doesn't work with xml sent from PivotalTracker
     message = request.env["RAW_POST_DATA"] # TODO: make test passing it
     message_hash = Hash.from_xml(message)
     return [202, "It is not a correct Pivotal Tracker message"] if message_hash['activity'].nil?
