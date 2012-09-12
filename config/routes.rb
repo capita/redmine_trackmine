@@ -4,4 +4,4 @@ resources :mappings do
   end
 end
 
-match "/pivotal_activity.xml" => PivotalHandler, :anchor => false
+# match "/pivotal_activity.xml" => PivotalHandler, :anchor => false
