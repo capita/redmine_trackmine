@@ -26,6 +26,5 @@ Redmine::Plugin.register :redmine_trackmine do
   description 'This plugin integrates Redmine projects with Pivotal Tracker'
   version '2.0.1'
 
-  # menu :admin_menu, :mapping, { :controller => :mappings, :action => 'index' }, :caption =>'Trackmine', :last => true
-  menu :application_menu, :mapping, { :controller => :mappings, :action => 'index' }, :caption =>'Trackmine', :last => true
+  menu :admin_menu, :mapping, { :controller => :mappings, :action => 'index' }, :caption =>'Trackmine', :last => true
 end

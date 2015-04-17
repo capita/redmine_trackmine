@@ -2,11 +2,11 @@
 
   <h2>
     Pivotal Tracker estimation points to Redmine estimated hours
-  </h2> 
+  </h2>
 
-  <% unless @mapping.estimations.blank? %> 
+  <% unless @mapping.estimations.blank? %>
     <% @mapping.estimations.each do |pair| %>
-    
+
       <p>
        <b> Estimation points:</b> <%= label_tag pair[0] %> =>
         <%= text_field_tag "estimations[#{pair[0]}]", pair[1], :size => 1 %><b> hours </b>
@@ -21,14 +21,14 @@
 
   <h2>
     Pivotal Tracker story type to Redmine tracker name
-  </h2> 
+  </h2>
 
-  <% unless @mapping.story_types.blank? %> 
+  <% unless @mapping.story_types.blank? %>
     <% @mapping.story_types.each do |pair| %>
 
       <p>
         <h4>"<%= label_tag pair[0] %>"</h4> to
-        <%= select_tag "story_types[#{pair[0]}]", options_for_select(Tracker.all.collect{|t| [t.name, t.name]}, pair[1] )  %>
+        <%= select_tag "story_types[#{pair[0]}]", options_for_select(Tracker.all.map { |t| [t.name, t.name] }, pair[1] )  %>
       </p>
 
      <% end %>

@@ -11,31 +11,31 @@ class MappingsController < ApplicationController
   def new
     @mapping = Mapping.new :estimations => { 1 => 1, 2 => 4, 3 => 10 },
                            :story_types => { 'feature' => 'Feature', 'bug' => 'Bug', 'chore' => 'Support' }
-                                  
+
     @projects = Project.all
     @tracker_projects = Trackmine.projects
     @labels = [['..choose..','']]
   end
-  
+
   def edit
-    @mapping = Mapping.find params[:id]   
+    @mapping = Mapping.find params[:id]
   end
 
   def create
-    @mapping = Mapping.new params[:mapping].merge :estimations => params[:estimations],
-                                                  :story_types => params[:story_types]
-    
-    @mapping.tracker_project_id = params[:tracker_project_id]
-    @mapping.tracker_project_name = PivotalTracker::Project.find(params[:tracker_project_id].to_i).name 
+    @mapping = Mapping.new(mapping_params)
+
+    @mapping.tracker_project_id = tracker_project_id
+    @mapping.tracker_project_name = PivotalTracker::Project.find(tracker_project_id.to_i).name
     if @mapping.save
       flash[:notice] = 'Mapping was successfully added.'
       redirect_to :action => "index"
     else
+      binding.pry
       flash[:error] = "Can't map these projects."
       redirect_to :action => "new"
     end
   end
-  
+
   def update
     @mapping = Mapping.find params[:id]
     if @mapping.update_attributes :estimations => params[:estimations],
@@ -56,7 +56,7 @@ class MappingsController < ApplicationController
     else
       flash[:error] = "Mapping could not be removed."
     end
-    redirect_to :action => "index", :project_id => @project    
+    redirect_to :action => "index", :project_id => @project
   end
 
   def xhr_labels
@@ -68,5 +68,15 @@ class MappingsController < ApplicationController
 
   def set_token
     Trackmine.set_token(User.current.mail)
+  end
+
+  def mapping_params
+    params.require(:mapping)
+      .permit(:project_id, :label)
+        .merge(estimations: params[:estimations], story_types: params[:story_types])
+  end
+
+  def tracker_project_id
+    params.require(:tracker_project_id)
   end
  end
