@@ -1,0 +1,1 @@
+get 'mappings', :to => 'mappings#index'
