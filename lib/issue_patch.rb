@@ -1,6 +1,5 @@
 require_dependency 'issue'
 
-# Patches Redmine's Issues dynamically.
 module IssuePatch
 
   def self.included(klass) # :nodoc:
@@ -21,38 +20,27 @@ module IssuePatch
         end
       end
 
-      # finding Issue by Pivotal Story ID
       def self.find_by_story_id(story_id)
-        Issue.scoped(:joins => {:custom_values => :custom_field},
-                     :conditions => ["custom_fields.name=? AND custom_values.value=?", 'Pivotal Story ID', story_id.to_s ],
-                     :readonly => false)
+        Issue.joins({:custom_values => :custom_field})
+          .where("custom_fields.name=? AND custom_values.value=?", 'Pivotal Story ID', story_id.to_s).first
       end
 
       def pivotal_custom_value(name)
-        # CustomValue.first :joins => :custom_field,
-        #                   :readonly => false,
-        #                   :conditions => { :custom_values => { :customized_id => self.id,
-        #                                                        :customized_type => 'Issue' },
-        #                                                        :custom_fields => { :name => name } }
         CustomValue.joins(:custom_field).where(custom_fields: {name: name}, customized_id: self.id).first
       end
 
-      # Pivotal Project ID setter
       def pivotal_project_id=(project_id)
-        pivotal_custom_value('Pivotal Project ID').update_attributes :value => project_id.to_s
+        pivotal_custom_value('Pivotal Project ID').update_attributes(value: project_id.to_s)
       end
 
-      # Pivotal Project ID getter
       def pivotal_project_id
         pivotal_custom_value('Pivotal Project ID').try(:value).to_i
       end
 
-      # Pivotal Story ID setter
       def pivotal_story_id=(story_id)
-        pivotal_custom_value('Pivotal Story ID').update_attributes :value => story_id.to_s
+        pivotal_custom_value('Pivotal Story ID').update_attributes(value: story_id.to_s)
       end
 
-      # Pivotal Story ID getter
       def pivotal_story_id
         pivotal_custom_value('Pivotal Story ID').try(:value).to_i
       end
