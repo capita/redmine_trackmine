@@ -7,18 +7,7 @@ module IssuePatch
     klass.class_eval do
       unloadable # Send unloadable so it will not be unloaded in development
 
-      # Finishes story when Issue status changed to 'closed' or 'rejected'
-      before_update do |issue|
-        if issue.status_id_changed? && issue.status.is_closed?
-          if (issue.pivotal_story_id != 0) || (issue.pivotal_project_id != 0)
-            begin
-              Trackmine.finish_story( issue.pivotal_project_id, issue.pivotal_story_id )
-            rescue => e
-              TrackmineMailer.deliver_error_mail("Error while closing story. Pivotal Project ID:'#{issue.pivotal_project_id}', Story ID:'#{issue.pivotal_story_id}',: " + e)
-            end
-          end
-        end
-      end
+      before_update { |issue| finish_story_when_closed_or_rejected(issue) }
 
       def self.find_by_story_id(story_id)
         Issue.joins({:custom_values => :custom_field})
@@ -44,9 +33,24 @@ module IssuePatch
       def pivotal_story_id
         pivotal_custom_value('Pivotal Story ID').try(:value).to_i
       end
-
     end
-
   end
 
+  def self.finish_story_when_closed_or_rejected(issue)
+    if issue_closed? && pivotal_assigned?
+      begin
+        Trackmine.finish_story(issue.pivotal_project_id, issue.pivotal_story_id)
+      rescue => e
+        TrackmineMailer.deliver_error_mail("Error while closing story. Pivotal Project ID:'#{issue.pivotal_project_id}', Story ID:'#{issue.pivotal_story_id}',: " + e)
+      end
+    end
+  end
+
+  def issue_closed?
+    issue.status_id_changed? && issue.status.is_closed?
+  end
+
+  def pivotal_assigned?
+    issue.pivotal_story_id != 0 || issue.pivotal_project_id != 0
+  end
 end
