@@ -21,7 +21,7 @@
       </th>
   	</tr>
   </thead>
-	
+
   <tbody>
   <% @mappings.each do |mapping|%>
     <tr>
@@ -34,10 +34,10 @@
       <td>
         <%= mapping.label %>
       </td>
-    	<td align='center'>	
+    	<td align='center'>
       	<p>
-          <%= link_to image_tag('/images/edit.png')+'Edit', { :action => :edit, :id => mapping } %> | 
-    	    <%= link_to image_tag('/images/delete.png')+'Delete', { :action => :destroy, :id => mapping }, :confirm =>"Do you really want to remove that mapping?"%>
+          <%= link_to image_tag('/images/edit.png')+'Edit', edit_mapping_path(mapping) %> |
+    	    <%= link_to image_tag('/images/delete.png')+'Delete', mapping_path(mapping), :method => :delete %>
         </p>
     	</td>
   	</tr>
