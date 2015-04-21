@@ -2,24 +2,30 @@ require 'sinatra'
 
 class PivotalHandler < Sinatra::Base
 
-  post '/pivotal_activity.xml' do
-#    message = request.body.read.strip # doesn't work with xml sent from PivotalTracker
-    message = request.env["RAW_POST_DATA"] # TODO: make test passing it
-    message_hash = Hash.from_xml(message)
-    return [202, "It is not a correct Pivotal Tracker message"] if message_hash['activity'].nil?
-    if message_hash['activity']['event_type'] == 'story_update'
+  post '/pivotal_activity.json' do
+
+    pivotal_body = JSON.parse(request.body.read.to_s)
+    binding.pry
+    return [202, 'It is not a correct Pivotal Tracker message'] if pivotal_body['kind'].nil?
+    if pivotal_body['kind'] == 'story_update_activity'
       begin
-        Trackmine.read_activity message_hash['activity']
+        handler_logger 'Got the post request from PivotalTracker'
+        Trackmine.read_activity(pivotal_body['activity'])
       rescue => e
-        # Sending email when something is wrong
+        handler_logger("Can't consume the request from PivotalTracker")
         TrackmineMailer.deliver_error_mail("Error while reading activity message from Pivotal Tracker: #{e}")
-        return [202, "Not supported activity"]
+        return [202, 'Not supported activity']
       end
-      return [200, "Got the activity"]
+      return [200, 'Got the activity']
     else
-      return [202, "Not supported event_type"]
+      return [202, 'Not supported event_type']
     end
   end
+
+  private
+
+  def handler_logger(message)
+    Rails.logger.tagged('PivotalHandler') { Rails.logger.info message }
+  end
+
 end
-
-
