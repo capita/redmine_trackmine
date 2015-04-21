@@ -8,3 +8,9 @@ group :development do
   gem 'pry'
 end
 
+group :test do
+  gem 'fakeweb'
+  gem 'rspec'
+  gem 'factory_girl'
+  gem 'shoulda-matchers'
+end

@@ -30,18 +30,17 @@ class MappingsController < ApplicationController
       flash[:notice] = 'Mapping was successfully added.'
       redirect_to action: 'index'
     else
-      flash[:error] = "Can't map these projects. #{@mapping.errors.full_messages.to_sentence}"
+      flash[:error] = "Can't map these projects. #{error_message}"
       redirect_to action: 'new'
     end
   end
 
   def update
     if @mapping.update_attributes(estimations: params[:estimations], story_types: params[:story_types])
-
       flash[:notice] = 'Updated successfully.'
       redirect_to action: 'index'
     else
-      flash[:error] = "Can't save that configuration. #{@mapping.errors.full_messages.to_sentence}"
+      flash[:error] = "Can't save that configuration. #{error_message}"
       redirect_to action: 'new'
     end
   end
@@ -77,4 +76,9 @@ class MappingsController < ApplicationController
   def set_mapping
     @mapping = Mapping.find(params[:id])
   end
+
+  def error_message
+    @mapping.errors.full_messages.to_sentence
+  end
+
  end

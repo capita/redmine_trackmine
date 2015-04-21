@@ -1,3 +1,4 @@
+require File.expand_path(File.dirname(__FILE__) + '/../../../test/test_helper')
 require 'sinatra'
 
 class PivotalHandler < Sinatra::Base
@@ -5,7 +6,6 @@ class PivotalHandler < Sinatra::Base
   post '/pivotal_activity.json' do
 
     pivotal_body = JSON.parse(request.body.read.to_s)
-    binding.pry
     return [202, 'It is not a correct Pivotal Tracker message'] if pivotal_body['kind'].nil?
     if pivotal_body['kind'] == 'story_update_activity'
       begin
