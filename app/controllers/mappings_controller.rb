@@ -54,9 +54,11 @@ class MappingsController < ApplicationController
     redirect_to action: 'index', project_id: @project
   end
 
-  def xhr_labels
-  	@labels = Trackmine.project_labels(params[:id].to_i)
-  	render :partial => 'xhr_labels', :layout => false
+  def update_labels
+  	@labels = Trackmine.project_labels(tracker_project_id.to_i)
+    respond_to do |format|
+      format.json { render json: @labels }
+    end
   end
 
   private
