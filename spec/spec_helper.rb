@@ -25,6 +25,10 @@ RSpec.configure do |config|
   config.formatter = :documentation
 end
 
+def json_path(fixture)
+  File.dirname(__FILE__) + "/fixtures/#{fixture}.json"
+end
+
 # Establishing fakeweb for PivotalTracker
 module FakeTracker
 

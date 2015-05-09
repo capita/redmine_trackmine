@@ -4,13 +4,12 @@ require 'sinatra'
 class PivotalHandler < Sinatra::Base
 
   post '/pivotal_activity.json' do
-
     pivotal_body = JSON.parse(request.body.read.to_s)
     return [202, 'It is not a correct Pivotal Tracker message'] if pivotal_body['kind'].nil?
     if pivotal_body['kind'] == 'story_update_activity'
       begin
         handler_logger 'Got the post request from PivotalTracker'
-        Trackmine.read_activity(pivotal_body['activity'])
+        Trackmine.read_activity(pivotal_body)
       rescue => e
         handler_logger("Can't consume the request from PivotalTracker")
         TrackmineMailer.deliver_error_mail("Error while reading activity message from Pivotal Tracker: #{e}")
@@ -29,3 +28,5 @@ class PivotalHandler < Sinatra::Base
   end
 
 end
+
+# JSON.parse(request.body.read)

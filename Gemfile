@@ -4,7 +4,7 @@ gem 'sinatra'
 gem 'pivotal-tracker', '~>0.5.13'
 gem 'unicode'
 
-group :development do
+group :development, :test do
   gem 'pry'
 end
 

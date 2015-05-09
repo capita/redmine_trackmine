@@ -1,0 +1,45 @@
+{
+  "kind": "story_update_activity",
+  "guid": "1327280_10",
+  "project_version": 10,
+  "message": "Pedro edited this feature",
+  "highlight": "edited",
+  "changes": [
+    {
+      "kind": "story",
+      "change_type": "update",
+      "id": 94184406,
+      "original_values": {
+        "description": "jazda z gorki w dol po sniegu",
+        "updated_at": 1431099317000
+      },
+      "new_values": {
+        "description": "jazda z gorki w dol po sniegu w parach czyli we dwoje\n",
+        "updated_at": 1431099420000
+      },
+      "name": "jazda na sankach w parach",
+      "story_type": "feature"
+    }
+  ],
+  "primary_resources": [
+    {
+      "kind": "story",
+      "id": 94184406,
+      "name": "jazda na sankach w parach",
+      "story_type": "feature",
+      "url": "https://www.pivotaltracker.com/story/show/94184406"
+    }
+  ],
+  "project": {
+    "kind": "project",
+    "id": 1327280,
+    "name": "ziomal"
+  },
+  "performed_by": {
+    "kind": "person",
+    "id": 1651216,
+    "name": "Pedro",
+    "initials": "PE"
+  },
+  "occurred_at": 1431099420000
+}

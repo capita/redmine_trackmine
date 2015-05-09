@@ -1,0 +1,45 @@
+{
+  "kind": "story_update_activity",
+  "guid": "1327280_9",
+  "project_version": 9,
+  "message": "Pedro edited this feature",
+  "highlight": "edited",
+  "changes": [
+    {
+      "kind": "story",
+      "change_type": "update",
+      "id": 94184406,
+      "original_values": {
+        "name": "jazda na sankach",
+        "updated_at": 1431098967000
+      },
+      "new_values": {
+        "name": "jazda na sankach w parach",
+        "updated_at": 1431099317000
+      },
+      "name": "jazda na sankach w parach",
+      "story_type": "feature"
+    }
+  ],
+  "primary_resources": [
+    {
+      "kind": "story",
+      "id": 94184406,
+      "name": "jazda na sankach w parach",
+      "story_type": "feature",
+      "url": "https://www.pivotaltracker.com/story/show/94184406"
+    }
+  ],
+  "project": {
+    "kind": "project",
+    "id": 1327280,
+    "name": "ziomal"
+  },
+  "performed_by": {
+    "kind": "person",
+    "id": 1651216,
+    "name": "Pedro",
+    "initials": "PE"
+  },
+  "occurred_at": 1431099317000
+}
