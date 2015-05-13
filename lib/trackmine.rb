@@ -55,6 +55,7 @@ module Trackmine
       if issues.empty? and story['current_state'] == "started"
         create_issues(activity)
       else
+        binding.pry
         story_restart(issues, activity) if story['current_state'] == "started"
         story_url = get_story(activity).url
         update_issues(issues, activity['project_id'], { :description => story_url +"\r\n"+ story['description'] }) if story['description']
@@ -64,33 +65,27 @@ module Trackmine
 
     # Finds author of the tracker activity and returns its email
     def get_user_email(project_id, name)
-      begin
         set_super_token
         project = PivotalTracker::Project.find project_id.to_i
          project.memberships.all.select{|m| m.name == name }[0].email
-      rescue => e
-        raise WrongActivityData.new("Can't get email of the Tracker user: #{name} in project id: #{project_id}. " + e)
-      end
+    rescue => e
+      raise WrongActivityData, "Can't get email of the Tracker user: #{name} in project id: #{project_id}. #{e}"
     end
 
-    # Return PivotalTracker story for given activity
     def get_story(activity)
-      begin
-        set_super_token
-        project_id = activity['project_id']
-        story_id = activity['stories'][0]['id']
-        story = PivotalTracker::Project.find(project_id).stories.find(story_id)
-        raise 'Got empty story' if story.nil?
-      rescue => e
-        raise WrongActivityData.new("Can't get story: #{story_id} from Pivotal Tracker project: #{project_id}. " + e)
-      end
-      return story
+      set_super_token
+
+      project_id = activity['project']['id']
+      story_id = activity['primary_resources'].select { |r| r['kind'] == 'story' }.first['id']
+      story = PivotalTracker::Project.find(project_id).stories.find(story_id)
+      raise 'Got empty story' if story.nil?
+      story
+    rescue => e
+      raise WrongActivityData, "Can't get story: #{story_id} from Pivotal Tracker project: #{project_id}. #{e}"
     end
 
-    # Return object which maps Redmine project with Tracker project
     def get_mapping(tracker_project_id, label)
-      mapping = Mapping.find :first, :conditions=>['tracker_project_id=? AND label=? ', tracker_project_id, label.to_s]
-      return mapping
+      Mapping.where(['tracker_project_id=? AND label=? ', tracker_project_id, label.to_s]).first
     end
 
     # Creates Redmine issues
@@ -99,32 +94,32 @@ module Trackmine
       raise WrongActivityData.new("Can't get story with id= #{activity['stories'][0]['id']}") if story.nil?
 
       # Getting story owners email
-      email = get_user_email( story.project_id, story.owned_by )
-      author = User.find_by_mail email
+      email = get_user_email(story.project_id, story.owned_by)
+      author = User.find_by_mail(email)
 
       # Setting issue attributes
       description = story.url + "\r\n" + story.description
-      status = IssueStatus.find_by_name "Accepted"
+      status = IssueStatus.find_by name: 'Accepted'
       raise WrongTrackmineConfiguration.new("Can't find Redmine IssueStatus: 'Accepted' ") if status.nil?
       issues = []
       labels = story.labels.to_s.split(',')
       labels = [''] if labels.blank?
       labels.each do |label|
-        mapping = get_mapping(activity['project_id'], Unicode.downcase(label)) # to make sure UTF-8 works fine
+        mapping = get_mapping(activity['project']['id'], Unicode.downcase(label)) # to make sure UTF-8 works fine
         next if mapping.try(:project).nil?
         tracker = Tracker.find_by_name mapping.story_types[story.story_type]
         next if tracker.nil?
         estimated_hours = mapping.estimations[story.estimate.to_i.to_s].to_i
 
         # Creating a new Redmine issue
-        issue = mapping.project.issues.create(:subject => story.name,
+        issue = mapping.project.issues.build(:subject => story.name,
                                               :description => description,
                                               :author_id => author.id,
                                               :assigned_to_id => author.id,
                                               :tracker_id => tracker.id,
                                               :status_id => status.id,
                                               :estimated_hours => estimated_hours)
-
+        issue.save
         # Setting value of 'Pivotal Project ID' issue's custom field
         issue.pivotal_project_id = story.project_id
 

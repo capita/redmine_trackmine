@@ -12,7 +12,7 @@ describe PivotalHandler do
     describe 'POST /pivotal_activity.json' do
 
       context 'when wrong body' do
-        let!(:post_request) { post "/pivotal_activity.json", { a:1 }.to_json }
+        let!(:post_request) { post '/pivotal_activity.json', { a:1 }.to_json }
 
         it 'returns 202' do
           expect(last_response.status).to be == 202
@@ -30,7 +30,7 @@ describe PivotalHandler do
           { kind: 'story_update_activity', highlight: 'started', guid: '1327280_10' }
         end
 
-        let!(:post_request) { post("/pivotal_activity.json", story_update.to_json, content_type: :json) }
+        let!(:post_request) { post('/pivotal_activity.json', story_update.to_json, content_type: :json) }
 
         it 'returns 200' do
           expect(last_response.status).to be == 200

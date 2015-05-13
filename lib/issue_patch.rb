@@ -19,6 +19,8 @@ module IssuePatch
       end
 
       def pivotal_project_id=(project_id)
+        #TODO: Modify fixtures so that it can find this custom field
+        binding.pry
         pivotal_custom_value('Pivotal Project ID').update_attributes(value: project_id.to_s)
       end
 

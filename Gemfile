@@ -9,7 +9,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'fakeweb'
+  gem 'vcr'
   gem 'rspec'
   gem 'factory_girl'
   gem 'shoulda-matchers'
