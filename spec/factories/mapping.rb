@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :mapping do
-    association :project
+    project_id 1
     sequence(:tracker_project_id) { |n| n}
     sequence(:tracker_project_name) { |n| "Foo tracker project #{n}"}
     sequence(:label){|n| "foolabel#{n}"}

@@ -7,11 +7,11 @@ module IssuePatch
     klass.class_eval do
       unloadable # Send unloadable so it will not be unloaded in development
 
-      before_update { |issue| finish_story_when_closed_or_rejected(issue) }
+      # before_update { |issue| finish_story_when_closed_or_rejected(issue) }
 
       def self.find_by_story_id(story_id)
         Issue.joins({:custom_values => :custom_field})
-          .where("custom_fields.name=? AND custom_values.value=?", 'Pivotal Story ID', story_id.to_s).first
+          .where("custom_fields.name=? AND custom_values.value=?", 'Pivotal Story ID', story_id.to_s)
       end
 
       def pivotal_custom_value(name)
@@ -19,8 +19,6 @@ module IssuePatch
       end
 
       def pivotal_project_id=(project_id)
-        #TODO: Modify fixtures so that it can find this custom field
-        binding.pry
         pivotal_custom_value('Pivotal Project ID').update_attributes(value: project_id.to_s)
       end
 
@@ -35,24 +33,24 @@ module IssuePatch
       def pivotal_story_id
         pivotal_custom_value('Pivotal Story ID').try(:value).to_i
       end
-    end
-  end
 
-  def self.finish_story_when_closed_or_rejected(issue)
-    if issue_closed? && pivotal_assigned?
-      begin
-        Trackmine.finish_story(issue.pivotal_project_id, issue.pivotal_story_id)
-      rescue => e
-        TrackmineMailer.deliver_error_mail("Error while closing story. Pivotal Project ID:'#{issue.pivotal_project_id}', Story ID:'#{issue.pivotal_story_id}',: " + e)
+      def finish_story_when_closed_or_rejected
+        if issue_closed? && pivotal_assigned?
+          begin
+            Trackmine.finish_story(pivotal_project_id, pivotal_story_id)
+          rescue => e
+            TrackmineMailer.deliver_error_mail("Error while closing story. Pivotal Project ID:'#{pivotal_project_id}', Story ID:'#{pivotal_story_id}',: " + e)
+          end
+        end
+      end
+
+      def issue_closed?
+        status_id_changed? && status.is_closed?
+      end
+
+      def pivotal_assigned?
+        pivotal_story_id != 0 || pivotal_project_id != 0
       end
     end
-  end
-
-  def issue_closed?
-    issue.status_id_changed? && issue.status.is_closed?
-  end
-
-  def pivotal_assigned?
-    issue.pivotal_story_id != 0 || issue.pivotal_project_id != 0
   end
 end

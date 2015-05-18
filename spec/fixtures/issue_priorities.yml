@@ -1,0 +1,29 @@
+---
+issue_priority_01:
+  id: 1
+  name: 'Low'
+  position: 1
+  is_default: false
+  type: 'IssuePriority'
+  active: true
+  project_id: nil
+  parent_id: nil
+  position_name: 'lowest'
+issue_priority_02:
+  name: 'Normal'
+  position: 1
+  is_default: false
+  type: 'IssuePriority'
+  active: true
+  project_id: nil
+  parent_id: nil
+  position_name: 'lowest'
+issue_priority_03:
+  name: 'High'
+  position: 3
+  is_default: false
+  type: 'IssuePriority'
+  active: true
+  project_id: nil
+  parent_id: nil
+  position_name: 'highest'

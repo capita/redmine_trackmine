@@ -22,4 +22,23 @@ def json_path(fixture)
   File.dirname(__FILE__) + "/fixtures/#{fixture}.json"
 end
 
-ActiveRecord::Fixtures.create_fixtures(File.dirname(__FILE__) + '/fixtures/', %i(projects custom_fields custom_fields_projects))
+
+def fixtures
+  %i(
+      users
+      email_addresses
+      projects
+      custom_fields
+      custom_fields_projects
+      custom_fields_trackers
+      custom_values
+      trackers
+      projects_trackers
+      issue_statuses
+      issue_priorities
+      issues
+      mappings
+    )
+end
+
+ActiveRecord::FixtureSet.create_fixtures(File.dirname(__FILE__) + '/fixtures/', fixtures)

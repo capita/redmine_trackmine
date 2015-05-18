@@ -1,0 +1,40 @@
+---
+mappings_001:
+  project_id: 1
+  tracker_project_id: 1327280
+  tracker_project_name:
+  label: 'sank'
+  estimations:
+    '1': '1'
+    '2': '4'
+    '3': '10'
+  story_types:
+    feature: 'Feature'
+    bug: 'Bug'
+    chore: 'Support'
+mappings_002:
+  project_id: 2
+  tracker_project_id: 1327280
+  tracker_project_name:
+  label: 'snieg'
+  estimations:
+    '1': '1'
+    '2': '4'
+    '3': '10'
+  story_types:
+    feature: 'Feature'
+    bug: 'Bug'
+    chore: 'Support'
+mappings_003:
+  project_id: 3
+  tracker_project_id: 1327280
+  tracker_project_name:
+  label: 'zima'
+  estimations:
+    '1': '1'
+    '2': '4'
+    '3': '10'
+  story_types:
+    feature: 'Feature'
+    bug: 'Bug'
+    chore: 'Support'
