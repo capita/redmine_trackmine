@@ -49,6 +49,8 @@ Make sure you have following custom fields for Redmine Issue:
 * 'Pivotal Project ID' (field_format: int, Trackers: Bug, Support, Feature) .
 * 'Pivotal Story ID' (field_format: int, Trackers: Bug, Support, Feature) .
 
+And there is IssueStatus 'Accepted'
+
 Add valid Pivotal Tracker credentials in [redmine_app]/config/trackmine.yml
 
 

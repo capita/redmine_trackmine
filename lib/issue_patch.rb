@@ -10,7 +10,7 @@ module IssuePatch
       # before_update { |issue| finish_story_when_closed_or_rejected(issue) }
 
       def self.find_by_story_id(story_id)
-        Issue.joins({:custom_values => :custom_field})
+        Issue.joins({custom_values: :custom_field})
           .where("custom_fields.name=? AND custom_values.value=?", 'Pivotal Story ID', story_id.to_s)
       end
 

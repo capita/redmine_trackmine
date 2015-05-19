@@ -1,5 +1,5 @@
 module Trackmine
-
+  ACCEPTED_STATUS = 'Accepted'
   class << self
     attr_writer :error_notification
 
@@ -100,6 +100,8 @@ module Trackmine
 
     # Creates Redmine issues
     def create_issues(activity)
+      binding.pry
+
       story = get_story(activity)
       raise WrongActivityData.new("Can't get story with id= #{activity['stories'][0]['id']}") if story.nil?
 
@@ -109,7 +111,7 @@ module Trackmine
 
       # Setting issue attributes
       description = story.url + "\r\n" + story.description
-      status = IssueStatus.find_by name: 'Accepted'
+      status = IssueStatus.find_by(name: 'Accepted')
       raise WrongTrackmineConfiguration.new("Can't find Redmine IssueStatus: 'Accepted' ") if status.nil?
       issues = []
       labels = story.labels.to_s.split(',')
@@ -122,6 +124,7 @@ module Trackmine
         estimated_hours = mapping.estimations[story.estimate.to_s].to_i
 
         # Creating a new Redmine issue
+        binding.pry
         issue = mapping.project.issues.create!(:subject => story.name,
                                               :description => description,
                                               :author_id => author.id,
@@ -175,9 +178,9 @@ module Trackmine
 
     # Updates Redmine issues- status and owner when story restarted
     def story_restart(issues, activity)
-      status = IssueStatus.find_by_name "Accepted"
-      email = get_user_email( activity['project']['id'], activity['author'] )
-      author = User.find_by_mail email
+      status = IssueStatus.find_by_name(ACCEPTED_STATUS)
+      email = get_user_email(activity['project']['id'], activity['performed_by']['name'])
+      author = User.find_by_mail(email)
       update_issues(issues, activity['project']['id'], { :status_id => status.id, :assigned_to_id => author.id })
     end
 

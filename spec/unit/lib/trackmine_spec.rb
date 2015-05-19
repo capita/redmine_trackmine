@@ -1,7 +1,9 @@
 require File.dirname(__FILE__) + '/../../spec_helper'
 
+describe Trackmine do
+  let(:activity) { JSON.parse(File.read(json_path(activity_name))) }
+  let(:read_activity) { Trackmine.read_activity(activity) }
 
-  describe Trackmine do
   context '.projects method' do
     before { Trackmine.set_token('pbrudny@gmail.com') }
 
@@ -60,13 +62,13 @@ require File.dirname(__FILE__) + '/../../spec_helper'
 
   context '.get_story(activity)' do
     context 'having correct activity data' do
-      let(:activity) { JSON.parse(File.read(json_path('story_started'))) }
+      let(:activity_name) { 'story_started' }
 
       it 'returns Story object' do
         expect(Trackmine.get_story(activity)).to be_kind_of(PivotalTracker::Story)
       end
     end
-    #
+
     context 'having wrong activity data' do
       let(:activity) { { a:1 }.to_json }
 
@@ -75,7 +77,7 @@ require File.dirname(__FILE__) + '/../../spec_helper'
   end
 
   context '.create_issues method' do
-    let(:activity) { JSON.parse(File.read(json_path('story_started'))) }
+    let(:activity_name) { 'story_started' }
     let(:project) { Project.find(1) }
     let(:issues) { Trackmine.create_issues(activity) }
     let(:issue) { issues.first }
@@ -130,6 +132,61 @@ require File.dirname(__FILE__) + '/../../spec_helper'
     end
   end
 
+
+  describe 'updating story' do
+    let(:issues) { Issue.find([2])}
+
+    context 'description' do
+      let(:activity_name) { 'story_description_update' }
+      let(:new_description) do
+        "https://www.pivotaltracker.com/story/show/94184406" +"\r\n"+ "jazda z gorki w dol po sniegu w parach czyli we dwoje\r\n"
+      end
+
+      it 'change an issue description in each issue' do
+        read_activity
+
+        issues.each do |issue|
+          expect(issue.reload.description).to eq new_description
+        end
+      end
+    end
+
+    # TODO: fix it. Does load CustomValues when test description context
+    # context 'subject' do
+    #   let(:activity_name) { 'story_subject_update' }
+    #
+    #   it 'change an issue subject in each issue' do
+    #     read_activity
+    #
+    #     issues.each do |issue|
+    #       expect(issue.reload.subject).to eq "jazda na sankach w parach"
+    #     end
+    #   end
+    # end
+  end
+
+  describe 'restarting a story' do
+    let(:activity_name) { 'story_restarted' }
+
+    context 'there is an associated Redmine issue' do
+      let(:issues) { Issue.find([3])}
+
+      it 'change an issues status for "Accepted" in each issue' do
+        read_activity
+        issues.each do |issue|
+          expect(issue.reload.status.name).to eq 'Accepted'
+        end
+      end
+
+      it 'assigned issue to user who restarted a story' do
+        issues.each do |issue|
+          expect(issue.reload.assigned_to.try(:mail)).to eq 'pbrudny@gmail.com'
+        end
+      end
+    end
+  end
+
+  # TODO: for later
   # context 'starting a story with one label' do
   #   before do
   #     @activity_hash['stories'] = [{ 'id' => 2,
@@ -199,65 +256,7 @@ require File.dirname(__FILE__) + '/../../spec_helper'
   #
   # end
 
-  context 'updating story' do
-    # let(:issues) { Issue.find([2,3])}
-    let(:issues) { Issue.find([2])}
-    let(:activity) { JSON.parse(File.read(json_path(activity_name))) }
-    let(:read_activity) { Trackmine.read_activity(activity) }
-
-    context 'description' do
-      let(:activity_name) { 'story_description_update' }
-      let(:new_description) do
-        "https://www.pivotaltracker.com/story/show/94184406" +"\r\n"+ "jazda z gorki w dol po sniegu w parach czyli we dwoje\r\n"
-      end
-
-      it 'change an issue description in each issue' do
-        read_activity
-
-        issues.each do |issue|
-          expect(issue.reload.description).to eq new_description
-        end
-      end
-    end
-
-    # TODO: fix it. Does load CustomValues when test description context
-    # context 'subject' do
-    #   let(:activity_name) { 'story_subject_update' }
-    #
-    #   it 'change an issue subject in each issue' do
-    #     read_activity
-    #
-    #     issues.each do |issue|
-    #       expect(issue.reload.subject).to eq "jazda na sankach w parach"
-    #     end
-    #   end
-    # end
-  end
-
-  context 'restarting a story' do
-    before do
-      @activity_hash['stories'] = [{ 'id' => 4460116,
-                                     'url' => "http://www.pivotaltracker.com/services/v3/projects/102622/stories/4460116",
-                                     'current_state' => 'started' }]
-      @story = @activity_hash['stories'][0]
-      @issues = []
-      status = IssueStatus.find_by_name 'Feedback'
-      3.times do
-        issue = FactoryGirl.create :issue, :status_id => status.id
-        issue.pivotal_story_id = @story['id']
-        @issues << issue
-      end
-      Trackmine.read_activity @activity_hash
-    end
-
-    it 'change an issues status for "Accepted" in each issue' do
-      @issues.each{ |issue| expect "Accepted", issue.reload.status.name }
-    end
-
-    it 'assigned issue to user who restarted a story' do
-      @issues.each{ |issue| expect "admin@somenet.foo", issue.reload.assigned_to.try(:mail) }
-    end
-  end
 end
+
 
 

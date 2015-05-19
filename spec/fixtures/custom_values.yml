@@ -110,7 +110,7 @@ custom_values_018:
 custom_values_019:
   customized_type: Issue
   custom_field_id: 13
-  customized_id: 2
+  customized_id: 1
   id: 19
   value: '94184406'
 custom_values_020:
@@ -122,7 +122,7 @@ custom_values_020:
 custom_values_021:
   customized_type: Issue
   custom_field_id: 13
-  customized_id: 3
+  customized_id: 2
   id: 21
   value: '94184406'
 custom_values_022:
@@ -131,3 +131,9 @@ custom_values_022:
   customized_id: 3
   id: 22
   value: '1327280'
+custom_values_023:
+  customized_type: Issue
+  custom_field_id: 13
+  customized_id: 3
+  id: 23
+  value: '92844256'
