@@ -130,5 +130,5 @@ Default:
 
 == Copyright
 
-Copyright (c) 2010 Capita Unternehmensberatung GmbH. See LICENSE for details.
+Copyright (c) 2010-2015 Capita Unternehmensberatung GmbH. See LICENSE for details.
 

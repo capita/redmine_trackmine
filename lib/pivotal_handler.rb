@@ -30,5 +30,3 @@ class PivotalHandler < Sinatra::Base
   end
 
 end
-
-# JSON.parse(request.body.read)

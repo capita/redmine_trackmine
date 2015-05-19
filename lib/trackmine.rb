@@ -100,8 +100,6 @@ module Trackmine
 
     # Creates Redmine issues
     def create_issues(activity)
-      binding.pry
-
       story = get_story(activity)
       raise WrongActivityData.new("Can't get story with id= #{activity['stories'][0]['id']}") if story.nil?
 
