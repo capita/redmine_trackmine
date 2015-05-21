@@ -10,7 +10,7 @@ class PivotalHandler < Sinatra::Base
     if pivotal_body['kind'] == 'story_update_activity'
       begin
         handler_logger 'Got the post request from PivotalTracker'
-        Trackmine.read_activity(pivotal_body)
+        Trackmine.read_activity(Trackmine::Activity.new(pivotal_body))
       rescue => e
         handler_logger("Can't consume the request from PivotalTracker: #{e}")
         TrackmineMailer.error_mail("Error while reading activity message from Pivotal Tracker: #{e}").deliver

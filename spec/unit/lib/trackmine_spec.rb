@@ -1,7 +1,8 @@
 require File.dirname(__FILE__) + '/../../spec_helper'
 
 describe Trackmine do
-  let(:activity) { JSON.parse(File.read(json_path(activity_name))) }
+  let(:activity_body) { JSON.parse(File.read(json_path(activity_name))) }
+  let(:activity) { Trackmine::Activity.new(activity_body) }
   let(:read_activity) { Trackmine.read_activity(activity) }
 
   context '.projects method' do
@@ -52,7 +53,7 @@ describe Trackmine do
     end
 
     context 'when there is a mapping for the Redmine project' do
-      let(:mapping) { FactoryGirl.create(:mapping, label: '') }
+      let(:mapping) { create(:mapping, label: '') }
 
       it('return a mapping object') do
         expect(Trackmine.get_mapping(mapping.tracker_project_id, '')).to eq mapping
@@ -65,14 +66,14 @@ describe Trackmine do
       let(:activity_name) { 'story_started' }
 
       it 'returns Story object' do
-        expect(Trackmine.get_story(activity)).to be_kind_of(PivotalTracker::Story)
+        expect(Trackmine::Activity.new(activity_body).story).to be_kind_of(PivotalTracker::Story)
       end
     end
 
     context 'having wrong activity data' do
-      let(:activity) { { a:1 }.to_json }
+      let(:activity_body) { { a:1 }.to_json }
 
-      it { expect { Trackmine.get_story(activity) }.to raise_error(Trackmine::WrongActivityData) }
+      it { expect { Trackmine::Activity.new(activity_body).story }.to raise_error(Trackmine::WrongActivityData) }
     end
   end
 
