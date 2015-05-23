@@ -101,18 +101,28 @@ describe Trackmine do
   context '.update_issues(issues,tracker_project_id, params)' do
     let(:project) { Project.find 1 }
     let(:issue) { Issue.find 1 }
+    let(:activity) { double :activity, project_id: 888 }
+    let(:issues_updater) { Trackmine::IssuesUpdater.new([issue], activity) }
 
     context 'with mapping' do
       let!(:mapping) { create :mapping, project: project, tracker_project_id: 888 }
 
-      it 'update issues description' do
-        Trackmine.update_issues([issue], 888, { description: 'new description' } )
-        expect(issue.description).to eq 'new description'
+      context 'description changed' do
+        let(:params) { { description: 'new description' } }
+
+        it 'update issues description' do
+          issues_updater.update_issues(params)
+          expect(issue.description).to eq 'new description'
+        end
       end
 
-      it 'update issues subject' do
-        Trackmine.update_issues([issue], 888, { subject: 'new subject' } )
-        expect(issue.subject).to eq 'new subject'
+      context 'subject changed' do
+        let(:params) { { subject: 'new subject' } }
+
+        it 'update issues subject' do
+          issues_updater.update_issues(params)
+          expect(issue.subject).to eq 'new subject'
+        end
       end
     end
   end

@@ -1,14 +1,17 @@
 module Trackmine
   class IssueCreator
 
-    def initialize(project, label, issue_params)
-      self.project = project
+    def initialize(project_id, story, label, issue_params)
+      self.project_id = project_id
       self.label = label
       self.issue_params = issue_params
+      self.story = story
     end
 
     def run
       create_issue
+      # create_custom_values
+      # add_comments
     end
 
     def mapping_params
@@ -19,7 +22,7 @@ module Trackmine
     end
 
     def mapping
-      @mapping ||= Trackmine.get_mapping(project.id, Unicode.downcase(label))
+      @mapping ||= Trackmine.get_mapping(project_id, Unicode.downcase(label))
     end
 
     def custom_field_pivotal_story_id
@@ -30,19 +33,24 @@ module Trackmine
       CustomField.find_by(name: 'Pivotal Project ID')
     end
 
-    def create_issue
-      return if mapping.try(:project).nil?
-      tracker = Tracker.find_by_name mapping.story_types[story.story_type]
-      return if tracker.nil?
-      estimated_hours = mapping.estimations[story.estimate.to_s].to_i
+    def tracker
+      Tracker.find_by_name(mapping.story_types[story.story_type])
+    end
 
-      # Creating a new Redmine issue
-      issue = mapping.project.issues.create!(issue_params.merge(mapping_params))
+    def estimated_hours
+      mapping.estimations[story.estimate.to_s].to_i
+    end
+
+    def issue
+      @issue
+    end
+
+    def create_custom_values
       CustomValue.create!(
           customized_type: Issue,
           custom_field_id: custom_field_pivotal_project_id.id,
           customized_id: issue.id,
-          value: story.project_id
+          value: project_id
       )
 
       CustomValue.create!(
@@ -51,19 +59,29 @@ module Trackmine
           customized_id: issue.id,
           value: story.id
       )
+    end
 
-      # Adding comments (journals)
+    def add_comments
       story.notes.all.each do |note|
-        user = User.find_by_mail get_user_email(story.project_id, note.author)
+        user = User.find_by_mail(get_user_email(story.project_id, note.author))
         journal = issue.journals.new(notes: note.text)
         journal.user_id = user.id unless user.nil?
         journal.save
       end
     end
 
+    def create_issue
+      return if mapping.try(:project).nil?
+      return if tracker.nil?
+      @issue = mapping.project.issues.create!(issue_params.merge(mapping_params))
+      create_custom_values
+      add_comments
+      return @issue
+    end
+
     private
 
-    attr_accessor :project, :label, :issue_params
+    attr_accessor :project_id, :label, :issue_params, :story
 
   end
 end

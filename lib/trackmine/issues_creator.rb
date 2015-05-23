@@ -38,7 +38,7 @@ module Trackmine
     end
 
     def run
-      labels.map { |label| IssueCreator.new(activity.project, label, issue_params).run }
+      labels.map { |label| IssueCreator.new(activity.project_id, story, label, issue_params).run }
     end
 
     private
