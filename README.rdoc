@@ -1,6 +1,4 @@
-Redmine Trackmine Plugin
-======================
-
+= Redmine Trackmine Plugin
 
 Redmine is an excellent multi-project issue tracking tool focussing on
 collaboration in the implementation and integration parts of software
