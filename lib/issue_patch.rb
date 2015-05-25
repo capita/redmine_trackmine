@@ -7,6 +7,7 @@ module IssuePatch
     klass.class_eval do
       unloadable # Send unloadable so it will not be unloaded in development
 
+      # TODO: make sure it works
       # before_update { |issue| finish_story_when_closed_or_rejected(issue) }
 
       def self.find_by_story_id(story_id)
@@ -35,13 +36,10 @@ module IssuePatch
       end
 
       def finish_story_when_closed_or_rejected
-        if issue_closed? && pivotal_assigned?
-          begin
-            Trackmine.finish_story(pivotal_project_id, pivotal_story_id)
-          rescue => e
-            TrackmineMailer.deliver_error_mail("Error while closing story. Pivotal Project ID:'#{pivotal_project_id}', Story ID:'#{pivotal_story_id}',: " + e)
-          end
-        end
+        Trackmine.finish_story(pivotal_project_id, pivotal_story_id) if issue_closed? && pivotal_assigned?
+      rescue => e
+        error_message = "Error while closing Story ID:'#{pivotal_story_id}' in Project ID:'#{pivotal_project_id}' : #{e}"
+        TrackmineMailer.deliver_error_mail(error_message)
       end
 
       def issue_closed?

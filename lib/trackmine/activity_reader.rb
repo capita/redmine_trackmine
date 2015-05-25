@@ -9,7 +9,7 @@ module Trackmine
       if issues.empty? && activity.story_started?
         create_issues(activity)
       elsif issues.present? && activity.story_started?
-        story_restart(issues, activity)
+        Trackmine::IssuesRestarter.new(issues, activity).run
       elsif issues.present? && activity.story_edited?
         issues_updater(issues, activity)
       end
@@ -36,15 +36,6 @@ module Trackmine
       Mapping.where(['tracker_project_id=? AND label=? ', tracker_project_id, label.to_s]).first
     end
 
-    # Updates Redmine issues- status and owner when story restarted
-    def story_restart(issues, activity)
-      issues_updater = Trackmine::IssuesUpdater.new(issues, activity)
-
-      status = IssueStatus.find_by_name(ACCEPTED_STATUS)
-      params = {status: status, assigned_to: activity.author}
-      issues_updater.update_issues(params)
-    end
-
     # Finishes the story when the Redmine issue is closed
     def finish_story(project_id, story_id)
       begin
@@ -63,7 +54,7 @@ module Trackmine
       end
     end
 
-    private
+    # private
 
     attr_accessor :activity
   end

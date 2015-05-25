@@ -34,7 +34,7 @@ describe Trackmine do
   context '.get_user_email(project_id, name)' do
     context 'with wrong attributes' do
       it 'raise an error' do
-        expect { Trackmine.get_user_email(1325832, 'noname') }.to raise_error(Trackmine::WrongActivityData)
+        expect { Trackmine.get_user_email(1325832, 'noname') }.to raise_error(Trackmine::PivotalTrackerError)
       end
     end
 
@@ -73,7 +73,7 @@ describe Trackmine do
     context 'having wrong activity data' do
       let(:activity_body) { { a:1 }.to_json }
 
-      it { expect { Trackmine::Activity.new(activity_body).story }.to raise_error(Trackmine::WrongActivityData) }
+      it { expect { Trackmine::Activity.new(activity_body).story }.to raise_error(Trackmine::PivotalTrackerError) }
     end
   end
 
