@@ -9,13 +9,10 @@ module Trackmine
   WrongTrackmineConfiguration = Class.new(StandardError)
   PivotalTrackerError = Class.new(StandardError)
 
-
   class << self
     attr_writer :error_notification
 
-    # Sets email for error notification
     def set_error_notification
-      # @error_notification = get_credentials['error_notification']
       @error_notification = Trackmine::Configuration.new.error_notification
     end
 
@@ -27,7 +24,6 @@ module Trackmine
       PivotalTracker::Project.all
     end
 
-    # Sets PivotalTracker token using user credentials from config/trackmine.yml
     def set_token(email)
       Trackmine::Authentication.set_token(email)
     end

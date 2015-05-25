@@ -22,6 +22,5 @@ module Trackmine
     private
 
     attr_accessor :story
-
   end
 end
