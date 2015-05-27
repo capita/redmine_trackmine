@@ -13,32 +13,16 @@ module Trackmine
       story.labels.to_s.split(',') || ['']
     end
 
-    def author
-      activity.author
-    end
-
-    def description
-      story.url + "\r\n" + story.description
-    end
-
-    def status
-      IssueStatus.find_by(name: 'Accepted') ||
-          raise(WrongTrackmineConfiguration.new("Can't find Redmine IssueStatus: 'Accepted' "))
-    end
-
-    def issue_params
+    def issue_attributes
       {
-        subject: story.name,
-        description: description,
-        author_id: author.id,
-        assigned_to_id: author.id,
-        status_id: status.id,
-        priority_id: 1,
+        project_id: activity.project_id,
+        story: story,
+        author: activity.author
       }
     end
 
     def run
-      labels.map { |label| IssueCreator.new(activity.project_id, story, label, issue_params).run }
+      labels.each { |label| IssueCreator.new(label, issue_attributes).run }
     end
 
     private

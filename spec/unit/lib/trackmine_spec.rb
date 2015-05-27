@@ -5,9 +5,8 @@ describe Trackmine do
   let(:activity) { Trackmine::Activity.new(activity_body) }
   let(:read_activity) { Trackmine.read_activity(activity) }
 
-  context '.projects method' do
+  describe '.projects' do
     before { Trackmine.set_token('pbrudny@gmail.com') }
-
     let(:projects) { Trackmine.projects }
 
     it 'returns an array of available projects' do
@@ -19,33 +18,7 @@ describe Trackmine do
     end
   end
 
-  context '.project_labels(tracker_project_id)' do
-    let(:labels) { Trackmine.project_labels(1325832) }
-
-    it 'returns an array' do
-      expect(labels).to be_kind_of(Array)
-    end
-
-    it 'returns an array of project labels' do
-      expect(%w(deployment admin epic).in?(labels))
-    end
-  end
-
-  context '.get_user_email(project_id, name)' do
-    context 'with wrong attributes' do
-      it 'raise an error' do
-        expect { Trackmine.get_user_email(1325832, 'noname') }.to raise_error(Trackmine::PivotalTrackerError)
-      end
-    end
-
-    context 'with correct attributes' do
-      it 'return authors email' do
-        expect(Trackmine.get_user_email(1325832, 'Pedro')).to eq 'pbrudny@gmail.com'
-      end
-    end
-  end
-
-  context '.get_mapping(tracker_project_id, label)' do
+  describe '.get_mapping' do
     context 'when no Redmine project mapped' do
       it 'does not raise an error' do
         expect(Trackmine.get_mapping(1325832, 'match')).not_to raise_exception
@@ -57,72 +30,6 @@ describe Trackmine do
 
       it('return a mapping object') do
         expect(Trackmine.get_mapping(mapping.tracker_project_id, '')).to eq mapping
-      end
-    end
-  end
-
-  context '.get_story(activity)' do
-    context 'having correct activity data' do
-      let(:activity_name) { 'story_started' }
-
-      it 'returns Story object' do
-        expect(Trackmine::Activity.new(activity_body).story).to be_kind_of(PivotalTracker::Story)
-      end
-    end
-
-    context 'having wrong activity data' do
-      let(:activity_body) { { a:1 }.to_json }
-
-      it { expect { Trackmine::Activity.new(activity_body).story }.to raise_error(Trackmine::PivotalTrackerError) }
-    end
-  end
-
-  context '.create_issues method' do
-    let(:activity_name) { 'story_started' }
-    let(:project) { Project.find(1) }
-    let(:issues) { Trackmine.create_issues(activity) }
-    let(:issue) { issues.first }
-
-    it 'create a proper Feature issue' do
-      expect(issue).to be_an_instance_of Issue
-      expect(issue.subject).to eq 'jazda na sankach w trojkach'
-      expect(issue.description).to eq "https://www.pivotaltracker.com/story/show/94184406\r\njazda z gorki w dol po sniegu w parach czyli w trzy osoby\r\n"
-      expect(issue.tracker.name).to eq 'Feature'
-      expect(issue.status.name).to eq 'Accepted'
-      expect(issue.estimated_hours).to eq 1.0
-      expect(issue.author.mail).to eq 'pbrudny@gmail.com'
-      expect(issue.author_id).to eq issue.assigned_to_id
-      expect(issue.pivotal_project_id).to eq 1327280
-      expect(issue.pivotal_story_id).to eq 94184406
-      expect(issue.journals.size).to eq 0
-    end
-  end
-
-  context '.update_issues(issues,tracker_project_id, params)' do
-    let(:project) { Project.find 1 }
-    let(:issue) { Issue.find 1 }
-    let(:activity) { double :activity, project_id: 888 }
-    let(:issues_updater) { Trackmine::IssuesUpdater.new([issue], activity) }
-
-    context 'with mapping' do
-      let!(:mapping) { create :mapping, project: project, tracker_project_id: 888 }
-
-      context 'description changed' do
-        let(:params) { { description: 'new description' } }
-
-        it 'update issues description' do
-          issues_updater.update_issues(params)
-          expect(issue.description).to eq 'new description'
-        end
-      end
-
-      context 'subject changed' do
-        let(:params) { { subject: 'new subject' } }
-
-        it 'update issues subject' do
-          issues_updater.update_issues(params)
-          expect(issue.subject).to eq 'new subject'
-        end
       end
     end
   end
@@ -142,7 +49,6 @@ describe Trackmine do
       expect {Trackmine.finish_story(wrong_id, wrong_id)}.to raise_error(Trackmine::PivotalTrackerError)
     end
   end
-
 
   describe 'updating story' do
     let(:issues) { Issue.find([2])}

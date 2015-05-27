@@ -5,7 +5,6 @@ class PivotalHandler < Sinatra::Base
 
   post '/pivotal_activity.json' do
     pivotal_body = JSON.parse(request.body.read.to_s)
-
     return [202, 'It is not a correct Pivotal Tracker message'] if pivotal_body['kind'].nil?
     if pivotal_body['kind'] == 'story_update_activity'
       begin

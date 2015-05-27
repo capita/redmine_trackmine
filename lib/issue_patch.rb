@@ -7,8 +7,7 @@ module IssuePatch
     klass.class_eval do
       unloadable # Send unloadable so it will not be unloaded in development
 
-      # TODO: make sure it works
-      # before_update { |issue| finish_story_when_closed_or_rejected(issue) }
+      before_update :finish_story_when_closed_or_rejected
 
       def self.find_by_story_id(story_id)
         Issue.joins({custom_values: :custom_field})
@@ -20,7 +19,7 @@ module IssuePatch
       end
 
       def pivotal_project_id=(project_id)
-        pivotal_custom_value('Pivotal Project ID').update_attributes(value: project_id.to_s)
+        pivotal_custom_value('Pivotal Project ID').update_attributes!(value: project_id.to_s)
       end
 
       def pivotal_project_id
@@ -28,7 +27,7 @@ module IssuePatch
       end
 
       def pivotal_story_id=(story_id)
-        pivotal_custom_value('Pivotal Story ID').update_attributes(value: story_id.to_s)
+        pivotal_custom_value('Pivotal Story ID').update_attributes!(value: story_id.to_s)
       end
 
       def pivotal_story_id

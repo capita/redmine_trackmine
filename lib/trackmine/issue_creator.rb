@@ -1,17 +1,46 @@
 module Trackmine
   class IssueCreator
 
-    def initialize(project_id, story, label, issue_params)
-      self.project_id = project_id
+    def initialize(label, issue_attributes)
       self.label = label
-      self.issue_params = issue_params
-      self.story = story
+      self.issue_attributes = issue_attributes
     end
 
     def run
       create_issue
-      # create_custom_values
-      # add_comments
+      add_comments
+    end
+
+    def description
+      story.url + "\r\n" + story.description
+    end
+
+    def status
+      IssueStatus.find_by(name: ACCEPTED_STATUS) ||
+          raise(WrongTrackmineConfiguration, "Can't find Redmine IssueStatus: #{ACCEPTED_STATUS} ")
+    end
+
+    def issue_params
+      {
+        subject: story.name,
+        description: description,
+        author_id: author.id,
+        assigned_to_id: author.id,
+        status_id: status.id,
+        priority_id: 1,
+      }
+    end
+
+    def story
+      issue_attributes[:story]
+    end
+
+    def project_id
+      issue_attributes[:project_id]
+    end
+
+    def author
+      issue_attributes[:author]
     end
 
     def mapping_params
@@ -25,14 +54,6 @@ module Trackmine
       @mapping ||= Trackmine.get_mapping(project_id, Unicode.downcase(label))
     end
 
-    def custom_field_pivotal_story_id
-      CustomField.find_by(name: 'Pivotal Story ID')
-    end
-
-    def custom_field_pivotal_project_id
-      CustomField.find_by(name: 'Pivotal Project ID')
-    end
-
     def tracker
       Tracker.find_by_name(mapping.story_types[story.story_type])
     end
@@ -41,47 +62,22 @@ module Trackmine
       mapping.estimations[story.estimate.to_s].to_i
     end
 
-    def issue
-      @issue
-    end
-
-    def create_custom_values
-      CustomValue.create!(
-          customized_type: Issue,
-          custom_field_id: custom_field_pivotal_project_id.id,
-          customized_id: issue.id,
-          value: project_id
-      )
-
-      CustomValue.create!(
-          customized_type: Issue,
-          custom_field_id: custom_field_pivotal_story_id.id,
-          customized_id: issue.id,
-          value: story.id
-      )
-    end
-
     def add_comments
       story.notes.all.each do |note|
         user = User.find_by_mail(get_user_email(story.project_id, note.author))
-        journal = issue.journals.new(notes: note.text)
-        journal.user_id = user.id unless user.nil?
-        journal.save
+        journal = issue.journals.create(notes: note.text, user: user)
       end
     end
 
     def create_issue
       return if mapping.try(:project).nil?
       return if tracker.nil?
-      @issue = mapping.project.issues.create!(issue_params.merge(mapping_params))
-      create_custom_values
-      add_comments
-      return @issue
+      issue = mapping.project.issues.create!(issue_params.merge(mapping_params))
+      Trackmine::CustomValuesCreator.new(project_id, story.id, issue.id).run
     end
 
     private
 
-    attr_accessor :project_id, :label, :issue_params, :story
-
+    attr_accessor :label, :issue_attributes
   end
 end
