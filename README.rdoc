@@ -1,4 +1,5 @@
 = Redmine Trackmine Plugin
+[UPGRADED to work with Pivotal Tracker API v5 and Redmine 3]
 
 Redmine is an excellent multi-project issue tracking tool focussing on
 collaboration in the implementation and integration parts of software
