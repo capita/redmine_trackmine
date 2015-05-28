@@ -1,7 +1,7 @@
 class TrackmineMailer < ActionMailer::Base
 
-  def error_mail(exception)
-    @exception = exception
+  def error_mail(error_message)
+    @error_message = error_message
 
     mail(
       to: Trackmine.error_notification['recipient'],

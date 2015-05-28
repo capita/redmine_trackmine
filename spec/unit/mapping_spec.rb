@@ -1,7 +1,7 @@
 require File.expand_path('../../spec_helper', __FILE__)
 
 describe Mapping do
-  let(:mapping) { FactoryGirl.create(:mapping) }
+  let(:mapping) { create :mapping }
 
   it { should belong_to(:project) }
 
@@ -13,7 +13,12 @@ describe Mapping do
     it { should validate_presence_of(:story_types) }
   end
 
-  it('stores hash in estimations attribute') { expect(mapping.estimations['2']).to eql '4' }
-  it('stores hash in story_types attribute') { expect(mapping.story_types['feature']).to eql 'Feature' }
+  it 'stores hash in estimations attribute' do
+    expect(mapping.estimations['2']).to eql '4'
+  end
+
+  it 'stores hash in story_types attribute' do
+    expect(mapping.story_types['feature']).to eql 'Feature'
+  end
 end
 
