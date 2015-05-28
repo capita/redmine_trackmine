@@ -5,7 +5,7 @@ http_interactions:
     uri: https://www.pivotaltracker.com/services/v3/tokens/active
     body:
       encoding: US-ASCII
-      string: username=pbrudny%40gmail.com&password=polmuz&timeout=60
+      string: username=foobar%40gmail.com&password=secret&timeout=60
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -59,7 +59,7 @@ http_interactions:
           <guid>b545bcaeafc773ced5b1a853fffd1fc9</guid>
           <id type="integer">838284</id>
         </token>
-    http_version: 
+    http_version:
   recorded_at: Thu, 28 May 2015 08:46:39 GMT
 - request:
     method: get
@@ -130,7 +130,7 @@ http_interactions:
         /acmSNcUnRY2KqL/aBnvxxPW1pxuyaga18nxp68U7LBw7pgJu4xZWPou+I+d
         Rluw+D7UwE41xjGeydEXbTIdqMPletuEEPekptPIjrfxDwAAAP//AwDXq2nA
         TQUAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 28 May 2015 08:46:40 GMT
 - request:
     method: get
@@ -195,7 +195,7 @@ http_interactions:
         oWTIMHnyUi9SR38kOBAe1fDZuO2Bb7Yd/QCuFcFPPQ+pVj4BtzpcV7u83ZjZ
         azDclS4piGgaJxMcuy9DySRPs3wyRevVm4vipglLNLXX/GuROItZnsT5ZH6x
         uGuCRcm2UBrq7zoMmQ1791gEX/supOsP+A0AAP//AwBvV9t2sAIAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 28 May 2015 08:46:41 GMT
 - request:
     method: get
@@ -253,6 +253,6 @@ http_interactions:
       string: !binary |-
         H4sIAAAAAAAAA7Kxr8jNUShLLSrOzM+zVTLUM1BSSM1Lzk/JzEu3VQoNcdO1
         ULK347LJyy9JLVYoqSxItVVKLCpKrFTSt+MCAAAA//8DAPeRVfM9AAAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 28 May 2015 08:46:42 GMT
 recorded_with: VCR 2.9.3

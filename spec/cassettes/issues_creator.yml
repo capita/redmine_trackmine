@@ -5,7 +5,7 @@ http_interactions:
     uri: https://www.pivotaltracker.com/services/v3/tokens/active
     body:
       encoding: US-ASCII
-      string: username=pbrudny%40gmail.com&password=polmuz&timeout=60
+      string: username=foobar%40gmail.com&password=secret&timeout=60
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -59,7 +59,7 @@ http_interactions:
           <guid>b545bcaeafc773ced5b1a853fffd1fc9</guid>
           <id type="integer">838284</id>
         </token>
-    http_version: 
+    http_version:
   recorded_at: Thu, 28 May 2015 08:48:18 GMT
 - request:
     method: get
@@ -130,7 +130,7 @@ http_interactions:
         /acmSNcUnRY2KqL/aBnvxxPW1pxuyaga18nxp68U7LBw7pgJu4xZWPou+I+d
         Rluw+D7UwE41xjGeydEXbTIdqMPletuEEPekptPIjrfxDwAAAP//AwDXq2nA
         TQUAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 28 May 2015 08:48:19 GMT
 - request:
     method: get
@@ -196,7 +196,7 @@ http_interactions:
         V7u83ZjZazDclS4piGgaJxMcuy9DySRPs3wyRevVm4vipglLNLXX/GuROItZ
         nsT5ZH6xuGuCRcm2UBrq7zoMmQ1791gEX/supOsP+A0AAP//AwBvV9t2sAIA
         AA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 28 May 2015 08:48:20 GMT
 - request:
     method: get
@@ -266,7 +266,7 @@ http_interactions:
         Wi+wFvZpKPhCfQAIohOwvMny1c1qOgeR2ZMXoycWAdiBVLwv7VDr/acmSNcU
         nRY2KqL/aBnvxxPW1pxuyaga18nxp68U7LBw7pgJu4xZWPou+I+dRluw+D7U
         wE41xjGeydEXbTIdqMPletuEEPekptPIjrfxDwAAAP//AwDXq2nATQUAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 28 May 2015 08:48:21 GMT
 - request:
     method: get
@@ -328,7 +328,7 @@ http_interactions:
         vo0fXi8PtGmDAzURoyfLvHaEJzIpgBrnmWDPPWvb4ekth8xgilLrLEjBEh7v
         nhKocf7vk8IXtf1y0OB2V71UdbmUngv8cnDarhuAiosf1PKf/KwV6rD4AwAA
         //8DAHDPkbBjAQAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 28 May 2015 08:48:22 GMT
 - request:
     method: get
@@ -387,7 +387,7 @@ http_interactions:
         H4sIAAAAAAAAAwIAAAD//7Kxr8jNUShLLSrOzM+zVTLUM1BSSM1Lzk/JzEu3
         VQoNcdO1ULK347LJyy9JLVYoqSxItVVKLCpKrFTSt+MCAAAA//8DAPeRVfM9
         AAAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 28 May 2015 08:48:23 GMT
 - request:
     method: get
@@ -457,7 +457,7 @@ http_interactions:
         Wi+wFvZpKPhCfQAIohOwvMny1c1qOgeR2ZMXoycWAdiBVLwv7VDr/acmSNcU
         nRY2KqL/aBnvxxPW1pxuyaga18nxp68U7LBw7pgJu4xZWPou+I+dRluw+D7U
         wE41xjGeydEXbTIdqMPletuEEPekptPIjrfxDwAAAP//AwDXq2nATQUAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 28 May 2015 08:48:24 GMT
 - request:
     method: get
@@ -519,7 +519,7 @@ http_interactions:
         vo0fXi8PtGmDAzURoyfLvHaEJzIpgBrnmWDPPWvb4ekth8xgilLrLEjBEh7v
         nhKocf7vk8IXtf1y0OB2V71UdbmUngv8cnDarhuAiosf1PKf/KwV6rD4AwAA
         //8DAHDPkbBjAQAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 28 May 2015 08:48:25 GMT
 - request:
     method: get
@@ -590,7 +590,7 @@ http_interactions:
         /acmSNcUnRY2KqL/aBnvxxPW1pxuyaga18nxp68U7LBw7pgJu4xZWPou+I+d
         Rluw+D7UwE41xjGeydEXbTIdqMPletuEEPekptPIjrfxDwAAAP//AwDXq2nA
         TQUAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 28 May 2015 08:48:26 GMT
 - request:
     method: get
@@ -652,6 +652,6 @@ http_interactions:
         tGmDAzURoyfLvHaEJzIpgBrnmWDPPWvb4ekth8xgilLrLEjBEh7vnhKocf7v
         k8IXtf1y0OB2V71UdbmUngv8cnDarhuAiosf1PKf/KwV6rD4AwAA//8DAHDP
         kbBjAQAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 28 May 2015 08:48:27 GMT
 recorded_with: VCR 2.9.3

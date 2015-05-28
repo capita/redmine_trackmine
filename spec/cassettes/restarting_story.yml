@@ -5,7 +5,7 @@ http_interactions:
     uri: https://www.pivotaltracker.com/services/v3/tokens/active
     body:
       encoding: US-ASCII
-      string: username=pbrudny%40gmail.com&password=polmuz&timeout=60
+      string: username=foobar%40gmail.com&password=secret&timeout=60
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -59,7 +59,7 @@ http_interactions:
           <guid>b545bcaeafc773ced5b1a853fffd1fc9</guid>
           <id type="integer">838284</id>
         </token>
-    http_version: 
+    http_version:
   recorded_at: Thu, 28 May 2015 08:42:55 GMT
 - request:
     method: get
@@ -121,14 +121,14 @@ http_interactions:
         tGmDAzURoyfLvHaEJzIpgBrnmWDPPWvb4ekth8xgilLrLEjBEh7vnhKocf7v
         k8IXtf1y0OB2V71UdbmUngv8cnDarhuAiosf1PKf/KwV6rD4AwAA//8DAHDP
         kbBjAQAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 28 May 2015 08:42:56 GMT
 - request:
     method: post
     uri: https://www.pivotaltracker.com/services/v3/tokens/active
     body:
       encoding: US-ASCII
-      string: username=pbrudny%40gmail.com&password=polmuz&timeout=60
+      string: username=foobar%40gmail.com&password=secret&timeout=60
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -182,7 +182,7 @@ http_interactions:
           <guid>b545bcaeafc773ced5b1a853fffd1fc9</guid>
           <id type="integer">838284</id>
         </token>
-    http_version: 
+    http_version:
   recorded_at: Thu, 28 May 2015 08:42:57 GMT
 - request:
     method: get
@@ -247,7 +247,7 @@ http_interactions:
         03fgWhH8pHlIDfIJuNVhEe0u6drMXlfmrnQ3gIimcZLjOMNpjJJpkWdFlqHN
         +tUtefOEIfrOe/6JyHE6Q/GiyCfFJL5E3D0homFbaAyVArYCTM0Iviqj6w/T
         0TcAAAD//wMAn+5QTIQCAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 28 May 2015 08:42:58 GMT
 - request:
     method: put
@@ -334,6 +334,6 @@ http_interactions:
           <updated_at type="datetime">2015/05/27 09:53:30 UTC</updated_at>
           <labels>niebieska</labels>
         </story>
-    http_version: 
+    http_version:
   recorded_at: Thu, 28 May 2015 08:42:59 GMT
 recorded_with: VCR 2.9.3
