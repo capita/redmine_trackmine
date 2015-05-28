@@ -5,7 +5,7 @@ http_interactions:
     uri: https://www.pivotaltracker.com/services/v3/tokens/active
     body:
       encoding: US-ASCII
-      string: username=foobar%40gmail.com&password=secret&timeout=60
+      string: username=pbrudny%40gmail.com&password=polmuz&timeout=60
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -35,14 +35,14 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       Set-Cookie:
-      - t_session=BAh7B0kiD3Nlc3Npb25faWQGOgZFVEkiJTk2YWUyNzkyMjE1OTZlMzcxNjRjMmFhMmE3NTFjMDNmBjsAVEkiD2V4cGlyZXNfYXQGOwBGSXU6CVRpbWUNiNQcgBK%2BpYEKOg1uYW5vX251bWkzOg1uYW5vX2RlbmkGOg1zdWJtaWNybyIHBGA6C29mZnNldGkAOgl6b25lSSIIVVRDBjsAVA%3D%3D--49384a3e673da73225b95bebbb9189ac0bb5a143;
+      - t_session=BAh7B0kiD3Nlc3Npb25faWQGOgZFVEkiJThkOTE2MDIyNjkzODU0M2EyZDg0MGI4ZjEzN2Q3N2Y4BjsAVEkiD2V4cGlyZXNfYXQGOwBGSXU6CVRpbWUNidQcgAF7bb8KOg1uYW5vX251bWkC7gE6DW5hbm9fZGVuaQY6DXN1Ym1pY3JvIgdJQDoLb2Zmc2V0aQA6CXpvbmVJIghVVEMGOwBU--d87ffeac0f19d54c583426be587b3b3d5f2ce869;
         path=/; HttpOnly
       X-Request-Id:
-      - fc96b422b1cd9c6c986b21f7d5f8edda
+      - df52e7dcb79a6c6a8e71ee0d55e51d68
       X-Runtime:
-      - '0.114451'
+      - '0.116613'
       Date:
-      - Thu, 28 May 2015 08:32:26 GMT
+      - Thu, 28 May 2015 09:47:54 GMT
       X-Rack-Cache:
       - invalidate, pass
       X-Powered-By:
@@ -59,8 +59,8 @@ http_interactions:
           <guid>b545bcaeafc773ced5b1a853fffd1fc9</guid>
           <id type="integer">838284</id>
         </token>
-    http_version:
-  recorded_at: Thu, 28 May 2015 08:32:27 GMT
+    http_version: 
+  recorded_at: Thu, 28 May 2015 09:47:55 GMT
 - request:
     method: get
     uri: https://www.pivotaltracker.com/services/v3/projects/1327280/stories/94184406
@@ -94,14 +94,14 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       Set-Cookie:
-      - t_session=BAh7CEkiD3Nlc3Npb25faWQGOgZFVEkiJTgzMzQxMjgxYTRhMDhlMzNjMmE2ZmZjNzM5NTkzOGI0BjsAVEkiD2V4cGlyZXNfYXQGOwBGSXU6CVRpbWUNiNQcgLZCt4EKOg1uYW5vX251bWkCBgI6DW5hbm9fZGVuaQY6DXN1Ym1pY3JvIgdRgDoLb2Zmc2V0aQA6CXpvbmVJIghVVEMGOwBUSSIQX2NzcmZfdG9rZW4GOwBGSSIxcXJJNUNxaHJNM3ZrR1BOdnlVNE9zU3JILzVWbm9pWE5YN3dBd0JaSnZ6Yz0GOwBG--c36bdc491cebcf3760450741578983237dbc3475;
+      - t_session=BAh7CEkiD3Nlc3Npb25faWQGOgZFVEkiJWY5MDQwZDU5MmVmZTRiMDhlYjA1MTZlYzQzMDlhNTE5BjsAVEkiD2V4cGlyZXNfYXQGOwBGSXU6CVRpbWUNidQcgFzqfL8KOg1uYW5vX251bWkCWwI6DW5hbm9fZGVuaQY6DXN1Ym1pY3JvIgdgMDoLb2Zmc2V0aQA6CXpvbmVJIghVVEMGOwBUSSIQX2NzcmZfdG9rZW4GOwBGSSIxaEg3M2VmZGo1K0IrZnNjOERzSjlSMlVEMnFTUzZPeVFpVGhhUXJyVjNnMD0GOwBG--e9b56f2f11a1d4ba710345466469ca61660065ee;
         path=/; HttpOnly
       X-Request-Id:
-      - d0dd9d400e722523d926f1d2d5f2c7de
+      - 98793c5509a55dc88b97ed531cf1cc38
       X-Runtime:
-      - '0.079920'
+      - '0.059728'
       Date:
-      - Thu, 28 May 2015 08:32:27 GMT
+      - Thu, 28 May 2015 09:47:55 GMT
       X-Rack-Cache:
       - miss
       X-Powered-By:
@@ -125,6 +125,6 @@ http_interactions:
         V7u83ZjZazDclS4piGgaJxMcuy9DySRPs3wyRevVm4vipglLNLXX/GuROItZ
         nsT5ZH6xuGuCRcm2UBrq7zoMmQ1791gEX/supOsP+A0AAP//AwBvV9t2sAIA
         AA==
-    http_version:
-  recorded_at: Thu, 28 May 2015 08:32:28 GMT
+    http_version: 
+  recorded_at: Thu, 28 May 2015 09:47:56 GMT
 recorded_with: VCR 2.9.3

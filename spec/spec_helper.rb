@@ -27,7 +27,7 @@ VCR.configure do |c|
 end
 
 def json_path(fixture)
-  File.dirname(__FILE__) + "/fixtures/#{fixture}.json"
+  File.dirname(__FILE__) + "/fixtures/json/#{fixture}.json"
 end
 
 

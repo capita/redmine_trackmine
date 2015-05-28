@@ -6,7 +6,7 @@ describe Trackmine do
   let(:read_activity) { Trackmine.read_activity(activity) }
 
   describe '.projects', vcr: { cassette_name: 'projects' } do
-    before { Trackmine.set_token('pbrudny@gmail.com') }
+    before { Trackmine::Authentication.set_token('pbrudny@gmail.com') }
     let(:projects) { Trackmine.projects }
 
     it 'returns an array of available projects' do

@@ -64,7 +64,7 @@ class MappingsController < ApplicationController
   private
 
   def set_token
-    Trackmine.set_token(User.current.mail)
+    Trackmine::Authentication.set_token(User.current.mail)
   end
 
   def mapping_params

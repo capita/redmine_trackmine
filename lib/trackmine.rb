@@ -48,14 +48,9 @@ module Trackmine
       Mapping.where(['tracker_project_id=? AND label=? ', tracker_project_id, label.to_s]).first
     end
 
-    # Finishes the story when the Redmine issue is closed
     def finish_story(project_id, story_id)
       story = Trackmine::PivotalProject.new(project_id).story(story_id)
       Trackmine::StoryFinisher.new(story).run
-    end
-
-    def set_super_token
-      set_token('super_user') if @token.nil?
     end
   end
 end

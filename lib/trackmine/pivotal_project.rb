@@ -3,7 +3,7 @@ module Trackmine
 
     def initialize(project_id)
       self.project_id = project_id
-      Trackmine.set_super_token
+      set_super_token
     end
 
     def project
@@ -34,5 +34,8 @@ module Trackmine
 
     attr_accessor :project_id
 
+    def set_super_token
+      Trackmine::Authentication.set_token('super_user') if @token.nil?
+    end
   end
 end
