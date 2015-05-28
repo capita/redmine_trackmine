@@ -95,11 +95,11 @@ Add Web Hook Url pointing to your Redmine app. To do that:
 
 * On your project page choose 'Project -> Configure Integrations'
 * Find Activity Web Hook section
-* In 'Web Hook Url' put [redmine_app_url]/pivotal_activity.xml
+* In 'Web Hook Url' put [redmine_app_url]/pivotal_activity.json
 
 Example:
 
-  http://my-company-redmine-site.org/pivotal_activity.xml
+  http://my-company-redmine-site.org/pivotal_activity.json
 
 
 == Usage
@@ -126,6 +126,12 @@ Default:
   'feature'  => 'Feature'
   'bug'      => 'Bug'
   'chore'    => 'Support'
+
+=== Testing
+
+Trackmine has RSpec test coverage. Run specs with:
+
+  rake redmine:plugins:test
 
 == Copyright
 
