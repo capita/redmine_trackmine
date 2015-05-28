@@ -9,6 +9,7 @@ describe PivotalHandler do
   end
 
   context 'pivotal_callback' do
+
     describe 'POST /pivotal_activity.json' do
 
       context 'when wrong body' do

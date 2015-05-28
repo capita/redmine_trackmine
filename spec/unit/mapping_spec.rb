@@ -1,10 +1,5 @@
 require File.expand_path('../../spec_helper', __FILE__)
 
-# class MappingSpec < ActiveSupport::TestCase
-#   fixtures :projects, :versions, :users, :roles, :members, :member_roles, :issues, :journals, :journal_details,
-#            :trackers, :projects_trackers, :issue_statuses, :enabled_modules, :enumerations, :boards, :messages,
-#            :attachments, :custom_fields, :custom_fields_trackers, :custom_values, :time_entries
-
 describe Mapping do
   let(:mapping) { FactoryGirl.create(:mapping) }
 

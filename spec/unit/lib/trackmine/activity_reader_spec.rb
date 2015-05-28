@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../../../spec_helper'
 
-describe Trackmine::ActivityReader do
+describe Trackmine::ActivityReader, vcr: { cassette_name: 'activity_reader' }  do
   let(:reader) { Trackmine::ActivityReader.new(activity) }
 
   context 'story started' do

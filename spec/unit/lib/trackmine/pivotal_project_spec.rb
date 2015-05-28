@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../../../spec_helper'
 
-describe Trackmine::PivotalProject do
+describe Trackmine::PivotalProject, vcr: { cassette_name: 'pivotal_project' } do
   let(:pivotal_project) { Trackmine::PivotalProject.new(1325832) }
 
   describe '#labels' do
@@ -15,11 +15,11 @@ describe Trackmine::PivotalProject do
     end
   end
 
-  describe '#participant_email' do
+  describe '#participant_email', vcr: { cassette_name: 'participant_email' } do
     context 'with wrong attributes' do
       it 'raises error' do
         expect { pivotal_project.participant_email('noname') }
-          .to raise_error(Trackmine::PivotalTrackerError)
+            .to raise_error(Trackmine::PivotalTrackerError)
       end
     end
 
@@ -30,3 +30,4 @@ describe Trackmine::PivotalProject do
     end
   end
 end
+

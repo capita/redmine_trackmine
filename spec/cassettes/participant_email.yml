@@ -1,0 +1,199 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://www.pivotaltracker.com/services/v3/tokens/active
+    body:
+      encoding: US-ASCII
+      string: username=pbrudny%40gmail.com&password=polmuz&timeout=60
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '55'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/xml; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 200 OK
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Etag:
+      - '"2aca2abf73441eff33bb5c8599b6a03b"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - t_session=BAh7B0kiD3Nlc3Npb25faWQGOgZFVEkiJTkyODY0OGIwNjYzNGVhMDk1OWFiZDNlZmYzZDY3N2Q2BjsAVEkiD2V4cGlyZXNfYXQGOwBGSXU6CVRpbWUNidQcgHyRsQgKOg1uYW5vX251bWkCBwE6DW5hbm9fZGVuaQY6DXN1Ym1pY3JvIgcmMDoLb2Zmc2V0aQA6CXpvbmVJIghVVEMGOwBU--bc21c6f578800a7660e4b329b599080958f721e1;
+        path=/; HttpOnly
+      X-Request-Id:
+      - 161b377ca29181e30441dc51ea409f73
+      X-Runtime:
+      - '0.122102'
+      Date:
+      - Thu, 28 May 2015 09:02:11 GMT
+      X-Rack-Cache:
+      - invalidate, pass
+      X-Powered-By:
+      - Phusion Passenger 4.0.41
+      Server:
+      - nginx/1.6.0 + Phusion Passenger 4.0.41
+      X-Tracker-Client-Pinger-Interval:
+      - '12'
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <token>
+          <guid>b545bcaeafc773ced5b1a853fffd1fc9</guid>
+          <id type="integer">838284</id>
+        </token>
+    http_version: 
+  recorded_at: Thu, 28 May 2015 09:02:11 GMT
+- request:
+    method: get
+    uri: https://www.pivotaltracker.com/services/v3/projects/1325832
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      X-Trackertoken:
+      - b545bcaeafc773ced5b1a853fffd1fc9
+      Content-Type:
+      - application/xml
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/xml; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 200 OK
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - t_session=BAh7CEkiD3Nlc3Npb25faWQGOgZFVEkiJTQ4ZjVhZjcxODVjNjUxMGNlZDAwNmE5ZTUxMTNiMzNmBjsAVEkiD2V4cGlyZXNfYXQGOwBGSXU6CVRpbWUNidQcgKS5wAgKOg1uYW5vX251bWkC2wI6DW5hbm9fZGVuaQY6DXN1Ym1pY3JvIgdzEDoLb2Zmc2V0aQA6CXpvbmVJIghVVEMGOwBUSSIQX2NzcmZfdG9rZW4GOwBGSSIxQ1NMK2V0N1IrQ3F0OTJJNHpnVnNiQkZsWUV0eFNPbEJWbW9HS25CcnY4TT0GOwBG--ef1d3899b911a4f3dc14ed9d7b94ffd7d06de702;
+        path=/; HttpOnly
+      X-Request-Id:
+      - 2f9421e11d3eb1c13f8adf65da333e79
+      X-Runtime:
+      - '0.046084'
+      Date:
+      - Thu, 28 May 2015 09:02:12 GMT
+      X-Rack-Cache:
+      - miss
+      X-Powered-By:
+      - Phusion Passenger 4.0.41
+      Server:
+      - nginx/1.6.0 + Phusion Passenger 4.0.41
+      X-Tracker-Client-Pinger-Interval:
+      - '12'
+      Content-Encoding:
+      - gzip
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAAwIAAAD//4RUW0/bMBR+51dYec5w0g4oKJhtaHtDQxo8R45z
+        mng4dmQ77frvd+ykTVuEkCrV+c537pfi4V+nyAask0bfJ/lllhDQwtRSN/fJ
+        68uvL6vkgV0UvTV/QXh2QUgha5YvF1er5aKg+A6Q5h2wpx35w7teAXke2QWN
+        eNTxYLlHH6UC3fiW+F0P94nUHhqwCcvR1Bkl6m0B3krnufVlzXfsyWj8K+gZ
+        HJi9QWOlE1wBy9I8XaTLgh6DgcSFMIP27IflGyCPMc2C7tHAWEvrfDnHMvr2
+        soMp5Jp7CJ8JW2T5Fc2WdJmRLLuLP/L68ljQj23EnMRgLWCssxM9dBXY85rc
+        FvQjarQDmlcKSs/dm5t0K2MUcJ0wbwco6DEjqmxAGSH9DuvUArbmO3aeN0DM
+        mizJIR5X0HPicdx7GcuzOcIDGJhSSy+5Kk+Y78DAHDMvzbqsjYa5JK70pnSt
+        2bIcp+xzVrCleAXKMV53UqeVMk0qcG5SzFS8mcGnNfTK7DosPT6dbHQKvRTp
+        GrgfLNQEZ7wehHephOtUA9SO1NKJwYXdSI2tcUtSC72xHscmdcCtaFMMsu+x
+        edMQuRGIBHQx9ISS8MCQBscrqbD6+EKFBnTYCXQsDK6B9gWdMhiTwTHkwstN
+        aBf3H0zfV5rfkPzmLlvdZdfj9Cl+qhkbz5UyWzTjuWhDBdw0Ie/xwO6HSknB
+        1lw5nKLpKwgw8LL1vnd72QwEcTU0ruS6LkVrLODTQgkOt4X7MKp7pc9owZQw
+        XSd92Zn6oHYMBUoHYWtcK/v9+HNr+S4JCZ+IRwAhvFZXy9tVdrvaX67IxPY5
+        o/csBKDjUrG+skOtd9+a8HWJ3nGhoiDaj5rxvj1Dbc186ybRNO6OPf9EZ+NC
+        uEMk9NRnYXFv2e8tTkRB43vMgc45xjYefUdbuGl4QMfL+r4Iwe8sxitOD2f8
+        PwAAAP//AwBMbtil+AUAAA==
+    http_version: 
+  recorded_at: Thu, 28 May 2015 09:02:12 GMT
+- request:
+    method: get
+    uri: https://www.pivotaltracker.com/services/v3/projects/1325832/memberships
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      X-Trackertoken:
+      - b545bcaeafc773ced5b1a853fffd1fc9
+      Content-Type:
+      - application/xml
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/xml; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 200 OK
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - t_session=BAh7CEkiD3Nlc3Npb25faWQGOgZFVEkiJThiOTc1NmJlYjdjOTc1NGNhYzNhOTU0Y2U0YmY0NzJmBjsAVEkiD2V4cGlyZXNfYXQGOwBGSXU6CVRpbWUNidQcgAsM1QgKOg1uYW5vX251bWkCmgM6DW5hbm9fZGVuaQY6DXN1Ym1pY3JvIgeSIDoLb2Zmc2V0aQA6CXpvbmVJIghVVEMGOwBUSSIQX2NzcmZfdG9rZW4GOwBGSSIxNnNBZkUxWlZ6SXQ1YjVTNnJVRFVncjJOREM4UGx5OVB0K3psQ1RHckorTT0GOwBG--c278b13237fdda8f6e688085ce939f2c3a24b226;
+        path=/; HttpOnly
+      X-Request-Id:
+      - d4c2892b8de65e474cdd555664c7acb0
+      X-Runtime:
+      - '0.045680'
+      Date:
+      - Thu, 28 May 2015 09:02:13 GMT
+      X-Rack-Cache:
+      - miss
+      X-Powered-By:
+      - Phusion Passenger 4.0.41
+      Server:
+      - nginx/1.6.0 + Phusion Passenger 4.0.41
+      X-Tracker-Client-Pinger-Interval:
+      - '12'
+      Content-Encoding:
+      - gzip
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAAwIAAAD//0xQy27CMBC85yss38FAhBSkzdILvVWN1PYDTLwC
+        V37JCZT8PSZulNx2dmZ2RgvHhzXsTrHT3tV8u95wRq71SrtLzX++31cVP2IB
+        luw5ia46dKwfAtVcxigHjgVjC/IF00Ir3JeHanOoQKQ5L0Pye5dB0pCV2mA4
+        x5tyw9vlhdattyAyMXqSzElL2JCKHsQ4T4R2utfSdNicUsgEcpRYZkH0hvDz
+        z1EEMc7/faL/pbafDyrclrt9Ve7m0lOBj4F9SRsMsSa7lmVAhPkUiPlV6W8L
+        1GHxBAAA//8DADPEdB9uAQAA
+    http_version: 
+  recorded_at: Thu, 28 May 2015 09:02:14 GMT
+recorded_with: VCR 2.9.3

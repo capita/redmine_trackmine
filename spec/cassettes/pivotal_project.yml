@@ -1,0 +1,277 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://www.pivotaltracker.com/services/v3/tokens/active
+    body:
+      encoding: US-ASCII
+      string: username=pbrudny%40gmail.com&password=polmuz&timeout=60
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '55'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/xml; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 200 OK
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Etag:
+      - '"2aca2abf73441eff33bb5c8599b6a03b"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - t_session=BAh7B0kiD3Nlc3Npb25faWQGOgZFVEkiJWUwNjUyYjhjNDcwYTljODZkNTJhOTgxMGFjM2FlZWJmBjsAVEkiD2V4cGlyZXNfYXQGOwBGSXU6CVRpbWUNiNQcgAMDCe4KOg1uYW5vX251bWkBmDoNbmFub19kZW5pBjoNc3VibWljcm8iBxUgOgtvZmZzZXRpADoJem9uZUkiCFVUQwY7AFQ%3D--a8c20183ad7ee86cc7556755b74b865e4e804dbb;
+        path=/; HttpOnly
+      X-Request-Id:
+      - 1c7cb934e28728f7580d5d65841f86a8
+      X-Runtime:
+      - '0.123110'
+      Date:
+      - Thu, 28 May 2015 08:59:32 GMT
+      X-Rack-Cache:
+      - invalidate, pass
+      X-Powered-By:
+      - Phusion Passenger 4.0.41
+      Server:
+      - nginx/1.6.0 + Phusion Passenger 4.0.41
+      X-Tracker-Client-Pinger-Interval:
+      - '12'
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <token>
+          <guid>b545bcaeafc773ced5b1a853fffd1fc9</guid>
+          <id type="integer">838284</id>
+        </token>
+    http_version: 
+  recorded_at: Thu, 28 May 2015 08:59:33 GMT
+- request:
+    method: get
+    uri: https://www.pivotaltracker.com/services/v3/projects/1325832
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      X-Trackertoken:
+      - b545bcaeafc773ced5b1a853fffd1fc9
+      Content-Type:
+      - application/xml
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/xml; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 200 OK
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - t_session=BAh7CEkiD3Nlc3Npb25faWQGOgZFVEkiJTFiMzc3MTMwMTZiNjU3ZWY0YjVhNjkzNmNhYmNlNTg5BjsAVEkiD2V4cGlyZXNfYXQGOwBGSXU6CVRpbWUNiNQcgDlpG%2B4KOg1uYW5vX251bWkBfzoNbmFub19kZW5pBjoNc3VibWljcm8iBxJwOgtvZmZzZXRpADoJem9uZUkiCFVUQwY7AFRJIhBfY3NyZl90b2tlbgY7AEZJIjFDM0Z6dytGKzhTUDlrN2dxMHVZMk9QM21aVUhaeVdGVVVpMWRuUFc0OHl3PQY7AEY%3D--23e6de1052bd72066de0988b61b3031993b0071e;
+        path=/; HttpOnly
+      X-Request-Id:
+      - 43fae054d42a766b882ab40944fc99dd
+      X-Runtime:
+      - '0.110401'
+      Date:
+      - Thu, 28 May 2015 08:59:33 GMT
+      X-Rack-Cache:
+      - miss
+      X-Powered-By:
+      - Phusion Passenger 4.0.41
+      Server:
+      - nginx/1.6.0 + Phusion Passenger 4.0.41
+      X-Tracker-Client-Pinger-Interval:
+      - '12'
+      Content-Encoding:
+      - gzip
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAAwIAAAD//4RUW0/bMBR+51dYec5w0g4oKJhtaHtDQxo8R45z
+        mng4dmQ77frvd+ykTVuEkCrV+c537pfi4V+nyAask0bfJ/lllhDQwtRSN/fJ
+        68uvL6vkgV0UvTV/QXh2QUgha5YvF1er5aKg+A6Q5h2wpx35w7teAXke2QWN
+        eNTxYLlHH6UC3fiW+F0P94nUHhqwCcvR1Bkl6m0B3krnufVlzXfsyWj8K+gZ
+        HJi9QWOlE1wBy9I8XaTLgh6DgcSFMIP27IflGyCPMc2C7tHAWEvrfDnHMvr2
+        soMp5Jp7CJ8JW2T5Fc2WdJmRLLuLP/L68ljQj23EnMRgLWCssxM9dBXY85rc
+        FvQjarQDmlcKSs/dm5t0K2MUcJ0wbwco6DEjqmxAGSH9DuvUArbmO3aeN0DM
+        mizJIR5X0HPicdx7GcuzOcIDGJhSSy+5Kk+Y78DAHDMvzbqsjYa5JK70pnSt
+        2bIcp+xzVrCleAXKMV53UqeVMk0qcG5SzFS8mcGnNfTK7DosPT6dbHQKvRTp
+        GrgfLNQEZ7wehHephOtUA9SO1NKJwYXdSI2tcUtSC72xHscmdcCtaFMMsu+x
+        edMQuRGIBHQx9ISS8MCQBscrqbD6+EKFBnTYCXQsDK6B9gWdMhiTwTHkwstN
+        aBf3H0zfV5rfkPzmLlvdZdfj9Cl+qhkbz5UyWzTjuWhDBdw0Ie/xwO6HSknB
+        1lw5nKLpKwgw8LL1vnd72QwEcTU0ruS6LkVrLODTQgkOt4X7MKp7pc9owZQw
+        XSd92Zn6oHYMBUoHYWtcK/v9+HNr+S4JCZ+IRwAhvFZXy9tVdrvaX67IxPY5
+        o/csBKDjUrG+skOtd9+a8HWJ3nGhoiDaj5rxvj1Dbc186ybRNO6OPf9EZ+NC
+        uEMk9NRnYXFv2e8tTkRB43vMgc45xjYefUdbuGl4QMfL+r4Iwe8sxitOD2f8
+        PwAAAP//AwBMbtil+AUAAA==
+    http_version: 
+  recorded_at: Thu, 28 May 2015 08:59:34 GMT
+- request:
+    method: get
+    uri: https://www.pivotaltracker.com/services/v3/projects/1325832/stories
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      X-Trackertoken:
+      - b545bcaeafc773ced5b1a853fffd1fc9
+      Content-Type:
+      - application/xml
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/xml; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 200 OK
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - t_session=BAh7CEkiD3Nlc3Npb25faWQGOgZFVEkiJTIxYjQxNDBmMzkzYjJiNDY2MTcwNjgzMGUyMTVkZDEzBjsAVEkiD2V4cGlyZXNfYXQGOwBGSXU6CVRpbWUNiNQcgGoALe4KOg1uYW5vX251bWkB6joNbmFub19kZW5pBjoNc3VibWljcm8iByNAOgtvZmZzZXRpADoJem9uZUkiCFVUQwY7AFRJIhBfY3NyZl90b2tlbgY7AEZJIjFXb1NIOUFjZklSR0p2NVhPSWZ2VzFubkhPVlYzVENpSUhNQXVjMTBUeGRjPQY7AEY%3D--df6a214aa9bc7ac46d68660d4f69a624eec66a27;
+        path=/; HttpOnly
+      X-Request-Id:
+      - 4668bdbea67bfad4405631a62be14e7c
+      X-Runtime:
+      - '0.198731'
+      Date:
+      - Thu, 28 May 2015 08:59:35 GMT
+      X-Rack-Cache:
+      - miss
+      X-Powered-By:
+      - Phusion Passenger 4.0.41
+      Server:
+      - nginx/1.6.0 + Phusion Passenger 4.0.41
+      X-Tracker-Client-Pinger-Interval:
+      - '12'
+      Content-Encoding:
+      - gzip
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAAwIAAAD//+xbXW/bNhR9768g/LIXL7LzZTtwXHQdBnTDsAJp
+        170FtETHXCRRI6m47q/f4YcsO6lqO6ZTpwgQILJESlfU4eU5914OX3/OUnLH
+        pOIiv2x1jzotwvJYJDy/uWx9/PDbz/3W69GrodJCcqaInhfsskWlpPMWiUWZ
+        68vW2aBFtNA0tYejV4TY5nNzhGOe+F481+yGydZocNzr9gdnp8OIJ75RIcW/
+        LNbXDxt3T47P+ifHw6hu4vvYh1wbi0bxVEg2jJbOuGeXMh1NtS7URRTNZrOj
+        gt8ZQ7Wk8S2TR7HIXJ9ITcUsqu0y/dwd4lJKlutrpalmIxrHrNAsGUar513b
+        hKlY8kJjKEefGMkZS8gxyWg85TnGTjFNymIYLTdzHXOasdEV02VBEnbHUlFk
+        eCY+xB2XIjfHw8i2cc0l+69kCmZcj+ej9yyRYhitnPOmSwabk2uq/QdI8FPz
+        jLVGx53uWdQ5iU46pNO5sH/k44e3eK1FH/+ssjC9vnGT06jbI93eRefsotNz
+        N6n7+JtUw/ZNU7r3TFnq5G+TC30Pgu4CQGYuVT++jrn+8Rle+rzGnAWnZp/1
+        6NOU6p8UEaUk4zK5wWeaCEn0lC2+3ethZFvagbUdaamBuWr0/a/6srFnu0Gr
+        eixeKarfCV/fvLq55EFuDzeaZUtvPDykWQa7dp9lV1NRpgkZM2LQohQfp4xM
+        pMjwMbXiCbNfMWd6JuRtm8y4npIxVTwm5outnYqZwKSV8I4v0w9wS+mYpWqU
+        sCIVc+eU/KnH4LIfzvtP4OfKcP4fltXIhJ/lGTzg/TUMC1J1yXunx64Ub5KM
+        5wQLUIVkogoWc5qSEuCzzz0iWE5imhPnni2oJ1wqTajtbBsmXGIFTecEJ0yD
+        X39pw51pkjLj3LCoy3mBlQBXCqoUJkRy1DgBHthk5pUWJBU3PH+ZDPVksOM/
+        jB4/D847hzoPjGXr50E32Dx4L0VSxhrwxeqLKQcWheM4LcGXiOY6ZW2wowXD
+        apNC8hjnrv74uD2Q/UTK2Qy3sc99QXVIVMM9huL2Yb37OSxbj+pw3n1rF1ti
+        daVJhUpSTIUGvX9h/xX92N3jBtSdgbEJy9Zj8ySYx30sNrMy1bwAI/Cu04FU
+        EZonUEzylogchBxO23ANCfok5z86gk8jiN9VKf1Qv3qWsDuCA2q6wAheUXX7
+        586NCIYwLAqQYk+rFWMk5eDLYlKBVnk56AHqMOxQW2bjnPL0BbM1I8A4FgVi
+        gjtR3YOVfOcbSb5wVLcRthUHHksxUxjuJVlYUEgvE4rzuO12FkgmBum4jgjo
+        j80TtvGyIRDbO1hxZixbTxWegMb+SW9rHrCArQerkXBvfn/zz8vyb0LGfvmv
+        gNkuFR3zlGuMTh0/QLsAYe4lT2uj1TZ4XTkXuxAad2EiOu6/pLniVnH7BRM2
+        EIlEBJSI/agLB/NMw+C9gxWkxrL1M/k7kn6eFUJqsiD9SzET5WLtb6/+Rjgy
+        fVl+lmb5ziS/d7Ay1Vi2HrFPwJbukXyTBfJx6jjlsZGhhFYkqW3VqdEBNE0X
+        wjVhGkQfUsAFGg3jsgEXtRcmBfpyfiD5Vpu13VCvBmFSBytZextJ1u+KZprU
+        8UAs2dX3QEZI7idsfWhAXS0vaAysmPFoB0HrwSrV3kZKNRzvf4shJTy2qRjQ
+        xYJIfjPVqPyROZNeiVKSI2IChsjzhMdI3MCLopwGocAcyUjNMmU6O7A21b6s
+        hmuWPPkdR4oGz9cogkGJxuTZob93cXry6LKYRXEN7nLq7rJ/9PcPVvUay3Zn
+        HglLOWo6NqniagzUNFMPyTJxV0tiW4zyA3lsr1SDudr+wQozY9nuYJvwnKvp
+        TlizPhjOlBdl6tLiXqTDTe4vuvJkHCA4ogIKp3GJiHeQqtL+imharRVCbanc
+        qKi02R2J7EE2zoRwVExTFKEiT4cQMUqDZlOWu4COlTqu8uGZi517YbVdMhT9
+        g1UpxrLdnVGZbww1BAszlIuZQliWQSOj0iyRqLC0MhpgUiKnKf8CcGU4i2Bi
+        G+Ial1xjW2hZZYe9yHbpYde4GciNRBDFbSJD1WFSa3oTv6QIQXGcfR6Cvd/A
+        BENiOKB2CVlW319RLqsOcAtcNiIHGmHCb1AGSpRIpQXupESoxwSsAU0qTRU+
+        vPkeMmTBl8p1MLFvs4ujGxwsxTeWrXd068LhWwDqL9SqOHgghs1SpFf9L0+y
+        UiFuUckiRXlTuzQDonvViMYvohSxEZ/NiqF6OhC7z1rE74PSIPGYQUCRgKwW
+        oyrUZiFjWQ3X8F7tXY60HErBE6hKs9zx/A5VNUI+E872VUe27RaWQUBCH7bc
+        yVj2pM7qEd4FcTOE5lDvnHDE7ahMVgqsbVJkym1tT0XxnsEa2b9AJsVuWHuw
+        16ySk1MW32ITUBj/E1AXhORUg29sotpiCWxE1TuzY1Oa3S+O0FO77Yfc4MyM
+        7qeo46lXqTgoTgJy78CeaqO8QUBa1YipTyYEYQOipjyzHGfcxPVlYtIJbhsl
+        VKXbT7xQkDQzO41dsUHxI4PQbBlW2Mml4hKbGUX+Ve8VpERoed9RXSIEkmp2
+        oc1AiUEykCu3u1z5Fxd2xLZw7wns99rnplhPHPayKXbQ6Ryo/HGWrWcU67LR
+        m/v+/wEAAP//7F3BTttQEPwVfwCUEEIlLpXaqpV6bi89GuKEqCmJYkDK33dm
+        9z3HCTUO8tpsLF9LEc/yeHdnd3bep8rv9AdGbVssmf9NZpRISK8loIEbhJoJ
+        9MMEE1rk62W6TbLNBiwmdIT4K+FDP4GSAuvr/61Wd8I9w1SBF+20qNWTuYHg
+        fgBawEThSRa90doBUeeUWUJRnECznJVGUFwgHKBYZ8SBF25Y3VpWLXoyH1D8
+        ycYzstFiJgoH6CG00Q1BggIQ4e8uk+qYgVK3gnvQapQnObONfE6LZMDtqCK5
+        TlxjkXyrm4XyKlCdwfFA5DCKvlukXvJ8sniiTmYt5cjYiwQsD4TO104t/7ZW
+        0s3o0m3hx5N1GuqEhwmaZM9oH1CSW8sLdPcpNC3c51yJvZEEufwPpm/iRIR/
+        +ZD8umd6VgJRGgXGcFi9o18Ndv6J+Aeg7UU7R0E9oBkOWkCzYVvcNnHzZJ2i
+        uZLGqJMJvVM2mWgJKf/WyBiRpTNtgSwm3OvVQ07DiYK7nHKr/cDS4cwgghry
+        FrtWKL6FV/Q1JhlZzNuSbw/YwsyS3+yjh2GdFIMtO7V13RW18HjCOzEkFpZj
+        Oz1Zm2O7L9grSZbp0wPH9KdMA6ZZOl0S8Wr8eOggCBPBycEaSfyNt5vV4bW4
+        pQY8WX1Ce19qkC/msAJbi/QF+Q5Ccemay+hmT8N12pCMWik8LR72IuFjN/Hg
+        uhmN3bICnqwedl20g6uLdNRM6pg5Xz1iS6NwlxtQVva7BcrcVus8mXeUwXmQ
+        np4DqA5AZVhi2VLAcdeK5UoKuN/poCbkiO6GJFPZeWPbY4GMqul0AOABAN2W
+        bOOjSjbD3IkUGcZRsvC4TGGz8XGUTNNt9JpCJQ0tqXQW8D+XHFxFRl61GAkY
+        QmOvBrHlhlxpRTI0NrSpgSYcbdH7AdPQgwyfXqPO75XbGo8nq8++htTia0kL
+        qJu7Rd8WqBLhB/Y41C+Yi2sNoJmzbVzWHnIuETdJykavcDAWlMdJ04DfvdsS
+        bka8AcGjo6qerB6/hnG2OSLjZhJC8Sx9hsAJ5voD4g4RZ9jptS0tr46SXXtB
+        XJw7yHjh5W74AMCXd77wIhYEFkNuYzlq4LnabB5j9fKZV1fMIAa9xUU1rBiR
+        g1kJgobIFJRLSRf4OUZZkOkhfPUieulDNpnvX7llIzxZfZbsQoD9eb3GJnj+
+        uAUbmcsgHxPROO6fpXeyGY6FdJGXcORPfOEqCSxNQVOCvnKOfl9wfouwHOAn
+        EWvilmTwZPXwMyQZjYq09YoOleE+CM2f/ajP5KKWeYZATiff6GvUJOJN3PIC
+        nqwecm6qNG45Bcgh2G3BRFcrsWC+PL+mPOqkVy53OpAWEOiWJ0zc8IS9pSfI
+        5HZGycGCJYjZ0S7Z0Ji3iH3qpsauSfBYQ04OARHXmsHZAPk7wwWDvdocbwGj
+        hlTClstO3IxJXpvwwgY6ok7UBQPcZGeuirlO3NIQnqw+KZ93kZWr7piTG2QK
+        hPFGjvDF9cPjRzcq4iPFD6nRbOPaLe3gyZzA7bteElnINouZR4qxWopBnN6a
+        SLKL0R2cTIUGt3SnRtd6Tlu4uaUc10dRjneNbuHiQVZ04shxS2ELui2Lu2VP
+        ZhAa4PhcTXit5e3gthUbT+YkplWlUBm77iGLs9XpJp3BSBRL/L1o1xnhzC0z
+        4F3lrePsHwAAAP//7J3dagIxEIXvfYp9g/amgiAFLyr0btEn8CewgV1Saq19
+        fM9MsibrTxt1aJOld6I3Kx4nyWTO+cbh5f7Fnl25XQIagxTbI1E5t9fpCtoL
+        gd1dwpI9BTylcwoolSGSpFNSMNWEaBhi/eIdtDi4ln3qRTGbz9nbOvkwzb/I
+        cOWQKj/aPlki9evSOsmGwAZwgYpuxBCVvEGbg2hHvZCWXSDtF+Lo09t900RN
+        TnP6KI7n/KdbfvXFAC076Un9jJaXFVyqkrGqAIUNvV9v3bem7Dy0OPo+jk9S
+        i4L3DZJjIcPOuUA+CnSm2LBcVCCw+MQbD7Rleh+4VwrTxtSkpex3/tvn4D/8
+        QT4yftSh4F5f1o9KT+bXSnntTCkJO/Ar52RNPSuNa4M/iPArtYBJQSGwRers
+        w09+dgxDr7fgN4wfuh8N+PIh7uTmhijOkVkJELEz75z/gfbA6wtE2INaoRW+
+        x+1bnVSZv6PHOOZvzFZHQFhH0bDIaTMNz7RYGwpF7wMJWnMils0RzFhc11ab
+        VGmz0JBYh1xAQ8CZA8RV6LIySBhAF8lNI8Ic1Q5AHOoWJ/u5rN6MleQHcdSb
+        Xt1VpwS3wbIN8jg+7C/VqSli+ZaEcIC8EDBc12ZH6x2NmLiQnwVybtsh/OA6
+        NtuV8FCs7AutNs+DPQAAAP//AwCPuqWQ55UAAA==
+    http_version: 
+  recorded_at: Thu, 28 May 2015 08:59:35 GMT
+recorded_with: VCR 2.9.3

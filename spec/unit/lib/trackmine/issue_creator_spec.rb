@@ -1,15 +1,15 @@
 require File.dirname(__FILE__) + '/../../../spec_helper'
 
-describe Trackmine::IssueCreator do
+describe Trackmine::IssueCreator, vcr: { cassette_name: 'issue_creator' }  do
   let(:label) { 'zima' }
   let(:author) { User.find(2) }
   let(:project_id) { '1327280' }
   let(:story) { Trackmine::PivotalProject.new(project_id).story(94184406) }
   let(:issue_attributes) do
     {
-      project_id: '1327280',
-      story: story,
-      author: author
+        project_id: '1327280',
+        story: story,
+        author: author
     }
   end
   let(:creator) { Trackmine::IssueCreator.new(label, issue_attributes) }

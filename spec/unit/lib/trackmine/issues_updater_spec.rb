@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../../../spec_helper'
 
-describe Trackmine::IssuesUpdater do
+describe Trackmine::IssuesUpdater, vcr: { cassette_name: 'issues_updater' }  do
   let(:project) { Project.find 1 }
   let(:issue) { Issue.find 1 }
   let(:activity) { double :activity, project_id: 888 }

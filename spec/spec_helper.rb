@@ -4,6 +4,7 @@ require 'bundler'
 Bundler.setup(:default, :spec)
 require 'factory_girl'
 require 'rack/test'
+require 'vcr'
 
 # load factories manually. Otherwise load it from redmine app.
 # if (!FactoryGirl.factories || FactoryGirl.factories.empty?)
@@ -16,6 +17,13 @@ RSpec.configure do |config|
   config.tty = true
   config.formatter = :documentation
   config.include FactoryGirl::Syntax::Methods
+  config.treat_symbols_as_metadata_keys_with_true_values = true
+end
+
+VCR.configure do |c|
+  c.cassette_library_dir = File.dirname(__FILE__) + '/cassettes'
+  c.hook_into :webmock
+  c.configure_rspec_metadata!
 end
 
 def json_path(fixture)
