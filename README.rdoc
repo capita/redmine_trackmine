@@ -15,9 +15,7 @@ tailored to individual needs.
 
 [UPGRADED to work with Pivotal Tracker API v5 and Redmine 3]
 
-For step by step configuration tutorial visit:
-
-  http://piotrbrudny.com/post/120177000661/how-to-integrate-redmine-with-pivotal-tracker
+{Step by step tutorial}[http://piotrbrudny.com/post/120177000661/how-to-integrate-redmine-with-pivotal-tracker]
 
 == Features
 
