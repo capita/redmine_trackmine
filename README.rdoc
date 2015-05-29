@@ -11,11 +11,10 @@ communication between Pivotal Tracker and Redmine by outsourcing the
 workflow between Pivotal's "Started" and "Finished" states to Redmine. The triggers for teleporting
 between the tools are starting a story in Pivotal and closing an issue
 in Redmine. The workflow in Redmine remains customizable and can be
-tailored to individual needs.
+tailored to individual needs. {Step by step configuration tutorial}[http://piotrbrudny.com/post/120177000661/how-to-integrate-redmine-with-pivotal-tracker]
 
 [UPGRADED to work with Pivotal Tracker API v5 and Redmine 3]
 
-{Step by step tutorial}[http://piotrbrudny.com/post/120177000661/how-to-integrate-redmine-with-pivotal-tracker]
 
 == Features
 
