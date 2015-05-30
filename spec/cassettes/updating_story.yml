@@ -1,0 +1,130 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://www.pivotaltracker.com/services/v3/tokens/active
+    body:
+      encoding: US-ASCII
+      string: username=foobar%40gmail.com&password=secret&timeout=60
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '55'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/xml; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 200 OK
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Etag:
+      - '"2aca2abf73441eff33bb5c8599b6a03b"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - t_session=BAh7B0kiD3Nlc3Npb25faWQGOgZFVEkiJThkOTE2MDIyNjkzODU0M2EyZDg0MGI4ZjEzN2Q3N2Y4BjsAVEkiD2V4cGlyZXNfYXQGOwBGSXU6CVRpbWUNidQcgAF7bb8KOg1uYW5vX251bWkC7gE6DW5hbm9fZGVuaQY6DXN1Ym1pY3JvIgdJQDoLb2Zmc2V0aQA6CXpvbmVJIghVVEMGOwBU--d87ffeac0f19d54c583426be587b3b3d5f2ce869;
+        path=/; HttpOnly
+      X-Request-Id:
+      - df52e7dcb79a6c6a8e71ee0d55e51d68
+      X-Runtime:
+      - '0.116613'
+      Date:
+      - Thu, 28 May 2015 09:47:54 GMT
+      X-Rack-Cache:
+      - invalidate, pass
+      X-Powered-By:
+      - Phusion Passenger 4.0.41
+      Server:
+      - nginx/1.6.0 + Phusion Passenger 4.0.41
+      X-Tracker-Client-Pinger-Interval:
+      - '12'
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <token>
+          <guid>b545bcaeafc773ced5b1a853fffd1fc9</guid>
+          <id type="integer">838284</id>
+        </token>
+    http_version:
+  recorded_at: Thu, 28 May 2015 09:47:55 GMT
+- request:
+    method: get
+    uri: https://www.pivotaltracker.com/services/v3/projects/1327280/stories/94184406
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      X-Trackertoken:
+      - b545bcaeafc773ced5b1a853fffd1fc9
+      Content-Type:
+      - application/xml
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/xml; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 200 OK
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - t_session=BAh7CEkiD3Nlc3Npb25faWQGOgZFVEkiJWY5MDQwZDU5MmVmZTRiMDhlYjA1MTZlYzQzMDlhNTE5BjsAVEkiD2V4cGlyZXNfYXQGOwBGSXU6CVRpbWUNidQcgFzqfL8KOg1uYW5vX251bWkCWwI6DW5hbm9fZGVuaQY6DXN1Ym1pY3JvIgdgMDoLb2Zmc2V0aQA6CXpvbmVJIghVVEMGOwBUSSIQX2NzcmZfdG9rZW4GOwBGSSIxaEg3M2VmZGo1K0IrZnNjOERzSjlSMlVEMnFTUzZPeVFpVGhhUXJyVjNnMD0GOwBG--e9b56f2f11a1d4ba710345466469ca61660065ee;
+        path=/; HttpOnly
+      X-Request-Id:
+      - 98793c5509a55dc88b97ed531cf1cc38
+      X-Runtime:
+      - '0.059728'
+      Date:
+      - Thu, 28 May 2015 09:47:55 GMT
+      X-Rack-Cache:
+      - miss
+      X-Powered-By:
+      - Phusion Passenger 4.0.41
+      Server:
+      - nginx/1.6.0 + Phusion Passenger 4.0.41
+      X-Tracker-Client-Pinger-Interval:
+      - '12'
+      Content-Encoding:
+      - gzip
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAAwIAAAD//3ySy27CMBBF93yFlTXFScojRMYsKnXdBayRiQcw
+        JHZqO6TJ19c2lEcrVcrCM3Pu1fg6ZPlVlegM2gglF1EyiiMEslBcyP0iWq/e
+        X7JoSQfEWKU7OkCICI5sV8MiEtLCHnRE5+MkG4/jKcGCB6TW6giF3fxFk9d0
+        lmYxwXckKIL9xvvSHTDbaCD4oeeRRpf0YG1tcozbth3V4qwsK61mxQn0qFDV
+        RYHNQbX4vpPXeT0YKypm4ff2CcE/o8AVjdYg7cZYB9OdkMIcgBP83PckB1No
+        UVuXHD2ynjPUo73SJ4FaxFWJaoWMFLBvXF0zt+cBFX1X+rHVfYeUUdtuQPCj
+        j/eVrIKroWTIMHnyUi9SR38kOBAe1fDZuO2Bb7Yd/QCuFcFPPQ+pVj4Btzpc
+        V7u83ZjZazDclS4piGgaJxMcuy9DySRPs3wyRevVm4vipglLNLXX/GuROItZ
+        nsT5ZH6xuGuCRcm2UBrq7zoMmQ1791gEX/supOsP+A0AAP//AwBvV9t2sAIA
+        AA==
+    http_version:
+  recorded_at: Thu, 28 May 2015 09:47:56 GMT
+recorded_with: VCR 2.9.3

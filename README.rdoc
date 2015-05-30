@@ -6,18 +6,20 @@ development. Pivotal Tracker, on the other hand, is a superb planning
 tool and extremely well suited for requirements capturing and customer
 feedback.
 
-The Trackmine -plugin provides simple but effective bi-directional
+The Trackmine plugin provides simple but effective bi-directional
 communication between Pivotal Tracker and Redmine by outsourcing the
 workflow between Pivotal's "Started" and "Finished" states to Redmine. The triggers for teleporting
 between the tools are starting a story in Pivotal and closing an issue
 in Redmine. The workflow in Redmine remains customizable and can be
-tailored to individual needs.
+tailored to individual needs. {Step by step configuration tutorial}[http://piotrbrudny.com/post/120177000661/how-to-integrate-redmine-with-pivotal-tracker]
+
+[UPGRADED to work with Pivotal Tracker API v5 and Redmine 3]
 
 
 == Features
 
-* Starting a story in a Pivotal Tracker automatically creates a Redmine issue with status "Accepted".  
-* Updating a story in a Pivotal Tracker updates the Redmine issue attributes (subject, description, status).  
+* Starting a story in a Pivotal Tracker automatically creates a Redmine issue with status "Accepted".
+* Updating a story in a Pivotal Tracker updates the Redmine issue attributes (subject, description, status).
 * Closing a Redmine issue finishes the Pivotal Tracker story.
 * Mapping between Pivotal Tracker and Redmine attributes can be configured
 
@@ -27,30 +29,27 @@ tailored to individual needs.
 
 In Redmine app run:
 
-  $ script/plugin install https://github.com/capita/redmine_trackmine.git
+  $ bin/plugin install https://github.com/capita/redmine_trackmine.git
 
 or clone it into /vendor/plugins/
 
   $ git clone git@github.com:capita/redmine_trackmine.git
 
-Copy Gemfile and Gemfile.lock from redmine_trackmine to redmine app
-
-  $ cp vendor/plugins/redmine_trackmine/Gemfile Gemfile 
-  $ cp vendor/plugins/redmine_trackmine/Gemfile.lock Gemfile.lock 
-
-Install gems 
+Install gems
 
   $ bundle install
 
 Run plugin migrations
 
-  $ rake db:migrate_plugins
+  $ rake redmine:plugins:migrate
 
 === Configuration- Redmine side
 
 Make sure you have following custom fields for Redmine Issue:
 * 'Pivotal Project ID' (field_format: int, Trackers: Bug, Support, Feature) .
 * 'Pivotal Story ID' (field_format: int, Trackers: Bug, Support, Feature) .
+
+And there is IssueStatus 'Accepted'
 
 Add valid Pivotal Tracker credentials in [redmine_app]/config/trackmine.yml
 
@@ -59,7 +58,7 @@ Syntax:
 
   [redmine_email]:
     email: [pivotal_tracker_email]
-    password: [pivotal_tracker_password]   
+    password: [pivotal_tracker_password]
 
 
   super_user:
@@ -70,10 +69,10 @@ Syntax:
     recipient: [email_for_error_notifications]
     from: "[information to emails FROM field]"
 
-trackmine.yml  
+trackmine.yml
 
-  foouser@example.net: 
-    token: 1234 
+  foouser@example.net:
+    token: 1234
 
   baruser@example.net:
     email: baruser2@fake.net
@@ -82,10 +81,10 @@ trackmine.yml
   super_user:
     email: admin@net.org
     password: 1234
-  
+
   error_notification:
     recipient: errors@examplet.net
-    from: "Trackmine Notifications <no-reply@example.net>" 
+    from: "Trackmine Notifications <no-reply@example.net>"
 
 Users mentioned in trackmine.yml should have administration rights in redmine.
 The user named 'super_user' should have access to all Pivotal Tracker projects you want to map to.
@@ -96,17 +95,17 @@ It might be the Pivotal Tracker admin. Its credentials are used to handle Pivota
 Add Web Hook Url pointing to your Redmine app. To do that:
 
 * On your project page choose 'Project -> Configure Integrations'
-* Find Activity Web Hook section 
-* In 'Web Hook Url' put [redmine_app_url]/pivotal_activity.xml
+* Find Activity Web Hook section
+* In 'Web Hook Url' put [redmine_app_url]/pivotal_activity.json
 
 Example:
 
-  http://my-company-redmine-site.org/pivotal_activity.xml
-  
-  
-== Usage 
+  http://my-company-redmine-site.org/pivotal_activity.json
 
-=== Mapping 
+
+== Usage
+
+=== Mapping
 
 * As a Redmine administrator go to 'Administration -> Trackmine' section.
 * Use link 'Add mapping'
@@ -117,19 +116,25 @@ Example:
 You can configure:
 
 * Mapping between Pivotal story estimation points and Redmine estimated_hours
-Default: 
+Default:
   1 point  => 1 hour
   2 points => 4 hours
   3 points => 10 hours
 
 
 * Mapping between Pivotal story_types and Redmine trackers
-Default: 
+Default:
   'feature'  => 'Feature'
   'bug'      => 'Bug'
   'chore'    => 'Support'
 
+=== Testing
+
+Trackmine has RSpec test coverage. Run specs with:
+
+  rake redmine:plugins:test
+
 == Copyright
 
-Copyright (c) 2010 Capita Unternehmensberatung GmbH. See LICENSE for details.
+Copyright (c) 2010-2015 Capita Unternehmensberatung GmbH. See LICENSE for details.
 

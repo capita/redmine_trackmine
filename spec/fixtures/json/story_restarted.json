@@ -1,0 +1,129 @@
+{
+  "kind": "story_update_activity",
+  "guid": "1327280_21",
+  "project_version": 21,
+  "message": "Pedro started this feature",
+  "highlight": "started",
+  "changes": [
+    {
+      "kind": "label",
+      "change_type": "update",
+      "id": 11449356,
+      "original_values": {
+        "counts": {
+          "number_of_zero_point_stories_by_state": {
+            "accepted": 0,
+            "started": 0,
+            "finished": 0,
+            "unstarted": 0,
+            "planned": 0,
+            "delivered": 0,
+            "unscheduled": 0,
+            "rejected": 0,
+            "kind": "counts_by_story_state"
+          },
+          "sum_of_story_estimates_by_state": {
+            "accepted": 1,
+            "started": 0,
+            "finished": 0,
+            "unstarted": 0,
+            "planned": 0,
+            "delivered": 0,
+            "unscheduled": 0,
+            "rejected": 0,
+            "kind": "counts_by_story_state"
+          },
+          "number_of_stories_by_state": {
+            "accepted": 1,
+            "started": 0,
+            "finished": 0,
+            "unstarted": 0,
+            "planned": 0,
+            "delivered": 0,
+            "unscheduled": 0,
+            "rejected": 0,
+            "kind": "counts_by_story_state"
+          },
+          "kind": "story_counts"
+        }
+      },
+      "new_values": {
+        "counts": {
+          "number_of_zero_point_stories_by_state": {
+            "accepted": 0,
+            "started": 0,
+            "finished": 0,
+            "unstarted": 0,
+            "planned": 0,
+            "delivered": 0,
+            "unscheduled": 0,
+            "rejected": 0,
+            "kind": "counts_by_story_state"
+          },
+          "sum_of_story_estimates_by_state": {
+            "accepted": 0,
+            "started": 1,
+            "finished": 0,
+            "unstarted": 0,
+            "planned": 0,
+            "delivered": 0,
+            "unscheduled": 0,
+            "rejected": 0,
+            "kind": "counts_by_story_state"
+          },
+          "number_of_stories_by_state": {
+            "accepted": 0,
+            "started": 1,
+            "finished": 0,
+            "unstarted": 0,
+            "planned": 0,
+            "delivered": 0,
+            "unscheduled": 0,
+            "rejected": 0,
+            "kind": "counts_by_story_state"
+          },
+          "kind": "story_counts"
+        }
+      },
+      "name": "niebieska"
+    },
+    {
+      "kind": "story",
+      "change_type": "update",
+      "id": 92844256,
+      "original_values": {
+        "current_state": "accepted",
+        "accepted_at": 1432020688000,
+        "updated_at": 1432020689000
+      },
+      "new_values": {
+        "current_state": "started",
+        "accepted_at": null,
+        "updated_at": 1432020710000
+      },
+      "name": "tolek lolek",
+      "story_type": "feature"
+    }
+  ],
+  "primary_resources": [
+    {
+      "kind": "story",
+      "id": 92844256,
+      "name": "tolek lolek",
+      "story_type": "feature",
+      "url": "https://www.pivotaltracker.com/story/show/92844256"
+    }
+  ],
+  "project": {
+    "kind": "project",
+    "id": 1327280,
+    "name": "ziomal"
+  },
+  "performed_by": {
+    "kind": "person",
+    "id": 1651216,
+    "name": "Pedro",
+    "initials": "PE"
+  },
+  "occurred_at": 1432020710000
+}

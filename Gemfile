@@ -1,28 +1,17 @@
-source :rubygems
+source 'https://rubygems.org'
 
-gem 'bundler', '>= 1.0.7'
-gem 'libxml-ruby', '1.1.3'
-gem 'rake', '0.8.7'
-gem 'mime-types', '1.16'
-gem 'rest-client', '1.6.0', :require => 'rest_client'
-gem 'rack', '1.0.1'
-gem 'sinatra', '1.0.0'
-gem 'pivotal-tracker', '0.3.0'
-gem 'pg', '0.9.0'
-gem 'unicode', '0.4.0'
+gem 'sinatra'
+gem 'pivotal-tracker', '~>0.5.13'
+gem 'unicode'
 
-group :development do
-  gem 'wirble'
+group :development, :test do
+  gem 'pry'
 end
 
 group :test do
-  gem 'fast_context'
-  gem 'factory_girl', '1.3.2'
-  gem 'fakeweb', '1.3.0'
-  gem 'shoulda', '2.11.3'
-  gem 'rack-test', '0.5.6'
-  gem 'edavis10-object_daddy'
-  gem 'mocha'
-
+  gem 'vcr'
+  gem 'rspec'
+  gem 'factory_girl'
+  gem 'shoulda-matchers'
+  gem 'webmock'
 end
-

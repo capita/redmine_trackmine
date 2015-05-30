@@ -1,5 +1,7 @@
+<%= javascript_include_tag 'mappings', plugin: 'redmine_trackmine' %>
+
 <h2>Map Redmine project to Pivotal Tracker project and labels.</h2>
-<% form_for :mapping , :url => { :controller => :mappings, :action => :create } do |f| %>
+<%= form_for :mapping , :url => { controller: :mappings, action: :create } do |f| %>
 
   <div class="box">
 
@@ -7,16 +9,16 @@
       <h4>Redmine project <span class="required"> *</span> </h4>
     </label>
 
-    <p> 
-      <%= f.select :project_id, @projects.collect{|p| [p.name, p.id]}  %> <br /> 
+    <p>
+      <%= f.select :project_id, options_for_select(@projects.map { |p| [p.name, p.id]})  %> <br />
     </p>
 
     <label> <h4> Pivotal Tracker project <span class="required"> *</span></h4> </label>
 
     <p>
-      <%= select_tag 'tracker_project_id', options_for_select(@tracker_projects.collect{|p| [p.name, p.id] }), {:onchange => remote_function(:update => "mapping_label", :url => { :action => :xhr_labels }, :with => "'id=' + $('tracker_project_id').value" )}  %> <br />
+      <%= select_tag 'tracker_project_id', options_for_select(@tracker_projects.map { |p| [p.name, p.id] } ) %> <br />
     </p>
-    
+
     <label><h4> Project labels </h4></label>
 
     <p>
@@ -24,7 +26,7 @@
     </p>
 
   </div>
-   
+
   <%= render :partial => 'config' %>
 
 

@@ -1,0 +1,339 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://www.pivotaltracker.com/services/v3/tokens/active
+    body:
+      encoding: US-ASCII
+      string: username=foobar%40gmail.com&password=secret&timeout=60
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '55'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/xml; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 200 OK
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Etag:
+      - '"2aca2abf73441eff33bb5c8599b6a03b"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - t_session=BAh7B0kiD3Nlc3Npb25faWQGOgZFVEkiJTQ1NGZlODQyODUwYTQwNzRjMmRiNWE0ZTgxMTk5MmRjBjsAVEkiD2V4cGlyZXNfYXQGOwBGSXU6CVRpbWUNidQcgOl6mL8KOg1uYW5vX251bWkCIwM6DW5hbm9fZGVuaQY6DXN1Ym1pY3JvIgeAMDoLb2Zmc2V0aQA6CXpvbmVJIghVVEMGOwBU--d62f62c4321c8efd59aeab89b696aa34a2af5867;
+        path=/; HttpOnly
+      X-Request-Id:
+      - 8364ff82affe35560ad3efa12c14fefd
+      X-Runtime:
+      - '0.120550'
+      Date:
+      - Thu, 28 May 2015 09:47:57 GMT
+      X-Rack-Cache:
+      - invalidate, pass
+      X-Powered-By:
+      - Phusion Passenger 4.0.41
+      Server:
+      - nginx/1.6.0 + Phusion Passenger 4.0.41
+      X-Tracker-Client-Pinger-Interval:
+      - '12'
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <token>
+          <guid>b545bcaeafc773ced5b1a853fffd1fc9</guid>
+          <id type="integer">838284</id>
+        </token>
+    http_version:
+  recorded_at: Thu, 28 May 2015 09:47:58 GMT
+- request:
+    method: get
+    uri: https://www.pivotaltracker.com/services/v3/projects/1327280/memberships
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      X-Trackertoken:
+      - b545bcaeafc773ced5b1a853fffd1fc9
+      Content-Type:
+      - application/xml
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/xml; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 200 OK
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - t_session=BAh7CEkiD3Nlc3Npb25faWQGOgZFVEkiJWU4M2M4OWMzNTM1NWJiYmY3MTE0NmQ2NTMxNTkxY2FkBjsAVEkiD2V4cGlyZXNfYXQGOwBGSXU6CVRpbWUNidQcgF%2F4p78KOg1uYW5vX251bWkCGQE6DW5hbm9fZGVuaQY6DXN1Ym1pY3JvIgcoEDoLb2Zmc2V0aQA6CXpvbmVJIghVVEMGOwBUSSIQX2NzcmZfdG9rZW4GOwBGSSIxWDZpTk1NR3JrTkdLelRaYThyQk9CRll5dkt0dklkYk9jMDZXL2lnRWw4ND0GOwBG--1fc426d1629f831698d291a9887d7485da64ea91;
+        path=/; HttpOnly
+      X-Request-Id:
+      - 54bcdc593fe63f9fab85ab19e782d200
+      X-Runtime:
+      - '0.049570'
+      Date:
+      - Thu, 28 May 2015 09:47:58 GMT
+      X-Rack-Cache:
+      - miss
+      X-Powered-By:
+      - Phusion Passenger 4.0.41
+      Server:
+      - nginx/1.6.0 + Phusion Passenger 4.0.41
+      X-Tracker-Client-Pinger-Interval:
+      - '12'
+      Content-Encoding:
+      - gzip
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAAwIAAAD//0xQu27DMAzc/RWC9kaOk6IeaKZLuyZD+wGKRSQs
+        9ILsJnW/vopdw954vDvegXD4cVbcKHUcfCO3m1IK8m0w7C+N/Px4f6rlAQtw
+        5M5ZdOXYiX6I1Eidkh4kFkKsyAfMCzb4vC+rel+DyvO0jNkf/ASyhpxmi/Gc
+        vo0fXi8PtGmDAzURoyfLvHaEJzIpgBrnmWDPPWvb4ekth8xgilLrLEjBEh7v
+        nhKocf7vk8IXtf1y0OB2V71UdbmUngv8cnDarhuAiosf1PKf/KwV6rD4AwAA
+        //8DAHDPkbBjAQAA
+    http_version:
+  recorded_at: Thu, 28 May 2015 09:47:59 GMT
+- request:
+    method: post
+    uri: https://www.pivotaltracker.com/services/v3/tokens/active
+    body:
+      encoding: US-ASCII
+      string: username=foobar%40gmail.com&password=secret&timeout=60
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '55'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/xml; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 200 OK
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Etag:
+      - '"2aca2abf73441eff33bb5c8599b6a03b"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - t_session=BAh7B0kiD3Nlc3Npb25faWQGOgZFVEkiJWRmMjgzODY4YzRkMTNiZDkzZWFkODU2YTViNTM2ZjVjBjsAVEkiD2V4cGlyZXNfYXQGOwBGSXU6CVRpbWUNidQcgButtr8KOg1uYW5vX251bWkCFwI6DW5hbm9fZGVuaQY6DXN1Ym1pY3JvIgdTUDoLb2Zmc2V0aQA6CXpvbmVJIghVVEMGOwBU--d998dc6034eb0ae3593e17d2a2a4cf580bb97bdf;
+        path=/; HttpOnly
+      X-Request-Id:
+      - c27a1de69e56911f53ca46e743b948b8
+      X-Runtime:
+      - '0.123150'
+      Date:
+      - Thu, 28 May 2015 09:47:59 GMT
+      X-Rack-Cache:
+      - invalidate, pass
+      X-Powered-By:
+      - Phusion Passenger 4.0.41
+      Server:
+      - nginx/1.6.0 + Phusion Passenger 4.0.41
+      X-Tracker-Client-Pinger-Interval:
+      - '12'
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <token>
+          <guid>b545bcaeafc773ced5b1a853fffd1fc9</guid>
+          <id type="integer">838284</id>
+        </token>
+    http_version:
+  recorded_at: Thu, 28 May 2015 09:48:00 GMT
+- request:
+    method: get
+    uri: https://www.pivotaltracker.com/services/v3/projects/1327280/stories/92844256
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      X-Trackertoken:
+      - b545bcaeafc773ced5b1a853fffd1fc9
+      Content-Type:
+      - application/xml
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/xml; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 200 OK
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - t_session=BAh7CEkiD3Nlc3Npb25faWQGOgZFVEkiJWM0ZDQ0OThkYjA5MWMxYzA4MDIzYWQzMTEwNjU4ZGM5BjsAVEkiD2V4cGlyZXNfYXQGOwBGSXU6CVRpbWUNidQcgI%2B9BsAKOg1uYW5vX251bWkCggI6DW5hbm9fZGVuaQY6DXN1Ym1pY3JvIgdkIDoLb2Zmc2V0aQA6CXpvbmVJIghVVEMGOwBUSSIQX2NzcmZfdG9rZW4GOwBGSSIxWDRQaVpZYjdCcWpxb2FPbEZsSzYwWHllTiswcU1JbDFCY3A5a0lVOGF4VT0GOwBG--7f6ecd1c00c604b20dba09c60951763a6a12cccd;
+        path=/; HttpOnly
+      X-Request-Id:
+      - 0112f6aea4b5ef3db4cf17153a0d1f78
+      X-Runtime:
+      - '0.058097'
+      Date:
+      - Thu, 28 May 2015 09:48:00 GMT
+      X-Rack-Cache:
+      - miss
+      X-Powered-By:
+      - Phusion Passenger 4.0.41
+      Server:
+      - nginx/1.6.0 + Phusion Passenger 4.0.41
+      X-Tracker-Client-Pinger-Interval:
+      - '12'
+      Content-Encoding:
+      - gzip
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAAwIAAAD//3yRy27CMBBF93yFlX1xEhIekTGLSl13AevIxAOY
+        JHZqO6T062sbyqOVurE0d869mhmT1WfboBNoI5RcRsk4jhDISnEh98tos357
+        mUcrOiLGKn2mI4SI4MieO1hGQlrYg47oIp1nWZpPCRY8IJ1WR6hs+RdNJuks
+        nccE35HgCPGlz6U7YLbXQPCD5pFeN/RgbWcKjIdhGHfipCxrrGZVDXpcqfbi
+        wOagBnyfyfu8H4wVLbPwe/qE4J9W4Kpea5C2NNbBdCekMAfgBD/rnuRgKi06
+        6y5HoVHoS6i2FqhllQC0Y0cJiAdlcK1WuJUeHT5BshaoVQ3UqPEvwUHxLQ0f
+        vZsLeLk903fgWhH8pHlIDfIJuNVhEe0u6drMXlfmrnQ3gIimcZLjOMNpjJJp
+        kWdFlqHN+tUtefOEIfrOe/6JyHE6Q/GiyCfFJL5E3D0homFbaAyVArYCTM0I
+        viqj6w/T0TcAAAD//wMAn+5QTIQCAAA=
+    http_version:
+  recorded_at: Thu, 28 May 2015 09:48:01 GMT
+- request:
+    method: put
+    uri: https://www.pivotaltracker.com/services/v3/projects/1327280/stories/92844256
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0"?>
+        <story>
+          <name>tolek lolek</name>
+          <description>elo ziomki macie fajne domki w zimie</description>
+          <story_type>feature</story_type>
+          <estimate>1</estimate>
+          <current_state>finished</current_state>
+          <requested_by>Pedro</requested_by>
+          <owned_by>Pedro</owned_by>
+          <labels>niebieska</labels>
+          <project_id>1327280</project_id>
+          <created_at>2015-04-20T16:54:44+00:00</created_at>
+        </story>
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      X-Trackertoken:
+      - b545bcaeafc773ced5b1a853fffd1fc9
+      Content-Type:
+      - application/xml
+      Content-Length:
+      - '417'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/xml; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 200 OK
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Etag:
+      - '"2d16160707383764f5c482483ad97cc9"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - t_session=BAh7CEkiD3Nlc3Npb25faWQGOgZFVEkiJThiM2YyZDkxZTliMzFlODUwZWFmNjFkOGMyMGI0ZTZmBjsAVEkiD2V4cGlyZXNfYXQGOwBGSXU6CVRpbWUNidQcgO5rFcAKOg1uYW5vX251bWkBpjoNbmFub19kZW5pBjoNc3VibWljcm8iBxZgOgtvZmZzZXRpADoJem9uZUkiCFVUQwY7AFRJIhBfY3NyZl90b2tlbgY7AEZJIjFXeWNtSmpWbFJuUnQ2ZzZ5ZWhXNm9kOUJUdW5XNFlhd3hkSTNjSjVxdGtzPQY7AEY%3D--9862b2f80a258212743cc49f8ac7d9b6be8013b4;
+        path=/; HttpOnly
+      X-Request-Id:
+      - 5db582d677c63b9e97ffa8f35cabc6ab
+      X-Runtime:
+      - '0.179818'
+      Date:
+      - Thu, 28 May 2015 09:48:01 GMT
+      X-Rack-Cache:
+      - invalidate, pass
+      X-Powered-By:
+      - Phusion Passenger 4.0.41
+      Server:
+      - nginx/1.6.0 + Phusion Passenger 4.0.41
+      X-Tracker-Client-Pinger-Interval:
+      - '12'
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <story>
+          <id type="integer">92844256</id>
+          <project_id type="integer">1327280</project_id>
+          <story_type>feature</story_type>
+          <url>https://www.pivotaltracker.com/story/show/92844256</url>
+          <estimate type="integer">1</estimate>
+          <current_state>finished</current_state>
+          <description>elo ziomki macie fajne domki w zimie</description>
+          <name>tolek lolek</name>
+          <requested_by>Pedro</requested_by>
+          <owned_by>Pedro</owned_by>
+          <created_at type="datetime">2015/04/20 16:54:44 UTC</created_at>
+          <updated_at type="datetime">2015/05/27 09:53:30 UTC</updated_at>
+          <labels>niebieska</labels>
+        </story>
+    http_version:
+  recorded_at: Thu, 28 May 2015 09:48:02 GMT
+recorded_with: VCR 2.9.3
